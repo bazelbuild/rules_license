@@ -1,0 +1,15 @@
+[
+  {
+    "rule": "//examples/vendor/constant_gen:license_for_emitted_code",
+    "license_kinds": [
+      {
+        "target": "@//examples/my_org/licenses:unencumbered",
+        "name": "unencumbered",
+        "conditions": []
+      }
+    ],
+    "copyright_notice": "",
+    "package_name": "Trivial Code Generator Output",
+    "license_text": "examples/vendor/constant_gen/LICENSE"
+  }
+]

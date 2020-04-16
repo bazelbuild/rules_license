@@ -1,0 +1,15 @@
+[
+  {
+    "rule": "//examples/vendor/constant_gen:license",
+    "license_kinds": [
+      {
+        "target": "@//examples/my_org/licenses:generic_restricted",
+        "name": "generic_restricted",
+        "conditions": ["restricted"]
+      }
+    ],
+    "copyright_notice": "",
+    "package_name": "Trivial Code Generator",
+    "license_text": "examples/vendor/constant_gen/LICENSE"
+  }
+]
