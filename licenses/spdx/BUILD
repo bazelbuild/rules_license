@@ -4,35 +4,40 @@
 # identifiers.  See: https://spdx.org/licenses/
 #
 # Open source projects using one of these well known licenses may reference
-# the license_kind targets here. For example:
+# the license_kind targets here. For example, their BUILD file might contain:
 #
-# === BUILD ===
-# package(default_applicable_licenses = [":license"])
+#   package(default_applicable_licenses = [":license"])
 #
-# license(
-#     name = "license",
-#     license_kinds = ["@rules_license//licenses/spdx:MIT-0"],
-#     license_text = "LICENSE.txt",
-# )
-#
+#   license(
+#       name = "license",
+#       license_kinds = ["@rules_license//licenses/spdx:MIT-0"],
+#       license_text = "LICENSE.txt",
+#   )
 #
 # Organizations building custom compliance checks based on these licenses
 # declarations can take several approaches to align the the package author's
 # declaration that the package is under (let's say) an MIT-0 license with
-# the conditions that organization believes are required by MIT-0
+# the conditions that organization believes are required by MIT-0.
 #
-# In a typical case on could.
-#   1. vendor in @rules_license to your source code tree.
+# One technique might be to:
+#   1. Vendor in @rules_license to your source code tree.
 #   2. Modify the targets here to add conditions for your particular needs.
+#   3. Add it as a local_repository() to your Bazel WORKSPACE.
 #   3. As the SPDX license list evolves, and your dependencies start using new
 #      licenses, add new license_kind rules to this copy.
-# another possible strategy might be to
-#   1. maintainin a private list of these license_kind declarations somewhere
-#      in your source tree. Let's say //compliance/liceneses/spdx/BUILD.
+# Another possible strategy might be to
+#   1. maintain a private list of these license_kind declarations somewhere
+#      in your source tree. Let's say //compliance/licenses/spdx/BUILD.
 #   2. Automatically remap "@rules_license//licenses/spdx:" to
-#      "//compliance/liceneses/spdx:" when importing third party code.
+#      "//compliance/licenses/spdx:" when importing third party code.
 #
-# There are a variety of approaches.
+# The choice of approach should be based on your individual philosoply of how
+# you should bring dependencies into your code. If you build from downloaded
+# packages then you might favor the first approach, because external deps
+# can simply refer to @rules_pkg, and they will pick up your local copy.
+# If you maintain your own  third_party directory of all your dependences,
+# so that your WORKSPACE files are empty, you might favor the second.
+
 
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 

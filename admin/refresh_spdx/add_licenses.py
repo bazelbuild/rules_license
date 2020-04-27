@@ -1,7 +1,11 @@
 """Refresh a BUILD file of license_kinds with new ones from licenses.json.
 
-TODO(aiuto): Refine this enought to update BUILD in place.
-TODO(aiuto): Add docs
+Usage:
+  wget https://github.com/spdx/license-list-data/raw/master/json/licenses.json
+  python add_licenses.py >BUILD.more
+  cat BUILD.more ../../licenses/spdx/BUILD
+
+TODO(aiuto): Refine this enough to update BUILD in place.
 TODO(aiuto): Refer to it from /licenses/spdx/BUILD
 """
 
