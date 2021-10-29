@@ -41,6 +41,8 @@
 
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 
+package(default_visibility = ["//visibility:public"])
+
 license_kind(
     name = "0BSD",
     conditions = [],
