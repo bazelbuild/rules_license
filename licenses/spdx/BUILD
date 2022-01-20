@@ -52,7 +52,6 @@
 # If you maintain your own  third_party directory of all your dependences,
 # so that your WORKSPACE files are empty, you might favor the second.
 
-load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 
 package(

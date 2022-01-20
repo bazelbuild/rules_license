@@ -17,8 +17,6 @@
 # TODO(aiuto): Add dependency on Skylib for bzl_library so that we can later
 # generate docs with stardoc.
 
-load("@rules_license//rules:license.bzl", "license")
-
 package(
     default_applicable_licenses = ["//:license"],
     default_visibility = ["//visibility:public"],
