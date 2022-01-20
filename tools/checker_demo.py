@@ -28,12 +28,7 @@ _ALWAYS_ALLOWED_CONDITIONS = frozenset(['notice', 'permissive', 'unencumberd'])
 
 def _get_licenses(licenses_info):
   with codecs.open(licenses_info, encoding='utf-8') as licenses_file:
-    # TODO(aiuto): Bazel is not parsing the BUILD file as utf-8, so it is
-    # double encoding characters. We should use the line below, but we have
-    # to hack up a double utf-8 decode.
-    # return json.loads(licenses_file.read())
-    b = bytearray([ord(c) for c in licenses_file.read()])
-    return json.loads(b.decode('utf-8'))
+    return json.loads(licenses_file.read())
 
 
 def _do_report(out, licenses):

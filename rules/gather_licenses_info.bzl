@@ -54,6 +54,7 @@ gather_licenses_info = aspect(
     doc = """Collects LicenseInfo providers into a single LicensesInfo provider.""",
     implementation = _gather_licenses_info_impl,
     attr_aspects = ["applicable_licenses", "deps", "srcs"],
+    apply_to_generating_rules = True,
 )
 
 def write_licenses_info(ctx, deps, json_out):
