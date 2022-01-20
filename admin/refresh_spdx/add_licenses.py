@@ -1,12 +1,11 @@
+#!/usr/bin/env python3
 """Refresh a BUILD file of license_kinds with new ones from licenses.json.
 
 Usage:
   wget https://github.com/spdx/license-list-data/raw/master/json/licenses.json
-  python add_licenses.py >BUILD.more
-  cat BUILD.more ../../licenses/spdx/BUILD
-
-TODO(aiuto): Refine this enough to update BUILD in place.
-TODO(aiuto): Refer to it from /licenses/spdx/BUILD
+  python add_licenses.py
+  git diff
+  git commit
 """
 
 import json
@@ -26,16 +25,18 @@ def load_json(path):
   return ret
 
 
-def gather_names(path):
+def gather_target_names(text):
   name_match = re.compile(r'^ *name *= *"([^"]*)"')
   ret = []
-  with open(path, 'r') as fp:
-    for line in fp:
-      m = name_match.match(line)
-      if m:
-        ret.append(m.group(1))
+  for line in text.split('\n'):
+    m = name_match.match(line)
+    if m:
+      ret.append(m.group(1))
   return ret
 
+
+
+# Sample JSON formate license declaration.
 """
 {
   "licenseListVersion": "3.8-57-gca4f142",
@@ -71,12 +72,23 @@ def add_new(already_declared, licenses):
   return ret
 
 
-def main():
+def update_spdx_build():
+  """Update //licenses/spdx/BUILD with new license kinds."""
+
+  build_path = '../../licenses/spdx/BUILD'
+  with open(build_path, 'r') as fp:
+    current_file_content = fp.read()
+  already_declared = gather_target_names(current_file_content)
+
   license_json = load_json('licenses.json')
-  already_declared = gather_names('../../licenses/spdx/BUILD')
-  # print(already_declared)
   new_rules = add_new(already_declared, license_json['licenses'])
-  print(new_rules)
+  with open(build_path, 'w') as fp:
+    fp.write(current_file_content)
+    fp.write(new_rules)
+
+
+def main():
+  update_spdx_build()
 
 
 if __name__ == '__main__':

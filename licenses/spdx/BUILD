@@ -2525,3 +2525,429 @@ license_kind(
     conditions = [],
     url = "https://spdx.org/licenses/zlib-acknowledgement.html",
 )
+
+license_kind(
+    name = "CC-BY-NC-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-3.0-DE.html",
+)
+
+license_kind(
+    name = "GFDL-1.1-no-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.1-no-invariants-or-later.html",
+)
+
+license_kind(
+    name = "DRL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/DRL-1.0.html",
+)
+
+license_kind(
+    name = "OPUBL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/OPUBL-1.0.html",
+)
+
+license_kind(
+    name = "OGDL-Taiwan-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/OGDL-Taiwan-1.0.html",
+)
+
+license_kind(
+    name = "FDK-AAC",
+    conditions = [],
+    url = "https://spdx.org/licenses/FDK-AAC.html",
+)
+
+license_kind(
+    name = "BSD-3-Clause-No-Military-License",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-3-Clause-No-Military-License.html",
+)
+
+license_kind(
+    name = "OGC-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/OGC-1.0.html",
+)
+
+license_kind(
+    name = "FreeBSD-DOC",
+    conditions = [],
+    url = "https://spdx.org/licenses/FreeBSD-DOC.html",
+)
+
+license_kind(
+    name = "GFDL-1.3-no-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.3-no-invariants-or-later.html",
+)
+
+license_kind(
+    name = "GFDL-1.3-no-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.3-no-invariants-only.html",
+)
+
+license_kind(
+    name = "C-UDA-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/C-UDA-1.0.html",
+)
+
+license_kind(
+    name = "CC-BY-SA-2.0-UK",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-SA-2.0-UK.html",
+)
+
+license_kind(
+    name = "CAL-1.0-Combined-Work-Exception",
+    conditions = [],
+    url = "https://spdx.org/licenses/CAL-1.0-Combined-Work-Exception.html",
+)
+
+license_kind(
+    name = "NAIST-2003",
+    conditions = [],
+    url = "https://spdx.org/licenses/NAIST-2003.html",
+)
+
+license_kind(
+    name = "GFDL-1.2-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.2-invariants-or-later.html",
+)
+
+license_kind(
+    name = "GFDL-1.3-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.3-invariants-or-later.html",
+)
+
+license_kind(
+    name = "CC-BY-ND-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-ND-3.0-DE.html",
+)
+
+license_kind(
+    name = "HTMLTIDY",
+    conditions = [],
+    url = "https://spdx.org/licenses/HTMLTIDY.html",
+)
+
+license_kind(
+    name = "CERN-OHL-P-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CERN-OHL-P-2.0.html",
+)
+
+license_kind(
+    name = "GFDL-1.2-no-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.2-no-invariants-only.html",
+)
+
+license_kind(
+    name = "CAL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CAL-1.0.html",
+)
+
+license_kind(
+    name = "CC-BY-3.0-NL",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-3.0-NL.html",
+)
+
+license_kind(
+    name = "MIT-open-group",
+    conditions = [],
+    url = "https://spdx.org/licenses/MIT-open-group.html",
+)
+
+license_kind(
+    name = "NIST-PD-fallback",
+    conditions = [],
+    url = "https://spdx.org/licenses/NIST-PD-fallback.html",
+)
+
+license_kind(
+    name = "SchemeReport",
+    conditions = [],
+    url = "https://spdx.org/licenses/SchemeReport.html",
+)
+
+license_kind(
+    name = "GFDL-1.3-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.3-invariants-only.html",
+)
+
+license_kind(
+    name = "CC-BY-3.0-AT",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-3.0-AT.html",
+)
+
+license_kind(
+    name = "CERN-OHL-S-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CERN-OHL-S-2.0.html",
+)
+
+license_kind(
+    name = "BUSL-1.1",
+    conditions = [],
+    url = "https://spdx.org/licenses/BUSL-1.1.html",
+)
+
+license_kind(
+    name = "CC-BY-SA-2.1-JP",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-SA-2.1-JP.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-ND-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-ND-3.0-DE.html",
+)
+
+license_kind(
+    name = "NCGL-UK-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/NCGL-UK-2.0.html",
+)
+
+license_kind(
+    name = "GFDL-1.2-no-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.2-no-invariants-or-later.html",
+)
+
+license_kind(
+    name = "CC-BY-SA-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-SA-3.0-DE.html",
+)
+
+license_kind(
+    name = "CDLA-Permissive-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CDLA-Permissive-2.0.html",
+)
+
+license_kind(
+    name = "App-s2p",
+    conditions = [],
+    url = "https://spdx.org/licenses/App-s2p.html",
+)
+
+license_kind(
+    name = "PolyForm-Noncommercial-1.0.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/PolyForm-Noncommercial-1.0.0.html",
+)
+
+license_kind(
+    name = "Community-Spec-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/Community-Spec-1.0.html",
+)
+
+license_kind(
+    name = "O-UDA-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/O-UDA-1.0.html",
+)
+
+license_kind(
+    name = "CC-BY-2.5-AU",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-2.5-AU.html",
+)
+
+license_kind(
+    name = "CC-BY-3.0-US",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-3.0-US.html",
+)
+
+license_kind(
+    name = "BSD-4-Clause-Shortened",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-4-Clause-Shortened.html",
+)
+
+license_kind(
+    name = "BSD-3-Clause-Modification",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-3-Clause-Modification.html",
+)
+
+license_kind(
+    name = "Elastic-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/Elastic-2.0.html",
+)
+
+license_kind(
+    name = "EPICS",
+    conditions = [],
+    url = "https://spdx.org/licenses/EPICS.html",
+)
+
+license_kind(
+    name = "MIT-Modern-Variant",
+    conditions = [],
+    url = "https://spdx.org/licenses/MIT-Modern-Variant.html",
+)
+
+license_kind(
+    name = "CC-BY-SA-3.0-AT",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-SA-3.0-AT.html",
+)
+
+license_kind(
+    name = "GFDL-1.1-invariants-or-later",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.1-invariants-or-later.html",
+)
+
+license_kind(
+    name = "GLWTPL",
+    conditions = [],
+    url = "https://spdx.org/licenses/GLWTPL.html",
+)
+
+license_kind(
+    name = "Hippocratic-2.1",
+    conditions = [],
+    url = "https://spdx.org/licenses/Hippocratic-2.1.html",
+)
+
+license_kind(
+    name = "NLOD-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/NLOD-2.0.html",
+)
+
+license_kind(
+    name = "CC-BY-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-3.0-DE.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-SA-3.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-SA-3.0-DE.html",
+)
+
+license_kind(
+    name = "DL-DE-BY-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/DL-DE-BY-2.0.html",
+)
+
+license_kind(
+    name = "GFDL-1.2-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.2-invariants-only.html",
+)
+
+license_kind(
+    name = "NIST-PD",
+    conditions = [],
+    url = "https://spdx.org/licenses/NIST-PD.html",
+)
+
+license_kind(
+    name = "COIL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/COIL-1.0.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-ND-3.0-IGO",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-ND-3.0-IGO.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-SA-3.0-IGO",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-SA-3.0-IGO.html",
+)
+
+license_kind(
+    name = "GFDL-1.1-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.1-invariants-only.html",
+)
+
+license_kind(
+    name = "CERN-OHL-W-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CERN-OHL-W-2.0.html",
+)
+
+license_kind(
+    name = "ANTLR-PD-fallback",
+    conditions = [],
+    url = "https://spdx.org/licenses/ANTLR-PD-fallback.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-SA-2.0-FR",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-SA-2.0-FR.html",
+)
+
+license_kind(
+    name = "CDL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CDL-1.0.html",
+)
+
+license_kind(
+    name = "Linux-man-pages-copyleft",
+    conditions = [],
+    url = "https://spdx.org/licenses/Linux-man-pages-copyleft.html",
+)
+
+license_kind(
+    name = "GD",
+    conditions = [],
+    url = "https://spdx.org/licenses/GD.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-SA-2.0-UK",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-SA-2.0-UK.html",
+)
+
+license_kind(
+    name = "GFDL-1.1-no-invariants-only",
+    conditions = [],
+    url = "https://spdx.org/licenses/GFDL-1.1-no-invariants-only.html",
+)
+
+license_kind(
+    name = "PolyForm-Small-Business-1.0.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/PolyForm-Small-Business-1.0.0.html",
+)
+
+license_kind(
+    name = "BSD-2-Clause-Views",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-2-Clause-Views.html",
+)
