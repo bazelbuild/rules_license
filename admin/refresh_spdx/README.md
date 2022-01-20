@@ -7,6 +7,7 @@ and updates our copy of it to include any new license identifiers.
 
 It does not attempt to classify them in any way.
 
+NOTE: You must run this from //admin/refresh_spdx
 
 1.  Fetch the license list from the SPDX project.
 
@@ -16,5 +17,4 @@ It does not attempt to classify them in any way.
 
 1.  Run the refresh tool
     python add_licenses.py
-
 
