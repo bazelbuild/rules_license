@@ -8,10 +8,6 @@ This repository contains a set of rules and tools for
 
 See [License Checking with
 Bazel](https://docs.google.com/document/d/1uwBuhAoBNrw8tmFs-NxlssI6VRolidGYdYqagLqHWt8/edit#)
-for more information about this project.
+for more information about the project.
 
-WARNING: The code here is still in early, active development.
-
-## Disclaimer
-
-This is not an officially supported Google product.
+WARNING: The code here is still in active initial development and may be under churn.

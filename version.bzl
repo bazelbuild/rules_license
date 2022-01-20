@@ -11,19 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""The version of rules_license."""
 
-# License declaration and compliance checking tools.
-
-package(
-    default_applicable_licenses = ["//:license"],
-    default_visibility = ["//visibility:public"],
-)
-
-py_binary(
-    name = "checker_demo",
-    srcs = ["checker_demo.py"],
-    python_version = "PY3",
-    visibility = ["//visibility:public"],
-)
-
-exports_files(["diff_test.sh"])
+version = "0.0.1"
