@@ -4,7 +4,7 @@
 Usage:
   wget https://github.com/spdx/license-list-data/raw/master/json/licenses.json
   python add_licenses.py
-  git diff 
+  git diff
   git commit
 """
 
