@@ -1,0 +1,52 @@
+
+default_tests: &default_tests
+  test_targets:
+    - "//tests/...
+    - "//examples/...
+
+#
+# Bazel releases
+#
+lts: &lts
+  bazel: latest
+
+rolling: &rolling
+  bazel: rolling
+
+
+#
+# Commmon features by platform
+# 
+ubuntu1804: &ubuntu
+  platform: ubuntu1804
+  <<: *default_tests
+  build_targets:
+    - "//distro:distro"
+    - "//distro:relnotes"
+    - "//doc_build:*"
+
+macos: &macos
+  platform: macos
+  <<: *default_tests
+
+windows: &windows
+  platform: windows
+  <<: *win_tests
+
+
+# The cross product of bazel releases X platforms
+#
+tasks:
+  rolling_ubuntu:
+    name: rolling_ubuntu
+    <<: *ubuntu
+    <<: *rolling
+  rolling_macos:
+    name: rolling_macos
+    <<: *macos
+    # It seems there is no rolling Bazel for macos.
+    bazel: last_green
+  rolling_windows:
+    name: rolling_windows
+    <<: *windows
+    <<: *rolling
