@@ -12,20 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# License declaration and compliance checking tools.
+# Workspace dependencies for rules_license/rules
 
-load("@rules_license//rules:license.bzl", "license")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
-package(
-    default_applicable_licenses = [":license"],
-    default_visibility = ["//visibility:public"],
-)
-
-py_binary(
-    name = "checker_demo",
-    srcs = ["checker_demo.py"],
-    python_version = "PY3",
-    visibility = ["//visibility:public"],
-)
-
-exports_files(["diff_test.sh"])
+def rules_license_dependencies():
+    maybe(
+        http_archive,
+        name = "rules_python",
+        sha256 = "a30abdfc7126d497a7698c29c46ea9901c6392d6ed315171a6df5ce433aa4502",
+        strip_prefix = "rules_python-0.6.0",
+        url = "https://github.com/bazelbuild/rules_python/archive/0.6.0.tar.gz",
+    )
