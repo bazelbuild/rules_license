@@ -22,10 +22,12 @@
 # package has provided a LICENSE file, but the text in it  does not match any
 # of the well known licenses in @rules_license//licenses/spdx:*
 
-
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 
-package(default_visibility = ["//visibility:public"])
+package(
+    default_applicable_licenses = ["//:license"],
+    default_visibility = ["//visibility:public"],
+)
 
 # "none" should be used for packages which are distributed with no license of
 # any kind. You can use this no-op license as a positive indication that the
