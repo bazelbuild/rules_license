@@ -23,6 +23,10 @@ use GitHub pull requests for this purpose. Consult
 [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
 information on using pull requests.
 
+All issues that modify the license rules require a github issue first. We
+will use that issue for public discussion of the merits and potential
+implementation.
+
 ## Community Guidelines
 
 This project follows
