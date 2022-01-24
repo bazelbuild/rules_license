@@ -14,6 +14,7 @@
 
 workspace(name = "rules_license")
 
+# You only need the dependencies if you intend to use any of the tools.
 load("@rules_license//:deps.bzl", "rules_license_dependencies")
 
 rules_license_dependencies()
