@@ -99,5 +99,5 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
         package_name = package_name,
         applicable_licenses = [],
         tags = tags,
-        visibility = ["//visbility:public"],
+        visibility = ["//visibility:public"],
     )
