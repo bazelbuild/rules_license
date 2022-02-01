@@ -17,7 +17,6 @@
 load(
     "@rules_license//rules:providers.bzl",
     "LicenseInfo",
-    "LicenseKindInfo",
     "LicensesInfo",
 )
 
@@ -35,21 +34,22 @@ def _default_licenses_impl(ctx):
 _default_licenses = rule(
     implementation = _default_licenses_impl,
     attrs = {
+        "conditions": attr.string_list(
+            doc = "TBD",
+        ),
         "deps": attr.label_list(
             mandatory = True,
             doc = "Licenses",
             providers = [LicenseInfo],
             cfg = "host",
         ),
-        "conditions": attr.string_list(
-            doc = "",
-        ),
     },
 )
 
+# buildifier: disable=unnamed-macro
 def default_licenses(licenses, conditions = None):
     _default_licenses(
         name = "__default_licenses",
-        deps = ["%s_license" % l for l in licenses],
+        deps = ["%s_license" % license for license in licenses],
         conditions = conditions,
     )

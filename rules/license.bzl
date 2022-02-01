@@ -45,6 +45,9 @@ def _license_impl(ctx):
 _license = rule(
     implementation = _license_impl,
     attrs = {
+        "copyright_notice": attr.string(
+            doc = "Copyright notice.",
+        ),
         "license_kinds": attr.label_list(
             mandatory = True,
             doc = "License kind(s) of this license. If multiple license kinds are" +
@@ -53,9 +56,6 @@ _license = rule(
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
             cfg = "host",
-        ),
-        "copyright_notice": attr.string(
-            doc = "Copyright notice.",
         ),
         "license_text": attr.label(
             allow_single_file = True,
@@ -84,8 +84,8 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
                      may be used to produce an index of OSS packages used by
                      an applicatation.
     """
-    license_text_arg = kwargs.get("license_text") or "LICENSE"
-    single_kind = kwargs.get("license_kind")
+    license_text_arg = kwargs.pop("license_text", default = None) or "LICENSE"
+    single_kind = kwargs.pop("license_kind", default = None)
     if single_kind:
         if license_kinds:
             fail("Can not use both license_kind and license_kinds")
@@ -99,4 +99,5 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
         package_name = package_name,
         applicable_licenses = [],
         tags = tags,
+        visibility = ["//visibility:public"],
     )

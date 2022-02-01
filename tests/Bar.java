@@ -13,8 +13,11 @@
 // limitations under the License.
 
 /**
- *
+ * A java class.
  */
+
+package build.bazel.rules_license.tests;
+
 final class Bar {
 
   static final int PI = 3;

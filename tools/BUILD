@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# License declaration and compliance checking tools.
+"""License declaration and compliance checking tools."""
 
 package(
     default_applicable_licenses = ["//:license"],
