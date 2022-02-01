@@ -1,7 +1,7 @@
 # Examples of applications and interactions with licenses
 
 load("@rules_license//examples/vendor/constant_gen:defs.bzl", "constant_gen")
-load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
+load("@rules_license//rules:compliance.bzl", "licenses_used")
 load("@rules_license//rules:license_policy_check.bzl", "license_policy_check")
 load("@rules_license//tools:test_helpers.bzl", "golden_test")
 

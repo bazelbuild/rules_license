@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# license_kind()s for SPDX license identifiers.
+"""license_kind()s for SPDX license identifiers."""
 
 # This is a set of license_kind declarations based on the SPDX license
 # identifiers.  See: https://spdx.org/licenses/
@@ -58,7 +58,6 @@ package(
     default_applicable_licenses = ["//:license"],
     default_visibility = ["//visibility:public"],
 )
-
 
 license_kind(
     name = "0BSD",

@@ -17,9 +17,9 @@
 LicenseKindInfo = provider(
     doc = """Provides information about a license kind.""",
     fields = {
-        "name": "License Name",
-        "label": "The full path to the license kind definition.",
         "conditions": "List of conditions to be met when using this software.",
+        "label": "The full path to the license kind definition.",
+        "name": "License Name",
     },
 )
 

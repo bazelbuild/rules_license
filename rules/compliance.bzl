@@ -15,13 +15,13 @@
 """Proof of concept. License compliance checking."""
 
 load(
-    "@rules_license//rules:providers.bzl",
-    "LicensesInfo",
-)
-load(
     "@rules_license//rules:gather_licenses_info.bzl",
     "gather_licenses_info",
     "write_licenses_info",
+)
+load(
+    "@rules_license//rules:providers.bzl",
+    "LicensesInfo",
 )
 
 # Debugging verbosity
@@ -75,11 +75,11 @@ def _check_license_impl(ctx):
 _check_license = rule(
     implementation = _check_license_impl,
     attrs = {
+        "check_conditions": attr.bool(default = True, mandatory = False),
+        "copyright_notices": attr.output(mandatory = False),
         "deps": attr.label_list(
             aspects = [gather_licenses_info],
         ),
-        "check_conditions": attr.bool(default = True, mandatory = False),
-        "copyright_notices": attr.output(mandatory = False),
         "license_texts": attr.output(mandatory = False),
         "report": attr.output(mandatory = True),
         "_checker": attr.label(

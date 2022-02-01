@@ -13,9 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# TODO(aiuto): Add dependency on Skylib for bzl_library so that we can later
-# generate docs with stardoc.
+"""Rules for making license declarations."""
 
 package(
     default_applicable_licenses = ["//:license"],
