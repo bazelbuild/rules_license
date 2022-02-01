@@ -13,8 +13,11 @@
 // limitations under the License.
 
 /**
- *
+ * A java main.
  */
+
+package build.bazel.rules_license.tests;
+
 final class Hello {
 
   private Hello() {
