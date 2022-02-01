@@ -1,4 +1,4 @@
-# Test cases for license rules.
+"""Test cases for license rules."""
 
 load("@rules_license//rules:compliance.bzl", "check_license")
 load("@rules_license//rules:license.bzl", "license")

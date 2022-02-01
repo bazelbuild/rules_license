@@ -47,6 +47,7 @@ _default_licenses = rule(
     },
 )
 
+# buildifier: disable=unamed-macro
 def default_licenses(licenses, conditions = None):
     _default_licenses(
         name = "__default_licenses",
