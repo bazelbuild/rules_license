@@ -59,7 +59,6 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
-
 license_kind(
     name = "0BSD",
     conditions = [],

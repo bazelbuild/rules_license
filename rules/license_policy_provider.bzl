@@ -17,8 +17,8 @@
 LicensePolicyInfo = provider(
     doc = """Declares a policy name and the license conditions allowable under it.""",
     fields = {
-        "name": "License Policy Name",
-        "label": "The full path to the license policy definition.",
         "conditions": "List of conditions to be met when using this software.",
+        "label": "The full path to the license policy definition.",
+        "name": "License policy name",
     },
 )

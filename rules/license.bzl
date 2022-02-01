@@ -45,6 +45,9 @@ def _license_impl(ctx):
 _license = rule(
     implementation = _license_impl,
     attrs = {
+        "copyright_notice": attr.string(
+            doc = "Copyright notice.",
+        ),
         "license_kinds": attr.label_list(
             mandatory = True,
             doc = "License kind(s) of this license. If multiple license kinds are" +
@@ -53,9 +56,6 @@ _license = rule(
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
             cfg = "host",
-        ),
-        "copyright_notice": attr.string(
-            doc = "Copyright notice.",
         ),
         "license_text": attr.label(
             allow_single_file = True,

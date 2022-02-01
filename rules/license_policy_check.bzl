@@ -15,16 +15,16 @@
 """License compliance checking at analysis time."""
 
 load(
-    "@rules_license//rules:providers.bzl",
-    "LicensesInfo",
-)
-load(
     "@rules_license//rules:gather_licenses_info.bzl",
     "gather_licenses_info",
 )
 load(
     "@rules_license//rules:license_policy_provider.bzl",
     "LicensePolicyInfo",
+)
+load(
+    "@rules_license//rules:providers.bzl",
+    "LicensesInfo",
 )
 
 def _license_policy_check_impl(ctx):
@@ -46,16 +46,16 @@ _license_policy_check = rule(
     implementation = _license_policy_check_impl,
     doc = """Internal tmplementation method for license_policy_check().""",
     attrs = {
+        "policy": attr.label(
+            doc = """Policy definition.""",
+            mandatory = True,
+            providers = [LicensePolicyInfo],
+        ),
         "target": attr.label(
             doc = """Target to collect LicenseInfo for.""",
             aspects = [gather_licenses_info],
             mandatory = True,
             allow_single_file = True,
-        ),
-        "policy": attr.label(
-            doc = """Policy definition.""",
-            mandatory = True,
-            providers = [LicensePolicyInfo],
         ),
     },
 )

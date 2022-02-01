@@ -17,7 +17,6 @@
 load(
     "@rules_license//rules:providers.bzl",
     "LicenseInfo",
-    "LicenseKindInfo",
     "LicensesInfo",
 )
 
@@ -35,14 +34,14 @@ def _default_licenses_impl(ctx):
 _default_licenses = rule(
     implementation = _default_licenses_impl,
     attrs = {
+        "conditions": attr.string_list(
+            doc = "TBD",
+        ),
         "deps": attr.label_list(
             mandatory = True,
             doc = "Licenses",
             providers = [LicenseInfo],
             cfg = "host",
-        ),
-        "conditions": attr.string_list(
-            doc = "",
         ),
     },
 )

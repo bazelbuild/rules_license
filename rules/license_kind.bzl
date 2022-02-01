@@ -37,14 +37,14 @@ def _license_kind_impl(ctx):
 _license_kind = rule(
     implementation = _license_kind_impl,
     attrs = {
+        "canonical_text": attr.label(
+            doc = "File containing the canonical text for this license. Must be UTF-8 encoded.",
+            allow_single_file = True,
+        ),
         "conditions": attr.string_list(
             doc = "Conditions to be met when using software under this license." +
                   "  Conditions are defined by the organization using this license.",
             mandatory = True,
-        ),
-        "canonical_text": attr.label(
-            doc = "File containing the canonical text for this license. Must be UTF-8 encoded.",
-            allow_single_file = True,
         ),
         "url": attr.string(doc = "URL pointing to canonical license definition"),
     },
