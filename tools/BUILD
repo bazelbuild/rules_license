@@ -27,3 +27,9 @@ py_binary(
 )
 
 exports_files(["diff_test.sh"])
+
+filegroup(
+    name = "standard_package",
+    srcs = glob(["**"]),
+    visibility = ["//distro:__pkg__"],
+)

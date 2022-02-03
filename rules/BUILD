@@ -19,3 +19,8 @@ package(
     default_applicable_licenses = ["//:license"],
     default_visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "standard_package",
+    srcs = glob(["**"]),
+)

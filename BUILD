@@ -38,3 +38,15 @@ exports_files(
     ]),
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "standard_package",
+    srcs = glob([
+        "*.bzl",
+        "*.md",
+    ]) + [
+        "BUILD",
+        "LICENSE",
+    ],
+    visibility = ["//distro:__pkg__"],
+)
