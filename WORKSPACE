@@ -35,3 +35,23 @@ http_archive(
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
+
+### Experimental
+
+local_repository(
+    name = "rules_jvm_external",
+    path = "../rules_jvm_external"
+)
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "com.google.guava:guava:28.0-jre",
+    ],
+    repositories = [
+        "https://jcenter.bintray.com/",
+    ],
+)
+
+
