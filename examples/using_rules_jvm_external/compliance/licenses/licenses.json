@@ -1,0 +1,17 @@
+{
+    "com.google.guava:guava:28.0-jre": [
+            {
+            "name": "LICENSE-com_google_guava_guava_28_0_jre",
+            "license_text": "path/to/license/text.text",
+            "package_name": "com_google_guava_guava_28_0_jre",
+            "license_kinds": [
+                "@rules_license//examples/using_rules_jvm_external/compliance/license_kinds:Apache-2.0"
+            ]
+        }
+    ],
+    "another:package:id": [
+            {
+            "license": "Apache-2.0"
+        }
+    ]
+}

@@ -44,6 +44,7 @@ local_repository(
 )
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
+# load("//examples/using_rules_jvm_external/compliance/licenses:defs.bzl", "lookup")
 
 maven_install(
     artifacts = [
@@ -52,6 +53,8 @@ maven_install(
     repositories = [
         "https://jcenter.bintray.com/",
     ],
+    # license_json = "//examples/using_rules_jvm_external/compliance/licenses:licenses.json"
 )
+
 
 

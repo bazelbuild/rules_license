@@ -12,7 +12,7 @@ license(
     name = "license",
     package_name = "Compare Numbers",
     license_kinds = [
-        "//examples/using_rules_jvm_external/compliance/licenses:MIT",
+        "//examples/using_rules_jvm_external/compliance/license_kinds:MIT",
     ],
     license_text = "LICENSE",
 )
