@@ -53,7 +53,7 @@ maven_install(
     repositories = [
         "https://jcenter.bintray.com/",
     ],
-    # license_json = "//examples/using_rules_jvm_external/compliance/licenses:licenses.json"
+    license_json = "//examples/using_rules_jvm_external/compliance/licenses:licenses.json"
 )
 
 

@@ -8,16 +8,16 @@ license_kind(
     url = "https://spdx.org/licenses/Apache-2.0.html",
 )
 
-# Unused but other example license_kinds
-license_kind(
-    name = "not_gdpr_compliant",
-    conditions = ['!deploy_eu'],
-)
-
 license_kind(
     name = "MIT",
     conditions = ['notice'],
     url = "https://spdx.org/licenses/MIT.html",
+)
+
+# Unused but other example license_kinds
+license_kind(
+    name = "not_gdpr_compliant",
+    conditions = ['!deploy_eu'],
 )
 
 license_kind(
