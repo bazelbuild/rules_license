@@ -38,6 +38,7 @@ def _license_impl(ctx):
         package_name = ctx.attr.package_name,
         license_text = ctx.file.license_text,
         rule = ctx.label,
+        additional_info = ctx.attr.additional_info,
     )
     _debug(0, provider)
     return [provider]
@@ -45,6 +46,9 @@ def _license_impl(ctx):
 _license = rule(
     implementation = _license_impl,
     attrs = {
+        "additional_info": attr.string_dict(
+            doc = "A catch-all bucket for users to add custom metadata about this license instance.",
+        ),
         "copyright_notice": attr.string(
             doc = "Copyright notice.",
         ),
@@ -68,10 +72,11 @@ _license = rule(
                   " an applicatation.",
         ),
     },
+    provides = [LicenseInfo],
 )
 
 # buildifier: disable=function-docstring-args
-def license(name, license_kinds = None, license_kind = None, copyright_notice = None, package_name = None, tags = None, **kwargs):
+def license(name, license_kinds = None, license_kind = None, copyright_notice = None, package_name = None, tags = None, additional_info = None, **kwargs):
     """Wrapper for license rule.
 
     Args:
@@ -80,16 +85,17 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
       license_kind: label a single license_kind. Only one of license_kind or license_kinds may
                     be specified
       copyright_notice: str Copyright notice associated with this package.
-      package_name : str A human readable name identifying this package. This
+      package_name:  str A human readable name identifying this package. This
                      may be used to produce an index of OSS packages used by
                      an applicatation.
+      additional_info: dict(str, str): A catch-all bucket for users to add
+                       custom metadata about this license instance.
     """
     license_text_arg = kwargs.pop("license_text", default = None) or "LICENSE"
-    single_kind = kwargs.pop("license_kind", default = None)
-    if single_kind:
+    if license_kind:
         if license_kinds:
             fail("Can not use both license_kind and license_kinds")
-        license_kinds = [single_kind]
+        license_kinds = [license_kind]
     tags = tags or []
     _license(
         name = name,
@@ -97,6 +103,7 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
         license_text = license_text_arg,
         copyright_notice = copyright_notice,
         package_name = package_name,
+        additional_info = additional_info or {},
         applicable_licenses = [],
         tags = tags,
         visibility = ["//visibility:public"],

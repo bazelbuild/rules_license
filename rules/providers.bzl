@@ -31,6 +31,8 @@ LicenseInfo = provider(
         "license_text": "License file",
         "package_name": "Human readable package name",
         "rule": "From whence this came",
+        "additional_info": "A string-string dictionary containing " +
+                           "arbitrary additional metadata.",
     },
 )
 

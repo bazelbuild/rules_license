@@ -10,6 +10,9 @@ package(
 # The default license for an entire package is typically named "license".
 license(
     name = "license",
+    additional_info = {
+        "homepage": "https://example.com",
+    },
     license_kinds = [
         "@rules_license//examples/my_org/licenses:acme_corp_paid",
     ],
