@@ -35,8 +35,12 @@
 # Packages may create license rules that use these license_kinds when the
 # package has provided a LICENSE file, but the text in it  does not match any
 # of the well known licenses in @rules_license//licenses/spdx:*
-
 load("@rules_license//rules:license_kind.bzl", "license_kind")
+
+filegroup(
+    name = "standard_package",
+    srcs = ["BUILD"],
+)
 
 package(
     default_applicable_licenses = ["//:license"],

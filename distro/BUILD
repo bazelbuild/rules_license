@@ -33,6 +33,7 @@ pkg_tar(
     srcs = [
         ":small_workspace",
         "//:standard_package",
+        "//licenses/generic:standard_package",
         "//licenses/spdx:standard_package",
         "//rules:standard_package",
         "//tools:standard_package",
