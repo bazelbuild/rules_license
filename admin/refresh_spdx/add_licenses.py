@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Refresh a BUILD file of license_kinds with new ones from licenses.json.
+"""Refresh the BUILD file of SPDX license_kinds with new ones from licenses.json.
 
 Usage:
   wget https://github.com/spdx/license-list-data/raw/master/json/licenses.json
-  python add_licenses.py
+  LC_ALL="en_US.UTF-8" admin/refresh_spdx/add_licenses.py
   git diff
   git commit
 """
