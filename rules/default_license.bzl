@@ -41,7 +41,7 @@ _default_licenses = rule(
             mandatory = True,
             doc = "Licenses",
             providers = [LicenseInfo],
-            cfg = "host",
+            cfg = "exec",
         ),
     },
 )

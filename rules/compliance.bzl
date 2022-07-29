@@ -86,7 +86,7 @@ _check_license = rule(
             default = Label("@rules_license//tools:checker_demo"),
             executable = True,
             allow_files = True,
-            cfg = "host",
+            cfg = "exec",
         ),
     },
 )
