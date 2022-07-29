@@ -109,7 +109,6 @@ def insert_new(already_declared, licenses):
       '    url = "https://spdx.org/licenses/${licenseId}.html",\n'
       ')'))
 
-  ret = []
   for license in licenses:
     id = license['licenseId']
     old = already_declared.get(id)
@@ -151,7 +150,7 @@ def update_spdx_build():
 def main():
   lc_all = os.environ.get('LC_ALL')
   if lc_all != 'en_US.UTF-8':
-    print('Your environment settings will resort the file badly.')
+    print('Your environment settings will reorder the file badly.')
     print('Please rerun as:')
     print('  LC_ALL="en_US.UTF-8"', ' '.join(sys.argv))
     sys.exit(1)
