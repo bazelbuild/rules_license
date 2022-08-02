@@ -93,6 +93,8 @@ def write_licenses_info(ctx, deps, json_out):
     ],
     "copyright_notice": "{copyright_notice}",
     "package_name": "{package_name}",
+    "package_url": "{package_url}",
+    "package_version": "{package_version}",
     "license_text": "{license_text}"\n  }}"""
 
     kind_template = """
@@ -118,6 +120,8 @@ def write_licenses_info(ctx, deps, json_out):
                     rule = license.rule,
                     copyright_notice = license.copyright_notice,
                     package_name = license.package_name,
+                    package_url = license.package_url or "<unknown>",
+                    package_version = license.package_version or "<unknown>",
                     license_text = license.license_text.path,
                     kinds = ",\n".join(kinds),
                 ))

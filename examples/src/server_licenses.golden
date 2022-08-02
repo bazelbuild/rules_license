@@ -10,6 +10,8 @@
     ],
     "copyright_notice": "",
     "package_name": "Trivial Code Generator Output",
+    "package_url": "<unknown>",
+    "package_version": "<unknown>",
     "license_text": "examples/vendor/constant_gen/LICENSE"
   },
   {
@@ -23,6 +25,8 @@
     ],
     "copyright_notice": "",
     "package_name": "",
+    "package_url": "<unknown>",
+    "package_version": "<unknown>",
     "license_text": "examples/vendor/libhhgttg/LICENSE"
   }
 ]

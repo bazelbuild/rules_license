@@ -13,11 +13,13 @@ package(
 # The default license for an entire package is typically named "license".
 license(
     name = "license",
-    package_name = "Trivial Code Generator",
     license_kinds = [
         "@rules_license//examples/my_org/licenses:generic_restricted",
     ],
     license_text = "LICENSE",
+    package_name = "Trivial Code Generator",
+    package_url = "http://github.com/tgc-fake/tgc.tgz",
+    package_version = "3.14",
 )
 
 license(

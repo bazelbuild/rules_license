@@ -30,6 +30,10 @@ license(
     # Note the UTF-8 encoded copyright symbol.
     copyright_notice = "Copyright © 2019 Uncle Toasty",
     license_kinds = [":generic_notice_license"],
+    # Note. This need not be precise. If a downloader creates the license
+    # clause for you, then it should use the absolute download URL.
+    package_url = "http://github.com/bazelbuild/rules_license",
+    package_version = "0.0.4",
 )
 
 license(
