@@ -76,8 +76,9 @@ _license = rule(
         ),
         "package_version": attr.string(
             doc = "A human readable version string identifying this package." +
-                  " This may be used to produce an index of OSS packages used by" +
-                  " an applicatation.",
+                  " This may be used to produce an index of OSS packages used" +
+                  " by an applicatation.  It should be a value that" +
+                  " increases over time, rather than a commit hash."
         ),
     },
 )
@@ -92,14 +93,16 @@ def license(name, license_kinds = None, license_kind = None,
     Args:
       name: str target name.
       license_kinds: list(label) list of license_kind targets.
-      license_kind: label a single license_kind. Only one of license_kind or license_kinds may
-                    be specified
+      license_kind: label a single license_kind. Only one of license_kind or
+                    license_kinds may be specified
       copyright_notice: str Copyright notice associated with this package.
       package_name: str A human readable name identifying this package. This
                     may be used to produce an index of OSS packages used by
                     an applicatation.
       package_url: The URL this instance was downloaded from.
-      package_version: The version number of this package.
+      package_version: The version number of this package. This should be a
+                       value that increases over time, rather than a commit
+                       hash.
     """
     license_text_arg = kwargs.pop("license_text", default = None) or "LICENSE"
     single_kind = kwargs.pop("license_kind", default = None)
