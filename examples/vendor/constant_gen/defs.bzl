@@ -36,7 +36,7 @@ _constant_gen = rule(
             default = Label("@rules_license//examples/vendor/constant_gen:constant_generator"),
             executable = True,
             allow_files = True,
-            cfg = "host",
+            cfg = "exec",
         ),
     },
 )

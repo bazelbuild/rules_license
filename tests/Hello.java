@@ -16,14 +16,17 @@
  * A java main.
  */
 
-package build.bazel.rules_license.tests;
+package rules_license.tests;
 
 final class Hello {
 
   private Hello() {
   }
 
-  public static int main(String[] args) {
+  int whatIsPi() {
     return Bar.PI;
+  }
+
+  public static void main(String[] args) {
   }
 }
