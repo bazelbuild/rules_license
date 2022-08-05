@@ -55,7 +55,7 @@ _license = rule(
                   " should be listed here. If the user can choose a single one" +
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
-            cfg = "host",
+            cfg = "exec",
         ),
         "license_text": attr.label(
             allow_single_file = True,

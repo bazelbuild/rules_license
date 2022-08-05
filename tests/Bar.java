@@ -16,7 +16,7 @@
  * A java class.
  */
 
-package build.bazel.rules_license.tests;
+package rules_license.tests;
 
 final class Bar {
 
