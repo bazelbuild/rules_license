@@ -10,6 +10,8 @@
     ],
     "copyright_notice": "",
     "package_name": "Trivial Code Generator Output",
+    "package_url": null,
+    "package_version": null,
     "license_text": "examples/vendor/constant_gen/LICENSE"
   }
 ]

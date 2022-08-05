@@ -36,6 +36,8 @@ def _license_impl(ctx):
         license_kinds = tuple([k[LicenseKindInfo] for k in ctx.attr.license_kinds]),
         copyright_notice = ctx.attr.copyright_notice,
         package_name = ctx.attr.package_name,
+        package_url = ctx.attr.package_url,
+        package_version = ctx.attr.package_version,
         license_text = ctx.file.license_text,
         rule = ctx.label,
     )
@@ -67,24 +69,47 @@ _license = rule(
                   " This may be used to produce an index of OSS packages used by" +
                   " an applicatation.",
         ),
+        "package_url": attr.string(
+            doc = "The URL this instance of the package was download from." +
+                  " This may be used to produce an index of OSS packages used by" +
+                  " an applicatation.",
+        ),
+        "package_version": attr.string(
+            doc = "A human readable version string identifying this package." +
+                  " This may be used to produce an index of OSS packages used" +
+                  " by an applicatation.  It should be a value that" +
+                  " increases over time, rather than a commit hash."
+        ),
     },
 )
 
 # buildifier: disable=function-docstring-args
-def license(name, license_kinds = None, license_kind = None, copyright_notice = None, package_name = None, tags = None, **kwargs):
+def license(name,
+            copyright_notice = None,
+            license_kinds = None,
+            license_text = None,
+            package_name = None,
+            package_url = None,
+            package_version = None,
+            tags = None,
+            **kwargs):
     """Wrapper for license rule.
 
     Args:
       name: str target name.
       license_kinds: list(label) list of license_kind targets.
-      license_kind: label a single license_kind. Only one of license_kind or license_kinds may
-                    be specified
+      license_kind: label a single license_kind. Only one of license_kind or
+                    license_kinds may be specified
       copyright_notice: str Copyright notice associated with this package.
-      package_name : str A human readable name identifying this package. This
-                     may be used to produce an index of OSS packages used by
-                     an applicatation.
+      package_name: str A human readable name identifying this package. This
+                    may be used to produce an index of OSS packages used by
+                    an applicatation.
+      package_url: The URL this instance was downloaded from.
+      package_version: The version number of this package. This should be a
+                       value that increases over time, rather than a commit
+                       hash.
+      kwargs: Other things may be specified, but they are explicitly ignored.
     """
-    license_text_arg = kwargs.pop("license_text", default = None) or "LICENSE"
     single_kind = kwargs.pop("license_kind", default = None)
     if single_kind:
         if license_kinds:
@@ -94,9 +119,11 @@ def license(name, license_kinds = None, license_kind = None, copyright_notice = 
     _license(
         name = name,
         license_kinds = license_kinds,
-        license_text = license_text_arg,
+        license_text = license_text or "LICENSE",
         copyright_notice = copyright_notice,
         package_name = package_name,
+        package_url = package_url,
+        package_version = package_version,
         applicable_licenses = [],
         tags = tags,
         visibility = ["//visibility:public"],

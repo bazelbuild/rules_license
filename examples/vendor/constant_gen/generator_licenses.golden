@@ -10,6 +10,8 @@
     ],
     "copyright_notice": "",
     "package_name": "Trivial Code Generator",
+    "package_url": "http://github.com/tgc-fake/tgc.tgz",
+    "package_version": "3.14",
     "license_text": "examples/vendor/constant_gen/LICENSE"
   }
 ]

@@ -30,6 +30,8 @@ LicenseInfo = provider(
         "license_kinds": "License kinds",
         "license_text": "License file",
         "package_name": "Human readable package name",
+        "package_url": "URL from which this package was downloaded.",
+        "package_version": "Human readable version string",
         "rule": "From whence this came",
     },
 )

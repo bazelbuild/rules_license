@@ -78,9 +78,11 @@ def _check_conditions(out, licenses, allowed_conditions):
 
 def _do_copyright_notices(out, licenses):
   for l in licenses:
+    name = l.get('package_name') or '<unknown>'
+    if l.get('package_version'):
+      name =  name + "/" + l['package_version']
     # IGNORE_COPYRIGHT: Not a copyright notice. It is a variable holding one.
-    out.write('package(%s), copyright(%s)\n' % (l.get('package_name') or '<unknown>',
-                                                l['copyright_notice']))
+    out.write('package(%s), copyright(%s)\n' % (name, l['copyright_notice']))
 
 
 def _do_licenses(out, licenses):
