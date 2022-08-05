@@ -84,10 +84,15 @@ _license = rule(
 )
 
 # buildifier: disable=function-docstring-args
-def license(name, license_kinds = None, license_kind = None,
-            copyright_notice = None, package_name = None,
-            package_url = None, package_version = None,
-            tags = None, **kwargs):
+def license(name,
+            copyright_notice = None,
+            license_kinds = None,
+            license_text = None,
+            package_name = None,
+            package_url = None,
+            package_version = None,
+            tags = None,
+            **kwargs):
     """Wrapper for license rule.
 
     Args:
@@ -103,8 +108,8 @@ def license(name, license_kinds = None, license_kind = None,
       package_version: The version number of this package. This should be a
                        value that increases over time, rather than a commit
                        hash.
+      kwargs: Other things may be specified, but they are explicitly ignored.
     """
-    license_text_arg = kwargs.pop("license_text", default = None) or "LICENSE"
     single_kind = kwargs.pop("license_kind", default = None)
     if single_kind:
         if license_kinds:
@@ -114,7 +119,7 @@ def license(name, license_kinds = None, license_kind = None,
     _license(
         name = name,
         license_kinds = license_kinds,
-        license_text = license_text_arg,
+        license_text = license_text or "LICENSE",
         copyright_notice = copyright_notice,
         package_name = package_name,
         package_url = package_url,
