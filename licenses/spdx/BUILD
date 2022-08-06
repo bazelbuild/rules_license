@@ -59,6 +59,8 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
+licenses(["notice"])
+
 filegroup(
     name = "standard_package",
     srcs = ["BUILD"],

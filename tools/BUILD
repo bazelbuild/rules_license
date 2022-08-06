@@ -19,6 +19,8 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
+licenses(["notice"])
+
 py_binary(
     name = "checker_demo",
     srcs = ["checker_demo.py"],

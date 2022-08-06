@@ -7,6 +7,8 @@ load("@rules_license//tools:test_helpers.bzl", "golden_test")
 
 package(default_applicable_licenses = [":license"])
 
+licenses(["notice"])
+
 # license_kind rules generally appear in a central location per workspace. They
 # are intermingled with normal target build rules
 license_kind(

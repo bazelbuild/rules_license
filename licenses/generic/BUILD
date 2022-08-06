@@ -37,14 +37,16 @@
 # of the well known licenses in @rules_license//licenses/spdx:*
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 
-filegroup(
-    name = "standard_package",
-    srcs = ["BUILD"],
-)
-
 package(
     default_applicable_licenses = ["//:license"],
     default_visibility = ["//visibility:public"],
+)
+
+licenses(["notice"])
+
+filegroup(
+    name = "standard_package",
+    srcs = ["BUILD"],
 )
 
 # "none" should be used for packages which are distributed with no license of
