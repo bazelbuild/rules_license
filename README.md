@@ -1,13 +1,24 @@
 # rules_license
 
 This repository contains a set of rules and tools for
-- asserting that packages are available under specified OSS licenses 
-- gathering those license assertions into artifacts to ship with code
+- declaring metadata about packages, such as
+  - the licenses the package is available under
+  - the canonical package name and version
+  - copyright information
+  - ... and more TBD in the future
+- gathering those license declarations into artifacts to ship with code
 - applying organization specific compliance constriants against the
-  set of licenses used by a target.
+  set of packages used by a target.
+- (eventually) producing SBOMs for built artifacts.
 
-See [License Checking with
-Bazel](https://docs.google.com/document/d/1uwBuhAoBNrw8tmFs-NxlssI6VRolidGYdYqagLqHWt8/edit#)
-for more information about the project.
+WARNING: The code here is still in active initial development and will churn a lot.
 
-WARNING: The code here is still in active initial development and may be under churn.
+If you want to follow along:
+- Mailing list: [bazel-ssc@googlegroups.com](https://groups.google.com/a/bazel.build/g/bazel-ssc)  
+- Monthly eng meeting: [calendar link](https://calendar.google.com/event?action=TEMPLATE&tmeid=MXRmdXVnMm5vZDI5bmFscHJhMjcwcm52OWlfMjAyMjA4MjJUMTYwMDAwWiBjXzUzcHBwZzFudWthZXRmb3E5NzhxaXViNmxzQGc&tmsrc=c_53pppg1nukaetfoq978qiub6ls%40group.calendar.google.com&scp=ALL)
+
+Background reading:
+These is for learning about the problem space, and our approach to solutions. Concrete specifications will always appear in checked in code rather than documents.
+- [License Checking with Bazel](https://docs.google.com/document/d/1uwBuhAoBNrw8tmFs-NxlssI6VRolidGYdYqagLqHWt8/edit#).
+- [OSS Licenses and Bazel Dependency Management](https://docs.google.com/document/d/1oY53dQ0pOPEbEvIvQ3TvHcFKClkimlF9AtN89EPiVJU/edit#)
+- [Adding OSS license declarations to Bazel](https://docs.google.com/document/d/1XszGbpMYNHk_FGRxKJ9IXW10KxMPdQpF5wWbZFpA4C8/edit#heading=h.5mcn15i0e1ch)
