@@ -15,7 +15,7 @@ WARNING: The code here is still in active initial development and will churn a l
 
 If you want to follow along:
 - Mailing list: [bazel-ssc@googlegroups.com](https://groups.google.com/a/bazel.build/g/bazel-ssc)  
-- Monthly eng meeting: [calendar link](https://calendar.google.com/event?action=TEMPLATE&tmeid=MXRmdXVnMm5vZDI5bmFscHJhMjcwcm52OWlfMjAyMjA4MjJUMTYwMDAwWiBjXzUzcHBwZzFudWthZXRmb3E5NzhxaXViNmxzQGc&tmsrc=c_53pppg1nukaetfoq978qiub6ls%40group.calendar.google.com&scp=ALL)
+- Monthly eng meeting: [calendar link](MjAyMjA4MjJUMTYwMDAwWiBjXzUzcHBwZzFudWthZXRmb3E5NzhxaXViNmxzQGc&tmsrc=c_53pppg1nukaetfoq978qiub6ls%40group.calendar.google.com&scp=ALL)
 
 Background reading:
 These is for learning about the problem space, and our approach to solutions. Concrete specifications will always appear in checked in code rather than documents.
