@@ -14,7 +14,7 @@ This repository contains a set of rules and tools for
 WARNING: The code here is still in active initial development and will churn a lot.
 
 If you want to follow along:
-- Mailing list: [bazel-ssc@googlegroups.com](https://groups.google.com/a/bazel.build/g/bazel-ssc)  
+- Mailing list: [bazel-ssc@bazel.build](https://groups.google.com/a/bazel.build/g/bazel-ssc)  
 - Monthly eng meeting: [calendar link](MjAyMjA4MjJUMTYwMDAwWiBjXzUzcHBwZzFudWthZXRmb3E5NzhxaXViNmxzQGc&tmsrc=c_53pppg1nukaetfoq978qiub6ls%40group.calendar.google.com&scp=ALL)
 
 Background reading:
