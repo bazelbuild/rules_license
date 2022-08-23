@@ -89,8 +89,10 @@ def _do_licenses(out, licenses):
   for lic in licenses:
     path = lic['license_text']
     with codecs.open(path, encoding='utf-8') as license_file:
+      out.write('====== %s ======\n' % lic['package_name'])
       out.write('= %s\n' % path)
       out.write(license_file.read())
+      out.write('\n')
 
 
 def main():

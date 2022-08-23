@@ -110,26 +110,31 @@ def write_licenses_info(ctx, deps, json_out):
       }}"""
 
     licenses = []
+    rules = [] 
     for dep in deps:
-        if LicensesInfo in dep:
-            for license in dep[LicensesInfo].licenses.to_list():
-                _debug(0, "  Requires license: %s" % license)
-                kinds = []
-                for kind in license.license_kinds:
-                    kinds.append(kind_template.format(
-                        kind_name = kind.name,
-                        kind_path = kind.label,
-                        kind_conditions = kind.conditions,
-                    ))
-                licenses.append(rule_template.format(
-                    rule = license.rule,
-                    copyright_notice = license.copyright_notice,
-                    package_name = license.package_name,
-                    package_url = _quotes_or_null(license.package_url),
-                    package_version = _quotes_or_null(license.package_version),
-                    license_text = license.license_text.path,
-                    kinds = ",\n".join(kinds),
+        if LicensesInfo not in dep:
+            continue
+        for license in dep[LicensesInfo].licenses.to_list():
+            if str(license.rule) in rules:  # duplicate rule
+                continue
+            rules.append(str(license.rule))
+            _debug(0, "  Requires license: %s" % license)
+            kinds = []
+            for kind in license.license_kinds:
+                kinds.append(kind_template.format(
+                    kind_name = kind.name,
+                    kind_path = kind.label,
+                    kind_conditions = kind.conditions,
                 ))
+            licenses.append(rule_template.format(
+                rule = license.rule,
+                copyright_notice = license.copyright_notice,
+                package_name = license.package_name,
+                package_url = _quotes_or_null(license.package_url),
+                package_version = _quotes_or_null(license.package_version),
+                license_text = license.license_text.path,
+                kinds = ",\n".join(kinds),
+            ))
     ctx.actions.write(
         output = json_out,
         content = "[\n%s\n]\n" % ",\n".join(licenses),
