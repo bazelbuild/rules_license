@@ -19,6 +19,8 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
+licenses(["notice"])
+
 license(
     name = "license",
     license_kinds = [
@@ -28,7 +30,7 @@ license(
 )
 
 exports_files(
-    ["WORKSPACE"],
+    ["LICENSE", "WORKSPACE"],
     visibility = ["//visibility:public"],
 )
 
