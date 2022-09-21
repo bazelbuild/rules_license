@@ -109,15 +109,14 @@ def write_licenses_info(ctx, deps, json_out):
         "conditions": {kind_conditions}
       }}"""
 
-    licenses = []
-    rules = [] 
+    licenses = {}
+    
     for dep in deps:
         if LicensesInfo not in dep:
             continue
         for license in dep[LicensesInfo].licenses.to_list():
-            if str(license.rule) in rules:  # duplicate rule
+            if str(license.rule) in licenses:  # duplicate rule
                 continue
-            rules.append(str(license.rule))
             _debug(0, "  Requires license: %s" % license)
             kinds = []
             for kind in license.license_kinds:
@@ -126,7 +125,7 @@ def write_licenses_info(ctx, deps, json_out):
                     kind_path = kind.label,
                     kind_conditions = kind.conditions,
                 ))
-            licenses.append(rule_template.format(
+            licenses[str(license.rule)] = rule_template.format(
                 rule = license.rule,
                 copyright_notice = license.copyright_notice,
                 package_name = license.package_name,
@@ -134,8 +133,8 @@ def write_licenses_info(ctx, deps, json_out):
                 package_version = _quotes_or_null(license.package_version),
                 license_text = license.license_text.path,
                 kinds = ",\n".join(kinds),
-            ))
+            )
     ctx.actions.write(
         output = json_out,
-        content = "[\n%s\n]\n" % ",\n".join(licenses),
+        content = "[\n%s\n]\n" % ",\n".join(licenses.values()),
     )
