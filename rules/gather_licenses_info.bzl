@@ -58,9 +58,9 @@ gather_licenses_info = aspect(
 )
 
 def _quotes_or_null(s):
-  if not s:
-    return "null"
-  return '"%s"' % s
+    if not s:
+        return "null"
+    return '"%s"' % s
 
 def write_licenses_info(ctx, deps, json_out):
     """Writes LicensesInfo providers for a set of targets as JSON.
