@@ -1,0 +1,9 @@
+module(
+    name = "rules_license",
+    version = "0.0.3",
+)
+
+bazel_dep(
+    name = "rules_python",
+    version = "0.12.0",
+)
