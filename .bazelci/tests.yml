@@ -41,6 +41,14 @@ tasks:
     name: rolling_ubuntu
     <<: *ubuntu
     <<: *rolling
+  rolling_ubuntu_bzlmod:
+    name: rolling_ubuntu
+    <<: *ubuntu
+    <<: *rolling
+    build_flags:
+    - "--experimental_enable_bzlmod"
+    test_flags:
+    - "--experimental_enable_bzlmod"
   rolling_macos:
     name: rolling_macos
     <<: *macos
