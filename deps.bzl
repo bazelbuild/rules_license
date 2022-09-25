@@ -21,7 +21,7 @@ def rules_license_dependencies():
     maybe(
         http_archive,
         name = "rules_python",
-        sha256 = "a30abdfc7126d497a7698c29c46ea9901c6392d6ed315171a6df5ce433aa4502",
-        strip_prefix = "rules_python-0.6.0",
-        url = "https://github.com/bazelbuild/rules_python/archive/0.6.0.tar.gz",
+        sha256 = "b593d13bb43c94ce94b483c2858e53a9b811f6f10e1e0eedc61073bd90e58d9c",
+        strip_prefix = "rules_python-0.12.0",
+        url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.12.0.tar.gz",
     )
