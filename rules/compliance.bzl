@@ -101,7 +101,7 @@ def _licenses_used_impl(ctx):
 
 _licenses_used = rule(
     implementation = _licenses_used_impl,
-    doc = """Internal tmplementation method for licenses_used().""",
+    doc = """Internal implementation method for licenses_used().""",
     attrs = {
         "deps": attr.label_list(
             doc = """List of targets to collect LicenseInfo for.""",

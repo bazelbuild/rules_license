@@ -44,7 +44,7 @@ def _license_policy_check_impl(ctx):
 
 _license_policy_check = rule(
     implementation = _license_policy_check_impl,
-    doc = """Internal tmplementation method for license_policy_check().""",
+    doc = """Internal implementation method for license_policy_check().""",
     attrs = {
         "policy": attr.label(
             doc = """Policy definition.""",
