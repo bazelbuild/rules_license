@@ -1,0 +1,33 @@
+default_tests: &default_tests
+  test_targets:
+    - "//tests/...
+
+#
+# Bazel releases
+#
+lts: &lts
+  bazel: latest
+
+rolling: &rolling
+  bazel: rolling
+
+
+#
+# Commmon features by platform
+# 
+ubuntu1804: &ubuntu
+  platform: ubuntu1804
+  <<: *default_tests
+  build_targets:
+    - "//distro:distro"
+    - "//distro:relnotes"
+    - "//doc_build:*"
+
+# The cross product of bazel releases X platforms
+#
+tasks:
+  rolling_ubuntu:
+    name: rolling_ubuntu
+    test_flags: --enable_bzlmod
+    <<: *ubuntu
+    <<: *rolling
