@@ -38,3 +38,50 @@ def golden_test(
             golden,
         ],
     )
+
+def golden_cmd_test(
+        name,
+        cmd,
+        golden,  # Required
+        toolchains = [],
+        tools = None,
+        exec_tools = None,
+        srcs = [],  # Optional
+        **kwargs):  # Rest
+    """Compares cmd output to golden output, passes if they are identical.
+
+    Args:
+      name: Name of the build rule.
+      cmd: The command to run to generate output.
+      golden: The golden file to be compared.
+      toolchains: List of toolchains needed to run the command, passed to genrule.
+      tools: List of tools needed to run the command, passed to genrule.
+      exec_tools: List of tools needed to run the command, passed to genrule.
+      srcs: List of sources needed as input to the command, passed to genrule.
+      **kwargs: Any additional parameters for the generated golden_test.
+    """
+    actual = name + ".output"
+
+    # There are some cases where tools are provided and exec_tools are provided.
+    # Specifying both in the same genrule, confuses the host vs exec rules,
+    # which prevents python3 from execution.
+    if tools and exec_tools:
+        fail("Only set one: tools or exec_tools.  " +
+             "Setting both confuses python execution mode (host vs exec).")
+    native.genrule(
+        name = name + "_output",
+        srcs = srcs,
+        outs = [actual],
+        cmd = cmd + " > '$@'",  # Redirect to collect output
+        toolchains = toolchains,
+        tools = tools,
+        exec_tools = exec_tools,
+        testonly = True,
+    )
+
+    golden_test(
+        name = name,
+        subject = actual,
+        golden = golden,
+        **kwargs
+    )

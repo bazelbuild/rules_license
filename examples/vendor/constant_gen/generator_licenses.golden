@@ -1,17 +1,34 @@
 [
   {
-    "rule": "//examples/vendor/constant_gen:license",
-    "license_kinds": [
+    "top_level_target": "//examples/vendor/constant_gen:constant_generator",
+    "dependencies": [
       {
-        "target": "@//examples/my_org/licenses:generic_restricted",
-        "name": "generic_restricted",
-        "conditions": ["restricted"]
+        "target_under_license": "//examples/vendor/constant_gen:constant_generator",
+        "licenses": [
+          "//examples/vendor/constant_gen:license"
+        ]
       }
     ],
-    "copyright_notice": "",
-    "package_name": "Trivial Code Generator",
-    "package_url": "http://github.com/tgc-fake/tgc.tgz",
-    "package_version": "3.14",
-    "license_text": "examples/vendor/constant_gen/LICENSE"
+    "licenses": [
+      {
+        "label": "//examples/vendor/constant_gen:license",
+        "rule": "//examples/vendor/constant_gen:license",
+        "license_kinds": [
+          {
+            "target": "@//examples/my_org/licenses:generic_restricted",
+            "name": "generic_restricted",
+            "conditions": ["restricted"]
+          }
+        ],
+        "copyright_notice": "",
+        "package_name": "Trivial Code Generator",
+        "package_url": "",
+        "package_version": "",
+        "license_text": "examples/vendor/constant_gen/LICENSE",
+        "used_by": [
+          "//examples/vendor/constant_gen:constant_generator"
+        ]
+      }
+    ]
   }
 ]
