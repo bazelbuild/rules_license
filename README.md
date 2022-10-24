@@ -1,5 +1,8 @@
 # rules_license
 
+CI:
+[![Build status](https://badge.buildkite.com/e12f23186aa579f1e20fcb612a22cd799239c3134bc38e1aff.svg)](https://buildkite.com/bazel/rules-license)
+
 This repository contains a set of rules and tools for
 - declaring metadata about packages, such as
   - the licenses the package is available under
