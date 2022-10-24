@@ -37,7 +37,7 @@ windows: &windows
 #
 tasks:
   lts_ubuntu:
-    name: rolling_ubuntu
+    name: lts_ubuntu
     <<: *ubuntu
     <<: *lts
   rolling_ubuntu:
@@ -45,7 +45,7 @@ tasks:
     <<: *ubuntu
     <<: *rolling
   lts_macos:
-    name: rolling_macos
+    name: lts_macos
     <<: *macos
     <<: *lts
   rolling_macos:
@@ -54,7 +54,7 @@ tasks:
     # It seems there is no rolling Bazel for macos.
     bazel: last_green
   lts_windows:
-    name: rolling_windows
+    name: lts_windows
     <<: *windows
     <<: *lts
   rolling_windows:
