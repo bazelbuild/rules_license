@@ -1,8 +1,8 @@
 
 default_tests: &default_tests
   test_targets:
-    - "//tests/...
-    - "//examples/...
+    - "//tests/..."
+    - "//examples/..."
 
 #
 # Bazel releases
