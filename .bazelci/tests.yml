@@ -17,13 +17,12 @@ rolling: &rolling
 #
 # Commmon features by platform
 # 
-ubuntu1804: &ubuntu
-  platform: ubuntu1804
+ubuntu2004: &ubuntu
+  platform: ubuntu2004
   <<: *default_tests
   build_targets:
     - "//distro:distro"
     - "//distro:relnotes"
-    - "//doc_build:*"
 
 macos: &macos
   platform: macos
