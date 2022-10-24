@@ -31,7 +31,7 @@ macos: &macos
 
 windows: &windows
   platform: windows
-  <<: *win_tests
+  <<: *default_tests
 
 
 # The cross product of bazel releases X platforms
