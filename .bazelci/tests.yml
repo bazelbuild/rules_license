@@ -36,15 +36,27 @@ windows: &windows
 # The cross product of bazel releases X platforms
 #
 tasks:
+  lts_ubuntu:
+    name: rolling_ubuntu
+    <<: *ubuntu
+    <<: *lts
   rolling_ubuntu:
     name: rolling_ubuntu
     <<: *ubuntu
     <<: *rolling
+  lts_macos:
+    name: rolling_macos
+    <<: *macos
+    <<: *lts
   rolling_macos:
     name: rolling_macos
     <<: *macos
     # It seems there is no rolling Bazel for macos.
     bazel: last_green
+  lts_windows:
+    name: rolling_windows
+    <<: *windows
+    <<: *lts
   rolling_windows:
     name: rolling_windows
     <<: *windows
