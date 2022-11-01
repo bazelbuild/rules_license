@@ -1,6 +1,7 @@
+
 default_tests: &default_tests
   test_targets:
-    - "//tests/...
+    - "//tests/..."
 
 #
 # Bazel releases
@@ -18,6 +19,8 @@ rolling: &rolling
 ubuntu1804: &ubuntu
   platform: ubuntu1804
   <<: *default_tests
+  test_flags:
+    - "--enable_bzlmod"
   build_targets:
     - "//distro:distro"
     - "//distro:relnotes"
@@ -28,6 +31,7 @@ ubuntu1804: &ubuntu
 tasks:
   rolling_ubuntu:
     name: rolling_ubuntu
-    test_flags: --enable_bzlmod
+    test_flags:
+      - "--enable_bzlmod"
     <<: *ubuntu
     <<: *rolling
