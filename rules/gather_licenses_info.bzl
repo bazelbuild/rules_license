@@ -27,6 +27,16 @@ def _debug(loglevel, msg):
     if _VERBOSITY > loglevel:
         print(msg)  # buildifier: disable=print
 
+def _strip_null_repo(label):
+    """Removes the null repo name (e.g. @//) from a string.
+
+    The is to make str(label) compatible between bazel 5.x and 6.x
+    """
+    s = str(label)
+    if s.startswith('@//'):
+        return s[1:]
+    return s
+
 def _get_transitive_licenses(deps, licenses, trans):
     for dep in deps:
         if LicenseInfo in dep:
@@ -122,7 +132,7 @@ def write_licenses_info(ctx, deps, json_out):
                         kind_conditions = kind.conditions,
                     ))
                 licenses.append(rule_template.format(
-                    rule = license.rule,
+                    rule = _strip_null_repo(license.rule),
                     copyright_notice = license.copyright_notice,
                     package_name = license.package_name,
                     package_url = _quotes_or_null(license.package_url),
