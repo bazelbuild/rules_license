@@ -30,7 +30,11 @@ macos: &macos
 
 windows: &windows
   platform: windows
-  <<: *default_tests
+  test_targets:
+    - "//tests/..."
+    - "//examples/..."
+    - "-//examples/manifest/..."
+
 
 
 # The cross product of bazel releases X platforms
