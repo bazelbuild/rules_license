@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Proof of concept. License restriction."""
 
 load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
@@ -30,6 +29,7 @@ def _license_kind_impl(ctx):
             ctx.label.package,
             ctx.label.name,
         ),
+        long_name = ctx.attr.long_name,
         conditions = ctx.attr.conditions,
     )
     return [provider]
@@ -37,15 +37,16 @@ def _license_kind_impl(ctx):
 _license_kind = rule(
     implementation = _license_kind_impl,
     attrs = {
-        "canonical_text": attr.label(
-            doc = "File containing the canonical text for this license. Must be UTF-8 encoded.",
-            allow_single_file = True,
-        ),
         "conditions": attr.string_list(
             doc = "Conditions to be met when using software under this license." +
                   "  Conditions are defined by the organization using this license.",
             mandatory = True,
         ),
+        "canonical_text": attr.label(
+            doc = "File containing the canonical text for this license. Must be UTF-8 encoded.",
+            allow_single_file = True,
+        ),
+        "long_name": attr.string(doc = "Human readable long name of license."),
         "url": attr.string(doc = "URL pointing to canonical license definition"),
     },
 )
@@ -53,6 +54,8 @@ _license_kind = rule(
 def license_kind(name, **kwargs):
     if "conditions" not in kwargs:
         kwargs["conditions"] = []
+    if "long_name" not in kwargs:
+        kwargs["long_name"] = name
     _license_kind(
         name = name,
         applicable_licenses = [],

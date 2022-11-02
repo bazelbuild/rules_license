@@ -1,13 +1,17 @@
-"""Test cases for license rules."""
+# Test cases for license rules.
 
-load("@rules_license//rules:compliance.bzl", "check_license")
+load("@rules_license//tools:test_helpers.bzl", "golden_test")
+load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//rules:license_kind.bzl", "license_kind")
-load("@rules_license//tools:test_helpers.bzl", "golden_test")
 
-package(default_applicable_licenses = [":license"])
-
-licenses(["notice"])
+package(
+    default_applicable_licenses = [":license"],
+    default_visibility = [
+        "//examples:__subpackages__",
+        "//tests:__subpackages__",
+    ],
+)
 
 # license_kind rules generally appear in a central location per workspace. They
 # are intermingled with normal target build rules
@@ -41,8 +45,16 @@ license(
 license(
     name = "license_for_extra_feature",
     package_name = "A test case package",
-    license = "LICENSE.extra",
     license_kinds = [":generic_restricted_license"],
+    license_text = "LICENSE.extra",
+)
+
+# This license is not in the "compliance" namespace and
+# therefore should not show up in the report verified by
+# :verify_cc_app_test
+license(
+    name = "internal_non_compliance_license",
+    namespace = "test_namespace",
 )
 
 cc_binary(
@@ -55,7 +67,18 @@ cc_binary(
 
 cc_library(
     name = "c_bar",
-    srcs = ["bar.cc"],
+    srcs = [
+        "bar.cc",
+    ],
+    applicable_licenses = [
+        ":license",
+        ":license_for_extra_feature",
+        ":internal_non_compliance_license",
+    ],
+    #deps = [
+    #    "@rules_license//rules/tests/legacy:another_library_with_legacy_license_clause",
+    #    "@rules_license//rules/tests/legacy:library_with_legacy_license_clause",
+    #],
 )
 
 java_binary(
@@ -87,6 +110,28 @@ check_license(
     ],
 )
 
+licenses_used(
+    name = "hello_licenses",
+    out = "hello_licenses.json",
+    deps = [":hello"],
+)
+
+py_test(
+    name = "hello_licenses_test",
+    srcs = ["hello_licenses_test.py"],
+    data = [":hello_licenses.json"],
+    python_version = "PY3",
+    deps = [
+        ":license_test_utils",
+    ],
+)
+
+py_library(
+    name = "license_test_utils",
+    srcs = ["license_test_utils.py"],
+    srcs_version = "PY3",
+)
+
 check_license(
     name = "check_java_app",
     check_conditions = False,
@@ -109,3 +154,7 @@ golden_test(
     golden = "hello_java_copyrights.golden",
     subject = ":hello_java_copyrights.txt",
 )
+
+exports_files([
+    "hello_licenses.golden",
+])
