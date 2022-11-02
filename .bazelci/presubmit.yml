@@ -1,3 +1,2 @@
 imports:
 - tests.yml
-- bzlmod_tests.yml

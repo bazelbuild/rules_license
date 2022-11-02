@@ -65,3 +65,12 @@ tasks:
     name: rolling_windows
     <<: *windows
     <<: *rolling
+  #
+  # Smoke test with bzlmod
+  # 
+  bzlmod_rolling_ubuntu:
+    name: bzlmod_rolling_ubuntu
+    <<: *ubuntu
+    <<: *rolling
+    build_flags:
+      - "--enable_bzlmod"
