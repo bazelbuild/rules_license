@@ -9,7 +9,7 @@ Terminology
 -   SCM: source code management system. These examples assume that
     an organization has a SCM that can enforce ownership restrictions on
     specific folder trees. Targets are divided into BUILD files that are
-    reviewed by engineers vs. those that are reviewed by an organization's
+    reviewed by engineers vs. those that are reviewed by an organizations
     compliance team.
 
 ## Overview

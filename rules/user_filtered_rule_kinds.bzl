@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,14 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Filtered rule kinds for aspect inspection.
 
-"""LicensePolicyProvider."""
+The format of this dictionary is:
+  rule_name: [attr, attr, ...]
 
-LicensePolicyInfo = provider(
-    doc = """Declares a policy name and the license conditions allowable under it.""",
-    fields = {
-        "conditions": "List of conditions to be met when using this software.",
-        "label": "The full path to the license policy definition.",
-        "name": "License policy name",
-    },
-)
+Filters for rules that are not part of the Bazel distribution should be added
+to this file.
+
+Attributes are either the explicit list of attributes to filter, or '_*' which
+would ignore all attributes prefixed with a _.
+"""
+
+# Rule kinds with attributes the aspect currently needs to ignore
+user_aspect_filters = {
+}

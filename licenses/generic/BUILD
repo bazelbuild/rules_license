@@ -86,6 +86,14 @@ license_kind(
     ],
 )
 
+# See: https://opensource.google/docs/thirdparty/licenses/#restricted
+license_kind(
+    name = "restricted",
+    conditions = [
+        "restricted",
+    ],
+)
+
 # See: https://opensource.google/docs/thirdparty/licenses/#ByExceptionOnly
 license_kind(
     name = "by_exception_only",

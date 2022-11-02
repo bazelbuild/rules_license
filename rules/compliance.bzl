@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,40 +11,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Proof of concept. License compliance checking."""
+"""License compliance checking."""
 
 load(
     "@rules_license//rules:gather_licenses_info.bzl",
     "gather_licenses_info",
+    "gather_licenses_info_and_write",
     "write_licenses_info",
 )
 load(
     "@rules_license//rules:providers.bzl",
-    "LicensesInfo",
+    "TransitiveLicensesInfo",
 )
 
-# Debugging verbosity
-_VERBOSITY = 0
-
-def _debug(loglevel, msg):
-    if _VERBOSITY > loglevel:
-        print(msg)  # buildifier: disable=print
-
+# This rule is proof of concept, and may not represent the final
+# form of a rule for compliance validation.
 def _check_license_impl(ctx):
     # Gather all licenses and write information to one place
-
-    _debug(0, "Check license: %s" % ctx.label)
 
     licenses_file = ctx.actions.declare_file("_%s_licenses_info.json" % ctx.label.name)
     write_licenses_info(ctx, ctx.attr.deps, licenses_file)
 
     license_files = []
     if ctx.outputs.license_texts:
-        for dep in ctx.attr.deps:
-            if LicensesInfo in dep:
-                for license in dep[LicensesInfo].licenses.to_list():
-                    license_files.append(license.license_text)
+        license_files = get_licenses_mapping(ctx.attr.deps).keys()
 
     # Now run the checker on it
     inputs = [licenses_file]
@@ -75,11 +65,11 @@ def _check_license_impl(ctx):
 _check_license = rule(
     implementation = _check_license_impl,
     attrs = {
-        "check_conditions": attr.bool(default = True, mandatory = False),
-        "copyright_notices": attr.output(mandatory = False),
         "deps": attr.label_list(
             aspects = [gather_licenses_info],
         ),
+        "check_conditions": attr.bool(default = True, mandatory = False),
+        "copyright_notices": attr.output(mandatory = False),
         "license_texts": attr.output(mandatory = False),
         "report": attr.output(mandatory = True),
         "_checker": attr.label(
@@ -91,21 +81,56 @@ _check_license = rule(
     },
 )
 
+# TODO(b/152546336): Update the check to take a pointer to a condition list.
 def check_license(**kwargs):
     _check_license(**kwargs)
 
+def _manifest_impl(ctx):
+    # Gather all licenses and make it available as deps for downstream rules
+    # Additionally write the list of license filenames to a file that can
+    # also be used as an input to downstream rules.
+    licenses_file = ctx.actions.declare_file(ctx.attr.out.name)
+    mappings = get_licenses_mapping(ctx.attr.deps, ctx.attr.warn_on_legacy_licenses)
+    ctx.actions.write(
+        output = licenses_file,
+        content = "\n".join([",".join([f.path, p]) for (f, p) in mappings.items()]),
+    )
+    return [DefaultInfo(files = depset(mappings.keys()))]
+
+_manifest = rule(
+    implementation = _manifest_impl,
+    doc = """Internal tmplementation method for manifest().""",
+    attrs = {
+        "deps": attr.label_list(
+            doc = """List of targets to collect license files for.""",
+            aspects = [gather_licenses_info],
+        ),
+        "out": attr.output(
+            doc = """Output file.""",
+            mandatory = True,
+        ),
+        "warn_on_legacy_licenses": attr.bool(default = False),
+    },
+)
+
+def manifest(name, deps, out = None, **kwargs):
+    if not out:
+        out = name + ".manifest"
+
+    _manifest(name = name, deps = deps, out = out, **kwargs)
+
 def _licenses_used_impl(ctx):
-    """Gather all licenses and make it available as JSON."""
+    # Gather all licenses and make it available as JSON
     write_licenses_info(ctx, ctx.attr.deps, ctx.outputs.out)
     return [DefaultInfo(files = depset([ctx.outputs.out]))]
 
 _licenses_used = rule(
     implementation = _licenses_used_impl,
-    doc = """Internal implementation method for licenses_used().""",
+    doc = """Internal tmplementation method for licenses_used().""",
     attrs = {
         "deps": attr.label_list(
             doc = """List of targets to collect LicenseInfo for.""",
-            aspects = [gather_licenses_info],
+            aspects = [gather_licenses_info_and_write],
         ),
         "out": attr.output(
             doc = """Output file.""",
@@ -113,6 +138,38 @@ _licenses_used = rule(
         ),
     },
 )
+
+def get_licenses_mapping(deps, warn = False):
+    """Creates list of entries representing all licenses for the deps.
+
+    Args:
+
+      deps: a list of deps which should have TransitiveLicensesInfo providers.
+            This requires that you have run the gather_licenses_info
+            aspect over them
+
+      warn: boolean, if true, display output about legacy targets that need
+            update
+
+    Returns:
+      {File:package_name}
+    """
+    tls = []
+    for dep in deps:
+        lds = dep[TransitiveLicensesInfo].licenses
+        tls.append(lds)
+
+    ds = depset(transitive = tls)
+
+    # Ignore any legacy licenses that may be in the report
+    mappings = {}
+    for lic in ds.to_list():
+        if type(lic.license_text) == "File":
+            mappings[lic.license_text] = lic.package_name
+        elif warn:
+            print("Legacy license %s not included, rule needs updating" % lic.license_text)
+
+    return mappings
 
 def licenses_used(name, deps, out = None, **kwargs):
     """Collects LicensedInfo providers for a set of targets and writes as JSON.
