@@ -36,6 +36,8 @@ def _strip_null_repo(label):
     s = str(label)
     if s.startswith('@//'):
         return s[1:]
+    elif s.startswith('@@//'):
+        return s[2:]
     return s
 
 def _gather_licenses_info_impl(target, ctx):
