@@ -46,16 +46,61 @@ LicensedTargetInfo = provider(
     },
 )
 
-def licenses_info():
-    return provider(
-        doc = """The transitive set of licenses used by a target.""",
-        fields = {
-            "target_under_license": "Label: The top level target label.",
-            "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
-            "licenses": "depset(LicenseInfo)",
-            "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
-        },
-    )
+# Constructor to reduce larger set of gathered data to what we want.
+def TransitiveLicensesInfoInit(target_under_license=None, licenses=None, deps=None, traces=None, **kwargs):
+    return {
+        "target_under_license": target_under_license,
+        "deps": deps,
+        "licenses": licenses,
+        "traces": traces,
+    }
 
-# This provider is used by the aspect that is used by manifest() rules.
-TransitiveLicensesInfo = licenses_info()
+TransitiveLicensesInfo, _raw_TransitiveLicensesInfo = provider(
+    doc = """The transitive set of licenses used by a target.""",
+    fields = {
+        "target_under_license": "Label: The top level target label.",
+        "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
+        "licenses": "depset(LicenseInfo)",
+        "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
+    },
+    init = TransitiveLicensesInfoInit,
+)
+
+# This is one way to do specify data
+PackageInfo = provider(
+    doc = """Provides information about a package.""",
+    fields = {
+        "type": "string: How to interpret data",
+        "label": "Label: label of the package_info rule",
+        "copyright_notice": "string: Human readable short copyright notice",
+        "package_name": "string: Human readable package name",
+        "package_url": "URL from which this package was downloaded.",
+        "package_version": "Human readable version string",
+    },
+)
+
+# This is more extensible. Because of the provider implementation, having a big
+# dict of values rather than named fields is not much more costly.
+# Design choice.  Replace data with actual providers, such as PackageInfo
+MetadataInfo = provider(
+    doc = """Generic bag of metadata.""",
+    fields = {
+        "type": "string: How to interpret data",
+        "label": "Label: label of the metadata rule",
+        "data": "String->any: Map of names to values",
+    }
+)
+
+TransitiveMetadataInfo = provider(
+    doc = """The transitive set of licenses used by a target.""",
+    fields = {
+        "top_level_target": "Label: The top level target label.",
+        "other_metadata": "depset(MetatdataInfo)",
+        "licenses": "depset(LicenseInfo)",
+        "package_info": "depset(PackageInfo)",
+
+        "target_under_license": "Label: The top level target label.",
+        "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
+        "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
+    },
+)
