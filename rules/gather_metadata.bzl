@@ -42,6 +42,10 @@ def _strip_null_repo(label):
         return s[2:]
     return s
 
+def _bazel_package(label):
+    l = _strip_null_repo(label)
+    return l[0:-(len(label.name) + 1)]
+
 def _gather_metadata_info_impl(target, ctx):
     return gather_licenses_info_common(target, ctx, TransitiveMetadataInfo, NAMESPACES, [MetadataInfo, PackageInfo], should_traverse)
 
@@ -183,6 +187,7 @@ def metadata_info_to_json(metadata_info):
       {{
         "label": "{label}",
         "rule": "{label}",
+        "bazel_package": "{bazel_package}",
         "license_kinds": [{kinds}
         ],
         "copyright_notice": "{copyright_notice}",
@@ -205,6 +210,7 @@ def metadata_info_to_json(metadata_info):
     package_info_template = """
           {{
             "target": "{label}",
+            "bazel_package": "{bazel_package}",
             "copyright_notice": "{copyright_notice}",
             "package_name": "{package_name}",
             "package_url": "{package_url}",
@@ -242,6 +248,7 @@ def metadata_info_to_json(metadata_info):
                 package_url = license.package_url,
                 package_version = license.package_version,
                 label = _strip_null_repo(license.label),
+                bazel_package =  _bazel_package(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
 
@@ -275,6 +282,7 @@ def metadata_info_to_json(metadata_info):
         if mi.type == "package_info":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
+                bazel_package =  _bazel_package(mi.label),
                 copyright_notice = mi.copyright_notice,
                 package_name = mi.package_name,
                 package_url = mi.package_url,
@@ -284,6 +292,7 @@ def metadata_info_to_json(metadata_info):
         if mi.type == "package_info2":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
+                bazel_package =  _bazel_package(mi.label),
                 copyright_notice = mi.data.get("copyright_notice") or "",
                 package_name = mi.data.get("package_name") or "",
                 package_url = mi.data.get("package_url") or "",

@@ -20,18 +20,34 @@ This is only a demonstration. It will be replaced with other tools.
 
 import argparse
 import codecs
+import datetime
 import json
+import os
 
+
+TOOL = 'https//github.com/bazelbuild/rules_license/tools:write_sbom'
 
 def _load_package_data(package_info):
   with codecs.open(package_info, encoding='utf-8') as inp:
     return json.loads(inp.read())
 
+def _write_sbom_header(out, package):
+  header = [
+    'SPDXVersion: SPDX-2.2',
+    'DataLicense: CC0-1.0',
+    'SPDXID: SPDXRef-DOCUMENT',
+    'DocumentName: %s' % package,
+    # TBD
+    # 'DocumentNamespace: https://swinslow.net/spdx-examples/example1/hello-v3
+    'Creator: Person: %s' % os.getlogin(),
+    'Creator: Tool: %s' % TOOL,
+    datetime.datetime.utcnow().strftime('Created: %Y-%m-%d-%H:%M:%SZ'),
+    '',
+    '##### Package: %s' % package,
+  ]
+  out.write('\n'.join(header))
 
-def unique_licenses(licenses):
-  for target in licenses:
-    for lic in target.get('licenses') or []:
-      yield lic
+
 
 def _write_sbom(out, packages):
   """Produce a basic SBOM
@@ -42,30 +58,23 @@ def _write_sbom(out, packages):
   """
   for p in packages:
     name = p.get('package_name') or '<unknown>'
+    out.write('\n')
+    out.write('SPDXID: "%s"\n' % name)
+    out.write('  name: "%s"\n' % name)
     if p.get('package_version'):
-      name =  name + "/" + p['package_version']
-    out.write('# %s\n' % name)
+      out.write('  versionInfo: "%s"\n' % p['package_version'])
     # IGNORE_COPYRIGHT: Not a copyright notice. It is a variable holding one.
     cn = p.get('copyright_notice')
     if cn:
-      out.write('  copyright: %s\n' % cn)
+      out.write('  copyrightText: "%s"\n' % cn)
     kinds = p.get('license_kinds')
     if kinds:
-      out.write('  license(s): "%s"\n' %
+      out.write('  licenseDeclared: "%s"\n' %
                 ','.join([k['name'] for k in kinds]))
     url = p.get('package_url')
     if url:
-      out.write('  package URL: %s\n' % url)
+      out.write('  downloadLocation: %s\n' % url)
 
-  """
-  for target in unique_licenses(licenses):
-    for lic in target.get('licenses') or []:
-      print("lic:", lic)
-      rule = lic['rule']
-      for kind in lic['license_kinds']:
-        out.write('= %s\n  kind: %s\n' % (rule, kind['target']))
-        out.write('  conditions: %s\n' % kind['conditions'])
-  """
 
 def main():
   parser = argparse.ArgumentParser(
@@ -83,11 +92,24 @@ def main():
   dependencies = target['dependencies']
   # It's not really packages, but this is close proxy for now
   licenses = target['licenses']
-  packages = target['packages']
+  package_infos = target['packages']
+
+  # These are similar dicts, so merge them by package. This is not
+  # strictly true, as different licenese can appear in the same
+  # package, but it is good enough for demonstrating the sbom.
+
+  all = {x['bazel_package']: x for x in licenses}
+  for pi in package_infos:
+    p = all.get(pi['bazel_package'])
+    if p:
+      p.update(pi)
+    else:
+      all[pi['bazel_package']] = pi
 
   err = 0
-  with codecs.open(args.out, mode='w', encoding='utf-8') as rpt:
-    _write_sbom(rpt, licenses + packages)
+  with codecs.open(args.out, mode='w', encoding='utf-8') as out:
+    _write_sbom_header(out, package=top_level_target)
+    _write_sbom(out, all.values())
   return err
 
 
