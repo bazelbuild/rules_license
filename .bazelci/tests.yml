@@ -74,3 +74,6 @@ tasks:
     <<: *rolling
     build_flags:
       - "--enable_bzlmod"
+    build_targets:
+      - "//distro:distro"
+      - "//distro:relnotes"
