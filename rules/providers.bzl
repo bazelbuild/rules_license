@@ -87,12 +87,12 @@ MetadataInfo = provider(
 TransitiveMetadataInfo = provider(
     doc = """The transitive set of licenses used by a target.""",
     fields = {
-        "top_level_target": "Label: The top level target label.",
+        "top_level_target": "Label: The top level target label we are examining.",
         "other_metadata": "depset(MetatdataInfo)",
         "licenses": "depset(LicenseInfo)",
         "package_info": "depset(PackageInfo)",
 
-        "target_under_license": "Label: The top level target label.",
+        "target_under_license": "Label: A target which will be associated with some licenses.",
         "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
         "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
     },

@@ -101,7 +101,7 @@ gather_metadata_info_and_write = aspect(
     doc = """Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
 
     Usage:
-      blaze build //some:target \
+      bazel build //some:target \
           --aspects=@rules_license//rules:gather_metadata_info.bzl%gather_metadata_info_and_write
           --output_groups=licenses
     """,
@@ -265,7 +265,6 @@ def metadata_info_to_json(metadata_info):
     #for package in sorted(metadata_info.package_info.to_list(), key = lambda x: x.label):
     #    all_packages.append(package_info_template.format(
     #        label = _strip_null_repo(package.label),
-    #        copyright_notice = package.copyright_notice,
     #        package_name = package.package_name,
     #        package_url = package.package_url,
     #        package_version = package.package_version,

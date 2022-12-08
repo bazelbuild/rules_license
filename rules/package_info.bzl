@@ -50,9 +50,6 @@ def _package_info_impl(ctx):
 _package_info = rule(
     implementation = _package_info_impl,
     attrs = {
-        "copyright_notice": attr.string(
-            doc = "Copyright notice.",
-        ),
         "package_name": attr.string(
             doc = "A human readable name identifying this package." +
                   " This may be used to produce an index of OSS packages used by" +
@@ -75,7 +72,6 @@ _package_info = rule(
 # buildifier: disable=function-docstring-args
 def package_info(
         name,
-        copyright_notice = None,
         package_name = None,
         package_url = None,
         package_version = None,
@@ -84,18 +80,16 @@ def package_info(
 
     Args:
       name: str target name.
-      license_kind: label a single license_kind. Only one of license_kind or license_kinds may
-                    be specified
-      license_kinds: list(label) list of license_kind targets.
-      copyright_notice: str Copyright notice associated with this package.
       package_name : str A human readable name identifying this package. This
                      may be used to produce an index of OSS packages used by
                      an application.
-      tags: list(str) tags applied to the rule
+      package_url: str The canoncial URL this package distribution was retrieved from.
+                       Note that, because of local mirroring, that might not be the 
+                       physical URL it was retrieved from.
+      package_version: str A human readable name identifying version of this package.
     """
     _package_info(
         name = name,
-        copyright_notice = copyright_notice,
         package_name = package_name,
         package_url = package_url,
         package_version = package_version,
