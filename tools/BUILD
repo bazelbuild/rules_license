@@ -15,7 +15,7 @@
 """License declaration and compliance checking tools."""
 
 package(
-    default_applicable_licenses = ["//:license"],
+    default_applicable_licenses = ["//:license", "//:package_info"],
     default_visibility = ["//visibility:public"],
 )
 

@@ -16,7 +16,7 @@
 load(
     "@rules_license//rules:licenses_core.bzl",
     "TraceInfo",
-    "gather_licenses_info_common",
+    "gather_metadata_info_common",
     "should_traverse",
 )
 load(
@@ -47,7 +47,7 @@ def _bazel_package(label):
     return l[0:-(len(label.name) + 1)]
 
 def _gather_metadata_info_impl(target, ctx):
-    return gather_licenses_info_common(target, ctx, TransitiveMetadataInfo, NAMESPACES, [MetadataInfo, PackageInfo], should_traverse)
+    return gather_metadata_info_common(target, ctx, TransitiveMetadataInfo, NAMESPACES, [MetadataInfo, PackageInfo], should_traverse)
 
 gather_metadata_info = aspect(
     doc = """Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.""",
@@ -101,7 +101,7 @@ gather_metadata_info_and_write = aspect(
     doc = """Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
 
     Usage:
-      blaze build //some:target \
+      bazel build //some:target \
           --aspects=@rules_license//rules:gather_metadata_info.bzl%gather_metadata_info_and_write
           --output_groups=licenses
     """,
@@ -182,11 +182,9 @@ def metadata_info_to_json(metadata_info):
         ]
       }}"""
 
-    # TODO(aiuto): 'rule' is a duplicate of 'label' until old users are transitioned
     license_template = """
       {{
         "label": "{label}",
-        "rule": "{label}",
         "bazel_package": "{bazel_package}",
         "license_kinds": [{kinds}
         ],
@@ -211,7 +209,6 @@ def metadata_info_to_json(metadata_info):
           {{
             "target": "{label}",
             "bazel_package": "{bazel_package}",
-            "copyright_notice": "{copyright_notice}",
             "package_name": "{package_name}",
             "package_url": "{package_url}",
             "package_version": "{package_version}"
@@ -268,7 +265,6 @@ def metadata_info_to_json(metadata_info):
     #for package in sorted(metadata_info.package_info.to_list(), key = lambda x: x.label):
     #    all_packages.append(package_info_template.format(
     #        label = _strip_null_repo(package.label),
-    #        copyright_notice = package.copyright_notice,
     #        package_name = package.package_name,
     #        package_url = package.package_url,
     #        package_version = package.package_version,
@@ -283,17 +279,16 @@ def metadata_info_to_json(metadata_info):
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
                 bazel_package =  _bazel_package(mi.label),
-                copyright_notice = mi.copyright_notice,
                 package_name = mi.package_name,
                 package_url = mi.package_url,
                 package_version = mi.package_version,
             ))
-        # This format is if use data as plail old dict.  sort of ugly.
-        if mi.type == "package_info2":
+        # experimental: Support the MetadataInfo bag of data
+        if mi.type == "package_info_alt":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
                 bazel_package =  _bazel_package(mi.label),
-                copyright_notice = mi.data.get("copyright_notice") or "",
+                # data is just a bag, so we need to use get() or ""
                 package_name = mi.data.get("package_name") or "",
                 package_url = mi.data.get("package_url") or "",
                 package_version = mi.data.get("package_version") or "",

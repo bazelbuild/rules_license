@@ -19,51 +19,37 @@ load(
     "PackageInfo",
 )
 
-# Debugging verbosity
-_VERBOSITY = 0
-
-def _debug(loglevel, msg):
-    if _VERBOSITY > loglevel:
-        print(msg)  # buildifier: disable=print
-
 #
 # package_info()
 #
 
 def _package_info_impl(ctx):
     provider = PackageInfo(
+        # Metadata providers must include a type discriminator. We don't need it
+        # to collect the providers, but we do need it to write the JSON. We
+        # key on the type field to look up the correct block of code to pull
+        # data out and format it. We can't to the lookup on the provider class.
         type = "package_info",
         label = ctx.label,
-        copyright_notice = ctx.attr.copyright_notice,
         package_name = ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
     )
+    # Experimental alternate design, using a generic 'data' back to hold things
     generic_provider = MetadataInfo(
-        type = "package_info2",
+        type = "package_info_alt",
         label = ctx.label,
-        # Alternate design.  data should be a package_info. That may be easier
-        # to work with. It probably uses more memory though. While we have a
-        # map here instead of an object pointer, the provider is basically
-        # a name/value map anyway, so there is no space savings.
         data = {
-            # DNS: Remove Ahoy:
-            "copyright_notice": "Ahoy: " + ctx.attr.copyright_notice,
             "package_name": ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
             "package_url": ctx.attr.package_url,
-            # DNS: remove ++
-            "package_version": ctx.attr.package_version + "++"
+            "package_version": ctx.attr.package_version
         }
     )
-    _debug(0, provider)
     return [provider, generic_provider]
 
 _package_info = rule(
     implementation = _package_info_impl,
     attrs = {
-        "copyright_notice": attr.string(
-            doc = "Copyright notice.",
-        ),
         "package_name": attr.string(
             doc = "A human readable name identifying this package." +
                   " This may be used to produce an index of OSS packages used by" +
@@ -86,7 +72,6 @@ _package_info = rule(
 # buildifier: disable=function-docstring-args
 def package_info(
         name,
-        copyright_notice = None,
         package_name = None,
         package_url = None,
         package_version = None,
@@ -95,18 +80,16 @@ def package_info(
 
     Args:
       name: str target name.
-      license_kind: label a single license_kind. Only one of license_kind or license_kinds may
-                    be specified
-      license_kinds: list(label) list of license_kind targets.
-      copyright_notice: str Copyright notice associated with this package.
       package_name : str A human readable name identifying this package. This
                      may be used to produce an index of OSS packages used by
                      an application.
-      tags: list(str) tags applied to the rule
+      package_url: str The canoncial URL this package distribution was retrieved from.
+                       Note that, because of local mirroring, that might not be the 
+                       physical URL it was retrieved from.
+      package_version: str A human readable name identifying version of this package.
     """
     _package_info(
         name = name,
-        copyright_notice = copyright_notice,
         package_name = package_name,
         package_url = package_url,
         package_version = package_version,

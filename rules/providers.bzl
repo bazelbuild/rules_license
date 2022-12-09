@@ -55,6 +55,7 @@ def TransitiveLicensesInfoInit(target_under_license=None, licenses=None, deps=No
         "traces": traces,
     }
 
+
 TransitiveLicensesInfo, _raw_TransitiveLicensesInfo = provider(
     doc = """The transitive set of licenses used by a target.""",
     fields = {
@@ -72,10 +73,9 @@ PackageInfo = provider(
     fields = {
         "type": "string: How to interpret data",
         "label": "Label: label of the package_info rule",
-        "copyright_notice": "string: Human readable short copyright notice",
         "package_name": "string: Human readable package name",
-        "package_url": "URL from which this package was downloaded.",
-        "package_version": "Human readable version string",
+        "package_url": "string: URL from which this package was downloaded.",
+        "package_version": "string: Human readable version string",
     },
 )
 
@@ -94,12 +94,12 @@ MetadataInfo = provider(
 TransitiveMetadataInfo = provider(
     doc = """The transitive set of licenses used by a target.""",
     fields = {
-        "top_level_target": "Label: The top level target label.",
+        "top_level_target": "Label: The top level target label we are examining.",
         "other_metadata": "depset(MetatdataInfo)",
         "licenses": "depset(LicenseInfo)",
         "package_info": "depset(PackageInfo)",
 
-        "target_under_license": "Label: The top level target label.",
+        "target_under_license": "Label: A target which will be associated with some licenses.",
         "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
         "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
     },

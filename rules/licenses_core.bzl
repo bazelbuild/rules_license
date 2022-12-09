@@ -19,6 +19,7 @@ load(
     "@rules_license//rules:providers.bzl",
     "LicenseInfo",
     "LicensedTargetInfo",
+    "TransitiveLicensesInfo",
 )
 
 
@@ -66,7 +67,7 @@ def should_traverse(ctx, attr):
 
     return True
 
-def _get_transitive_licenses(ctx, trans_licenses, trans_other_metadata, trans_package_info, trans_deps, traces, provider, filter_func):
+def _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_package_info, trans_deps, traces, provider, filter_func):
     attrs = [a for a in dir(ctx.rule.attr)]
     for name in attrs:
         if not filter_func(ctx, name):
@@ -109,8 +110,8 @@ def _get_transitive_licenses(ctx, trans_licenses, trans_other_metadata, trans_pa
                     if info.package_info:
                         trans_package_info.append(info.package_info)
 
-def gather_licenses_info_common(target, ctx, provider, namespaces, metadata_providers, filter_func):
-    """Collect license info from myself and my deps.
+def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metadata_providers, filter_func):
+    """Collect license and other metadata info from myself and my deps.
 
     Any single target might directly depend on a license, or depend on
     something that transitively depends on a license, or neither.
@@ -174,7 +175,7 @@ def gather_licenses_info_common(target, ctx, provider, namespaces, metadata_prov
     trans_package_info = []
     trans_deps = []
     traces = []
-    _get_transitive_licenses(ctx, trans_licenses, trans_other_metadata, trans_package_info, trans_deps, traces, provider, filter_func)
+    _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_package_info, trans_deps, traces, provider_factory, filter_func)
 
     if not licenses and not trans_licenses:
         return [provider(deps = depset(), licenses = depset(), traces = [])]
@@ -202,15 +203,22 @@ def gather_licenses_info_common(target, ctx, provider, namespaces, metadata_prov
     else:
         direct_license_uses = None
 
-    return [provider(
+    # This is a bit of a hack for bazel 5.x.  We can not pass extra fields to
+    # the provider constructor, so we need to do something special for each.
+    # In Bazel 6.x we can use a provider initializer function that would take
+    # all the args and only use the ones it wants.
+    if provider_factory == TransitiveLicensesInfo:
+        return [provider_factory(
+            target_under_license = target.label,
+            licenses = depset(tuple(licenses), transitive = trans_licenses),
+            deps = depset(direct = direct_license_uses, transitive = trans_deps),
+            traces = traces,
+        )]
+
+    return [provider_factory(
         target_under_license = target.label,
         licenses = depset(tuple(licenses), transitive = trans_licenses),
-        # Note: The TransitiveLicensesInfo initializer drops this.
-        # A less memory intensive solution would be to never collect it.
         other_metadata = depset(tuple(other_metadata), transitive = trans_other_metadata),
-        # Remove: Only here to show the fanout from being explicit about
-        # each provider type.
-        # package_info = depset(tuple(package_info), transitive = trans_package_info),
         deps = depset(direct = direct_license_uses, transitive = trans_deps),
         traces = traces,
     )]

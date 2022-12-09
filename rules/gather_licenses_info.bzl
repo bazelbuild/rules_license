@@ -16,7 +16,7 @@
 load(
     "@rules_license//rules:licenses_core.bzl",
     "TraceInfo",
-    "gather_licenses_info_common",
+    "gather_metadata_info_common",
     "should_traverse",
 )
 load(
@@ -41,7 +41,7 @@ def _strip_null_repo(label):
     return s
 
 def _gather_licenses_info_impl(target, ctx):
-    return gather_licenses_info_common(target, ctx, TransitiveLicensesInfo, NAMESPACES, [], should_traverse)
+    return gather_metadata_info_common(target, ctx, TransitiveLicensesInfo, NAMESPACES, [], should_traverse)
 
 gather_licenses_info = aspect(
     doc = """Collects LicenseInfo providers into a single TransitiveLicensesInfo provider.""",
