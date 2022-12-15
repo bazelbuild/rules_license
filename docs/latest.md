@@ -2,7 +2,6 @@
 
 Rules for declaring the compliance licenses used by a package.
 
-See: go/license-checking-v2
 
 
 <a id="license"></a>
@@ -63,7 +62,6 @@ license_kind(<a href="#license_kind-name">name</a>, <a href="#license_kind-canon
 
 Rules for declaring the compliance licenses used by a package.
 
-See: go/license-checking-v2
 
 
 

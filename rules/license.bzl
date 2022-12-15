@@ -13,7 +13,6 @@
 # limitations under the License.
 """Rules for declaring the compliance licenses used by a package.
 
-See: go/license-checking-v2
 """
 
 load(
