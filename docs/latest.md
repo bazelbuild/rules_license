@@ -60,13 +60,6 @@ license_kind(<a href="#license_kind-name">name</a>, <a href="#license_kind-canon
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
-Rules for declaring the compliance licenses used by a package.
-
-
-
-
-<!-- Generated with Stardoc: http://skydoc.bazel.build -->
-
 Rules for declaring metadata about a package.
 
 <a id="package_info"></a>

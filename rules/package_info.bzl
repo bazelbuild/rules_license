@@ -78,6 +78,8 @@ def package_info(
         **kwargs):
     """Wrapper for package_info rule.
 
+    @wraps(_package_info)
+
     Args:
       name: str target name.
       package_name: str A human readable name identifying this package. This
