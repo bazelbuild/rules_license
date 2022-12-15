@@ -13,4 +13,4 @@
 # limitations under the License.
 """The version of rules_license."""
 
-version = "0.0.5"
+version = "0.0.4"
