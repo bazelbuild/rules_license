@@ -74,7 +74,6 @@ _license = rule(
 def license(
         name,
         license_text = "LICENSE",
-        visibility = ["//visibility:public"],
         license_kind = None,
         license_kinds = None,
         copyright_notice = None,
@@ -82,21 +81,27 @@ def license(
         package_url = None,
         package_version = None,
         namespace = "compliance",
-        tags = []):
+        tags = [],
+        visibility = ["//visibility:public"]):
     """Wrapper for license rule.
+
+    @wraps(_license)
 
     Args:
       name: str target name.
       license_text: str Filename of the license file
-      visibility: list(label) visibility spec
       license_kind: label a single license_kind. Only one of license_kind or license_kinds may
                     be specified
       license_kinds: list(label) list of license_kind targets.
       copyright_notice: str Copyright notice associated with this package.
-      package_name : str A human readable name identifying this package. This
-                     may be used to produce an index of OSS packages used by
-                     an application.
+      package_name: str A human readable name identifying this package. This
+                    may be used to produce an index of OSS packages used by
+                    an application.
+      package_url: str The canonical URL this package was downloaded from.
+      package_version: str The version corresponding the the URL.
+      namespace: str Undocumened. Internal.
       tags: list(str) tags applied to the rule
+      visibility: list(label) visibility spec.
     """
     if license_kind:
         if license_kinds:
@@ -108,7 +113,6 @@ def license(
     srcs = native.glob([license_text])
     if len(srcs) != 1 or srcs[0] != license_text:
         fail("Specified license file doesn't exist: %s" % license_text)
-
 
     _license(
         name = name,

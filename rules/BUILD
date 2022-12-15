@@ -37,3 +37,12 @@ filegroup(
     name = "standard_package",
     srcs = glob(["**"]),
 )
+
+# Do not create a bzl_library(). That would create a dependency loop back
+# to bazel-skylib. We export the .bzl files to the documentation maker.
+exports_files(
+    glob([
+        "*.bzl",
+    ]),
+    visibility = ["//doc_build:__pkg__"],
+)

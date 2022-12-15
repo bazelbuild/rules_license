@@ -75,19 +75,21 @@ def package_info(
         package_name = None,
         package_url = None,
         package_version = None,
-        visibility = ["//visibility:public"]):
+        **kwargs):
     """Wrapper for package_info rule.
 
     Args:
       name: str target name.
-      package_name : str A human readable name identifying this package. This
-                     may be used to produce an index of OSS packages used by
-                     an application.
+      package_name: str A human readable name identifying this package. This
+                    may be used to produce an index of OSS packages used by
+                    an application.
       package_url: str The canoncial URL this package distribution was retrieved from.
                        Note that, because of local mirroring, that might not be the 
                        physical URL it was retrieved from.
       package_version: str A human readable name identifying version of this package.
+      kwargs: other args. Most are ignored.
     """
+    visibility = kwargs.get("visibility") or ["//visibility:public"]
     _package_info(
         name = name,
         package_name = package_name,
