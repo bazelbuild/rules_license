@@ -52,6 +52,10 @@ _license_kind = rule(
 )
 
 def license_kind(name, **kwargs):
+    """Wrapper for license_kind.
+
+    @wraps(_license_kind)
+    """
     if "conditions" not in kwargs:
         kwargs["conditions"] = []
     if "long_name" not in kwargs:
