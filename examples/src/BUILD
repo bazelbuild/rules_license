@@ -16,6 +16,11 @@
 load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
 load("@rules_license//examples/vendor/constant_gen:defs.bzl", "constant_gen")
 
+package(
+    default_package_metadata = ["//:license", "//:package_info"],
+    default_visibility = ["//visibility:public"],
+)
+
 cc_binary(
     name = "my_server",
     srcs = ["server.cc"],
@@ -57,5 +62,16 @@ py_test(
     python_version = "PY3",
     deps = [
         "@rules_license//tests:license_test_utils",
+    ],
+)
+
+# This server uses something under a restricted license
+cc_binary(
+    name = "my_violating_server",
+    srcs = ["server.cc"],
+    deps = [
+        ":message",
+        "@rules_license//examples/vendor/acme",
+        "@rules_license//examples/vendor/libhhgttg",
     ],
 )

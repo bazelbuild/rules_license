@@ -18,7 +18,10 @@ load("@rules_license//rules:license.bzl", "license")
 
 # Using a package wide default ensure that all targets are associated with the
 # license.
-package(default_applicable_licenses = [":license"])
+package(
+    default_applicable_licenses = [":license"],
+    default_visibility = ["//visibility:public"],
+)
 
 # The default license for an entire package is typically named "license".
 license(
