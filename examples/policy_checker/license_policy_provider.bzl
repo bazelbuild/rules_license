@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,25 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# A package with a commercial license.
 
-load("@rules_license//rules:license.bzl", "license")
+"""LicensePolicyProvider."""
 
-package(
-   default_applicable_licenses = [":license"],
-   default_visibility = ["//visibility:public"],
-)
-
-# The default license for an entire package is typically named "license".
-license(
-    name = "license",
-    license_kinds = [
-        "@rules_license//examples/my_org/licenses:acme_corp_paid",
-    ],
-    license_text = "ACME_LICENSE",
-)
-
-cc_library(
-    name = "acme",
-    srcs = ["coyote.cc"],
+LicensePolicyInfo = provider(
+    doc = """Declares a policy name and the license conditions allowable under it.""",
+    fields = {
+        "conditions": "List of conditions to be met when using this software.",
+        "label": "The full path to the license policy definition.",
+        "name": "License policy name",
+    },
 )
