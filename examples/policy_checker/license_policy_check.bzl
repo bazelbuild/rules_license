@@ -69,7 +69,6 @@ _license_policy_check = rule(
             doc = """Target to collect LicenseInfo for.""",
             aspects = [gather_licenses_info],
             mandatory = True,
-            allow_single_file = True,
         ),
     },
 )
