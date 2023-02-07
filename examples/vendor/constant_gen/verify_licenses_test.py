@@ -9,7 +9,6 @@ from tests import license_test_utils
 class VerifyLicensesTest(unittest.TestCase):
 
   def test_generater_license(self):
-    package_base = license_test_utils.LICENSE_PACKAGE_BASE
     licenses_info = license_test_utils.load_licenses_info(
         os.path.join(os.path.dirname(__file__), "generator_licenses.json"))
 
@@ -22,7 +21,6 @@ class VerifyLicensesTest(unittest.TestCase):
         self, licenses_info, expected)
 
   def test_generated_code_license(self):
-    package_base = license_test_utils.LICENSE_PACKAGE_BASE
     licenses_info = license_test_utils.load_licenses_info(
         os.path.join(os.path.dirname(__file__), "generated_code_licenses.json"))
 

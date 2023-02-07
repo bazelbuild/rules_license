@@ -10,13 +10,8 @@ from tests import license_test_utils
 class HelloLicensesTest(unittest.TestCase):
 
   def test_has_expected_licenses(self):
-    package_base = license_test_utils.LICENSE_PACKAGE_BASE
     licenses_info = license_test_utils.load_licenses_info(
         os.path.join(os.path.dirname(__file__), "hello_licenses.json"))
-    licenses_info = license_test_utils.filter_dependencies(
-        licenses_info,
-        target_filter=lambda targ: targ.startswith(package_base),
-        licenses_filter=lambda lic: lic.startswith(package_base))
 
     expected = {
         "/tests:hello": [
