@@ -14,7 +14,6 @@
 # An example of a code generator with a distinct license for the generated code.
 
 load("@rules_license//rules:compliance.bzl", "licenses_used")
-load("@rules_license//tools:test_helpers.bzl", "golden_test")
 load("@rules_license//rules:license.bzl", "license")
 load(":defs.bzl", "constant_gen")
 
@@ -63,21 +62,21 @@ licenses_used(
     deps = [":constant_generator"],
 )
 
-golden_test(
-    name = "verify_generator_licenses",
-    golden = "generator_licenses.golden",
-    subject = ":generator_licenses.json",
-)
-
 licenses_used(
     name = "generated_code_licenses",
     # Note: using default output file name
     deps = [":libhello"],
 )
 
-golden_test(
-    name = "verify_generated_code_licenses",
-    golden = "generated_code_licenses.golden",
-    subject = ":generated_code_licenses.json",
+py_test(
+    name = "verify_licenses_test",
+    srcs = ["verify_licenses_test.py"],
+    data = [
+        ":generator_licenses.json",
+        ":generated_code_licenses.json",
+    ],
+    python_version = "PY3",
+    deps = [
+        "//tests:license_test_utils",
+    ],
 )
-

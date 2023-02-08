@@ -1,6 +1,5 @@
 # Test cases for license rules.
 
-load("@rules_license//tools:test_helpers.bzl", "golden_test")
 load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//rules:license_kind.bzl", "license_kind")
@@ -119,7 +118,10 @@ licenses_used(
 py_test(
     name = "hello_licenses_test",
     srcs = ["hello_licenses_test.py"],
-    data = [":hello_licenses.json"],
+    data = [
+        ":hello_licenses.json",
+        ":hello_cc_copyrights.txt",
+    ],
     python_version = "PY3",
     deps = [
         ":license_test_utils",
@@ -142,19 +144,3 @@ check_license(
         ":hello_java",
     ],
 )
-
-golden_test(
-    name = "verify_cc_app_test",
-    golden = "hello_cc_copyrights.golden",
-    subject = ":hello_cc_copyrights.txt",
-)
-
-golden_test(
-    name = "verify_java_app_test",
-    golden = "hello_java_copyrights.golden",
-    subject = ":hello_java_copyrights.txt",
-)
-
-exports_files([
-    "hello_licenses.golden",
-])
