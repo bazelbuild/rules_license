@@ -66,6 +66,6 @@ license_kind(
 license_kind(
     name = "acme_corp_paid",
     conditions = [
-        "whitelist:acme_corp_paid",
+        "allowlist:acme_corp_paid",
     ],
 )

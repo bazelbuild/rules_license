@@ -74,10 +74,10 @@ cc_library(
         ":license_for_extra_feature",
         ":internal_non_compliance_license",
     ],
-    #deps = [
-    #    "@rules_license//rules/tests/legacy:another_library_with_legacy_license_clause",
-    #    "@rules_license//rules/tests/legacy:library_with_legacy_license_clause",
-    #],
+    deps = [
+        "@rules_license//tests/legacy:another_library_with_legacy_license_clause",
+        "@rules_license//tests/legacy:library_with_legacy_license_clause",
+    ],
 )
 
 java_binary(

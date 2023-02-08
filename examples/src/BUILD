@@ -18,7 +18,7 @@ load("@rules_license//examples/vendor/constant_gen:defs.bzl", "constant_gen")
 
 package(
     default_package_metadata = ["//:license", "//:package_info"],
-    default_visibility = ["//visibility:public"],
+    default_visibility = ["//examples:__subpackages__"],
 )
 
 cc_binary(
