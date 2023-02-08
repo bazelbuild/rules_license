@@ -55,8 +55,10 @@ filegroup(
         "*.bzl",
         "*.md",
     ]) + [
+        "MODULE.bazel",
         "BUILD",
         "LICENSE",
+        "WORKSPACE.bzlmod",
     ],
     visibility = ["//distro:__pkg__"],
 )
