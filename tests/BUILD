@@ -87,6 +87,7 @@ java_binary(
     applicable_licenses = [
         ":license_for_extra_feature",
     ],
+    javacopts = ["-Xep:DefaultPackage:OFF"],
     main_class = "Hello",
     deps = [
         ":j_bar",
@@ -96,6 +97,7 @@ java_binary(
 java_library(
     name = "j_bar",
     srcs = ["Bar.java"],
+    javacopts = ["-Xep:DefaultPackage:OFF"],
 )
 
 check_license(
