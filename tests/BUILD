@@ -74,10 +74,10 @@ cc_library(
         ":license_for_extra_feature",
         ":internal_non_compliance_license",
     ],
-    #deps = [
-    #    "@rules_license//rules/tests/legacy:another_library_with_legacy_license_clause",
-    #    "@rules_license//rules/tests/legacy:library_with_legacy_license_clause",
-    #],
+    deps = [
+        "@rules_license//tests/legacy:another_library_with_legacy_license_clause",
+        "@rules_license//tests/legacy:library_with_legacy_license_clause",
+    ],
 )
 
 java_binary(
@@ -87,6 +87,7 @@ java_binary(
     applicable_licenses = [
         ":license_for_extra_feature",
     ],
+    javacopts = ["-Xep:DefaultPackage:OFF"],
     main_class = "Hello",
     deps = [
         ":j_bar",
@@ -96,6 +97,7 @@ java_binary(
 java_library(
     name = "j_bar",
     srcs = ["Bar.java"],
+    javacopts = ["-Xep:DefaultPackage:OFF"],
 )
 
 check_license(

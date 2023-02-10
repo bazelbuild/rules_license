@@ -19,7 +19,7 @@ load(":defs.bzl", "constant_gen")
 
 package(
     default_applicable_licenses = [":license"],
-    default_visibility = ["//visibility:public"],
+    default_visibility = ["//examples:__subpackages__"],
 )
 
 # The default license for an entire package is typically named "license".

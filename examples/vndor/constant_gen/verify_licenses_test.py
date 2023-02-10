@@ -13,8 +13,8 @@ class VerifyLicensesTest(unittest.TestCase):
         os.path.join(os.path.dirname(__file__), "generator_licenses.json"))
 
     expected = {
-        "examples/vendor/constant_gen:constant_generator": [
-            "examples/vendor/constant_gen:license"
+        "examples/vndor/constant_gen:constant_generator": [
+            "examples/vndor/constant_gen:license"
         ],
     }
     license_test_utils.check_licenses_of_dependencies(
@@ -25,10 +25,10 @@ class VerifyLicensesTest(unittest.TestCase):
         os.path.join(os.path.dirname(__file__), "generated_code_licenses.json"))
 
     expected = {
-        "examples/vendor/constant_gen:libhello": [
+        "examples/vndor/constant_gen:libhello": [
             "/constant_gen:license_for_emitted_code",
         ],
-        "examples/vendor/constant_gen:libhello_src_": [
+        "examples/vndor/constant_gen:libhello_src_": [
             "/constant_gen:license_for_emitted_code",
         ],
     }

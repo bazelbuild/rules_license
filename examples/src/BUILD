@@ -14,11 +14,11 @@
 # Examples of applications and interactions with licenses
 
 load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
-load("@rules_license//examples/vendor/constant_gen:defs.bzl", "constant_gen")
+load("@rules_license//examples/vndor/constant_gen:defs.bzl", "constant_gen")
 
 package(
     default_package_metadata = ["//:license", "//:package_info"],
-    default_visibility = ["//visibility:public"],
+    default_visibility = ["//examples:__subpackages__"],
 )
 
 cc_binary(
@@ -71,7 +71,7 @@ cc_binary(
     srcs = ["server.cc"],
     deps = [
         ":message",
-        "@rules_license//examples/vendor/acme",
-        "@rules_license//examples/vendor/libhhgttg",
+        "@rules_license//examples/vndor/acme",
+        "@rules_license//examples/vndor/libhhgttg",
     ],
 )
