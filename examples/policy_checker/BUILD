@@ -27,11 +27,11 @@ license_policy(
 )
 
 license_policy(
-    name = "special_whitelisted_app",
-    # There could be a whitelist of targets here.
+    name = "special_allowlisted_app",
+    # There could be a allowlist of targets here.
     conditions = [
         "notice",
-        "whitelist:acme_corp_paid",
+        "allowlist:acme_corp_paid",
     ],
 )
 

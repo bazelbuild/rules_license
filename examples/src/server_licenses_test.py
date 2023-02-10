@@ -32,10 +32,10 @@ class ServerLicensesTest(unittest.TestCase):
 
     expected = {
         "/examples/src:message_src_": [
-            "/examples/vendor/constant_gen:license_for_emitted_code"
+            "/examples/vndor/constant_gen:license_for_emitted_code"
         ],
         "/examples/src:message": [
-            "/examples/vendor/constant_gen:license_for_emitted_code"
+            "/examples/vndor/constant_gen:license_for_emitted_code"
         ],
     }
     license_test_utils.check_licenses_of_dependencies(

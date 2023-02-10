@@ -45,7 +45,6 @@ def _license_policy_check_impl(ctx):
 
     if LicenseInfo in ctx.attr.target:
         for license in ctx.attr.target[LicenseInfo].licenses.to_list():
-            print(license)
             for kind in license.license_kinds:
                 # print(kind.conditions)
                 for condition in kind.conditions:
