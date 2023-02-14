@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Providers for license rules."""
+"""Basic providers for license rules.
+
+This file should only contain the basic providers needed to create
+license and package_info declarations. Providers needed to gather
+them are declared in other places.
+"""
 
 LicenseKindInfo = provider(
     doc = """Provides information about a license_kind instance.""",
@@ -38,29 +43,6 @@ LicenseInfo = provider(
     },
 )
 
-LicensedTargetInfo = provider(
-    doc = """Lists the licenses directly used by a single target.""",
-    fields = {
-        "target_under_license": "Label: The target label",
-        "licenses": "list(label of a license rule)",
-    },
-)
-
-def licenses_info():
-    return provider(
-        doc = """The transitive set of licenses used by a target.""",
-        fields = {
-            "target_under_license": "Label: The top level target label.",
-            "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
-            "licenses": "depset(LicenseInfo)",
-            "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
-        },
-    )
-
-# This provider is used by the aspect that is used by manifest() rules.
-TransitiveLicensesInfo = licenses_info()
-
-# This is one way to do specify data
 PackageInfo = provider(
     doc = """Provides information about a package.""",
     fields = {
@@ -75,25 +57,11 @@ PackageInfo = provider(
 # This is more extensible. Because of the provider implementation, having a big
 # dict of values rather than named fields is not much more costly.
 # Design choice.  Replace data with actual providers, such as PackageInfo
-MetadataInfo = provider(
+ExperimentalMetadataInfo = provider(
     doc = """Generic bag of metadata.""",
     fields = {
         "type": "string: How to interpret data",
         "label": "Label: label of the metadata rule",
         "data": "String->any: Map of names to values",
     }
-)
-
-TransitiveMetadataInfo = provider(
-    doc = """The transitive set of licenses used by a target.""",
-    fields = {
-        "top_level_target": "Label: The top level target label we are examining.",
-        "other_metadata": "depset(MetatdataInfo)",
-        "licenses": "depset(LicenseInfo)",
-        "package_info": "depset(PackageInfo)",
-
-        "target_under_license": "Label: A target which will be associated with some licenses.",
-        "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
-        "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
-    },
 )

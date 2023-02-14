@@ -20,7 +20,7 @@ load(
     "write_metadata_info",
 )
 load(
-    "@rules_license//rules:providers.bzl",
+    "@rules_license//rules:private/gathering_providers.bzl",
     "TransitiveLicensesInfo",
 )
 
