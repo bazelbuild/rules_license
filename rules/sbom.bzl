@@ -32,10 +32,6 @@ def _generate_sbom_impl(ctx):
     licenses_file = ctx.actions.declare_file("_%s_licenses_info.json" % ctx.label.name)
     write_metadata_info(ctx, ctx.attr.deps, licenses_file)
 
-    license_files = []
-    # if ctx.outputs.license_texts:
-    #     license_files = get_licenses_mapping(ctx.attr.deps).keys()
-
     # Now turn the big blob of data into something consumable.
     inputs = [licenses_file]
     outputs = [ctx.outputs.out]
@@ -106,26 +102,6 @@ def manifest(name, deps, out = None, **kwargs):
 
     _manifest(name = name, deps = deps, out = out, **kwargs)
 
-def _licenses_used_impl(ctx):
-    # Gather all licenses and make it available as JSON
-    write_metadata_info(ctx, ctx.attr.deps, ctx.outputs.out)
-    return [DefaultInfo(files = depset([ctx.outputs.out]))]
-
-_licenses_used = rule(
-    implementation = _licenses_used_impl,
-    doc = """Internal tmplementation method for licenses_used().""",
-    attrs = {
-        "deps": attr.label_list(
-            doc = """List of targets to collect LicenseInfo for.""",
-            aspects = [gather_metadata_info_and_write],
-        ),
-        "out": attr.output(
-            doc = """Output file.""",
-            mandatory = True,
-        ),
-    },
-)
-
 def get_licenses_mapping(deps, warn = False):
     """Creates list of entries representing all licenses for the deps.
 
@@ -154,6 +130,7 @@ def get_licenses_mapping(deps, warn = False):
         if type(lic.license_text) == "File":
             mappings[lic.license_text] = lic.package_name
         elif warn:
+            # buildifier: disable=print
             print("Legacy license %s not included, rule needs updating" % lic.license_text)
 
     return mappings
