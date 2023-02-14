@@ -43,8 +43,8 @@ def _strip_null_repo(label):
     return s
 
 def _bazel_package(label):
-    l = _strip_null_repo(label)
-    return l[0:-(len(label.name) + 1)]
+    clean_label = _strip_null_repo(label)
+    return clean_label[0:-(len(label.name) + 1)]
 
 def _gather_metadata_info_impl(target, ctx):
     return gather_metadata_info_common(target, ctx, TransitiveMetadataInfo, NAMESPACES, [MetadataInfo, PackageInfo], should_traverse)
@@ -251,8 +251,6 @@ def metadata_info_to_json(metadata_info):
 
     all_deps = []
     for dep in sorted(metadata_info.deps.to_list(), key = lambda x: x.target_under_license):
-        metadata_used = []
-
         # Undo the concatenation applied when stored in the provider.
         dep_licenses = dep.licenses.split(",")
         all_deps.append(dep_template.format(
