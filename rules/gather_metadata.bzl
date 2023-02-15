@@ -21,8 +21,11 @@ load(
 )
 load(
     "@rules_license//rules:providers.bzl",
-    "MetadataInfo",
+    "ExperimentalMetadataInfo",
     "PackageInfo",
+)
+load(
+    "@rules_license//rules:private/gathering_providers.bzl",
     "TransitiveMetadataInfo",
 )
 
@@ -47,7 +50,13 @@ def _bazel_package(label):
     return clean_label[0:-(len(label.name) + 1)]
 
 def _gather_metadata_info_impl(target, ctx):
-    return gather_metadata_info_common(target, ctx, TransitiveMetadataInfo, NAMESPACES, [MetadataInfo, PackageInfo], should_traverse)
+    return gather_metadata_info_common(
+        target,
+        ctx,
+        TransitiveMetadataInfo,
+        NAMESPACES,
+        [ExperimentalMetadataInfo, PackageInfo],
+        should_traverse)
 
 gather_metadata_info = aspect(
     doc = """Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.""",
@@ -281,7 +290,7 @@ def metadata_info_to_json(metadata_info):
                 package_url = mi.package_url,
                 package_version = mi.package_version,
             ))
-        # experimental: Support the MetadataInfo bag of data
+        # experimental: Support the ExperimentalMetadataInfo bag of data
         if mi.type == "package_info_alt":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),

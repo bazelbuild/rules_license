@@ -15,7 +15,7 @@
 
 load(
     "@rules_license//rules:providers.bzl",
-    "MetadataInfo",
+    "ExperimentalMetadataInfo",
     "PackageInfo",
 )
 
@@ -36,7 +36,7 @@ def _package_info_impl(ctx):
         package_version = ctx.attr.package_version,
     )
     # Experimental alternate design, using a generic 'data' back to hold things
-    generic_provider = MetadataInfo(
+    generic_provider = ExperimentalMetadataInfo(
         type = "package_info_alt",
         label = ctx.label,
         data = {
