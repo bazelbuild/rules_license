@@ -18,6 +18,9 @@ load("@rules_license//rules:user_filtered_rule_kinds.bzl", "user_aspect_filters"
 load(
     "@rules_license//rules:providers.bzl",
     "LicenseInfo",
+)
+load(
+    "@rules_license//rules:private/gathering_providers.bzl",
     "LicensedTargetInfo",
     "TransitiveLicensesInfo",
 )
