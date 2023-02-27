@@ -20,7 +20,7 @@ load(
     "LicenseInfo",
 )
 load(
-    "@rules_license//rules:private/gathering_providers.bzl",
+    "@rules_license//rules/private:gathering_providers.bzl",
     "LicensedTargetInfo",
     "TransitiveLicensesInfo",
 )
