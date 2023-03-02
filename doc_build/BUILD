@@ -89,6 +89,7 @@ bzl_library(
     srcs = [
         "//:version.bzl",
         "//rules:standard_package",
+        "//rules/private:standard_package",
         # "@bazel_skylib//lib:paths",
     ],
     visibility = ["//visibility:public"],
