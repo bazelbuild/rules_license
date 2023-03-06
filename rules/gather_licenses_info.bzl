@@ -72,7 +72,8 @@ def _write_licenses_info_impl(target, ctx):
 
     # Write the output file for the target
     name = "%s_licenses_info.json" % ctx.label.name
-    content = "[\n%s\n]\n" % ",\n".join(licenses_info_to_json(info))
+    lic_info, _ = licenses_info_to_json(info)
+    content = "[\n%s\n]\n" % ",\n".join(lic_info)
     out = ctx.actions.declare_file(name)
     ctx.actions.write(
         output = out,
@@ -149,8 +150,9 @@ def write_licenses_info(ctx, deps, json_out):
     licenses_files = []
     for dep in deps:
         if TransitiveLicensesInfo in dep:
-            transitive_licenses_info = dep[TransitiveLicensesInfo]
-            licenses_json.extend(licenses_info_to_json(transitive_licenses_info))
+            transitive_licenses_info = dep[TransitiveLicensesInfo]            
+            lic_info, _ = licenses_info_to_json(transitive_licenses_info)
+            licenses_json.extend(lic_info)
             for info in transitive_licenses_info.licenses.to_list():
                 if info.license_text:
                     licenses_files.append(info.license_text)
@@ -169,6 +171,7 @@ def licenses_info_to_json(licenses_info):
 
     Returns:
       [(str)] list of LicenseInfo values rendered as JSON.
+      [(File)] list of Files containing license texts.
     """
 
     main_template = """  {{
@@ -222,6 +225,7 @@ def licenses_info_to_json(licenses_info):
             used_by[license].append(_strip_null_repo(dep.target_under_license))
 
     all_licenses = []
+    all_license_text_files = []
     for license in sorted(licenses_info.licenses.to_list(), key = lambda x: x.label):
         kinds = []
         for kind in sorted(license.license_kinds, key = lambda x: x.name):
@@ -245,11 +249,12 @@ def licenses_info_to_json(licenses_info):
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
-
+            # Additionally retrun all File references so that other rules invoking
+            # this method can load license text file contents from external repos
+            # using runfiles
+            all_license_text_files.append(license.license_text)
     all_deps = []
     for dep in sorted(licenses_info.deps.to_list(), key = lambda x: x.target_under_license):
-        licenses_used = []
-
         # Undo the concatenation applied when stored in the provider.
         dep_licenses = dep.licenses.split(",")
         all_deps.append(dep_template.format(
@@ -261,4 +266,4 @@ def licenses_info_to_json(licenses_info):
         top_level_target = _strip_null_repo(licenses_info.target_under_license),
         dependencies = ",".join(all_deps),
         licenses = ",".join(all_licenses),
-    )]
+    )], all_license_text_files
