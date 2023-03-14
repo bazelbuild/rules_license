@@ -37,7 +37,6 @@ def _license_policy_check_impl(ctx):
         if TransitiveLicensesInfo in target:
             for license in target[TransitiveLicensesInfo].licenses.to_list():
                 for kind in license.license_kinds:
-                    # print(kind.conditions)
                     for condition in kind.conditions:
                         if condition not in allowed_conditions:
                             fail("Condition %s violates policy %s" % (
@@ -49,7 +48,6 @@ def _license_policy_check_impl(ctx):
         if LicenseInfo in target:
             for license in target[LicenseInfo].licenses.to_list():
                 for kind in license.license_kinds:
-                    # print(kind.conditions)
                     for condition in kind.conditions:
                         if condition not in allowed_conditions:
                             fail("Condition %s violates policy %s" % (
