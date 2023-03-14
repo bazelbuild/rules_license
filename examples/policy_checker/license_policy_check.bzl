@@ -39,9 +39,10 @@ def _license_policy_check_impl(ctx):
                 for kind in license.license_kinds:
                     for condition in kind.conditions:
                         if condition not in allowed_conditions:
-                            fail("Condition %s violates policy %s" % (
+                            fail("Condition %s violates policy %s of %s" % (
                                 condition,
                                 policy.label,
+                                target.label,
                             ))
 
     for target in ctx.attr.targets:
@@ -50,9 +51,10 @@ def _license_policy_check_impl(ctx):
                 for kind in license.license_kinds:
                     for condition in kind.conditions:
                         if condition not in allowed_conditions:
-                            fail("Condition %s violates policy %s" % (
+                            fail("Condition %s violates policy %s of %s" % (
                                 condition,
                                 policy.label,
+                                target.label,
                             ))
     return [DefaultInfo()]
 
