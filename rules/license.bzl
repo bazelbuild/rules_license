@@ -24,6 +24,14 @@ load(
     "license_rule_impl",
 )
 
+# Enable this if your organization requires the license text to be a file
+# checked into source control instead of, possibly, another rule.
+_require_license_text_is_a_file = False
+
+# This rule must be named "_license" for backwards compatability with older
+# or Bazel that checked that name explicitly. See
+# https://github.com/bazelbuild/bazel/commit/bbc221f60bc8c9177470529d85c3e47a5d9aaf21
+# TODO(after bazel 7.0 release): Feel free to rename the rule and move.
 _license = rule(
     implementation = license_rule_impl,
     attrs = {
@@ -34,6 +42,7 @@ _license = rule(
                   " should be listed here. If the user can choose a single one" +
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
+            # This should be the null configuration, not the exec.
             cfg = "exec",
         ),
         "copyright_notice": attr.string(
@@ -107,11 +116,12 @@ def license(
             fail("Can not use both license_kind and license_kinds")
         license_kinds = [license_kind]
 
-    # Make sure the file exists as named in the rule. A glob expression that
-    # expands to the name of the file is not acceptable.
-    srcs = native.glob([license_text])
-    if len(srcs) != 1 or srcs[0] != license_text:
-        fail("Specified license file doesn't exist: %s" % license_text)
+    if _require_license_text_is_a_file:
+        # Make sure the file exists as named in the rule. A glob expression that
+        # expands to the name of the file is not acceptable.
+        srcs = native.glob([license_text])
+        if len(srcs) != 1 or srcs[0] != license_text:
+            fail("Specified license file doesn't exist: %s" % license_text)
 
     _license(
         name = name,
