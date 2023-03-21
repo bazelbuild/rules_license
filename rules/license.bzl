@@ -24,6 +24,8 @@ load(
     "license_rule_impl",
 )
 
+_require_license_text_is_a_file = False
+
 _license = rule(
     implementation = license_rule_impl,
     attrs = {
@@ -34,6 +36,7 @@ _license = rule(
                   " should be listed here. If the user can choose a single one" +
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
+            # This should be the null configuration, not the exec.
             cfg = "exec",
         ),
         "copyright_notice": attr.string(
@@ -107,11 +110,12 @@ def license(
             fail("Can not use both license_kind and license_kinds")
         license_kinds = [license_kind]
 
-    # Make sure the file exists as named in the rule. A glob expression that
-    # expands to the name of the file is not acceptable.
-    srcs = native.glob([license_text])
-    if len(srcs) != 1 or srcs[0] != license_text:
-        fail("Specified license file doesn't exist: %s" % license_text)
+    if _require_license_text_is_a_file:
+        # Make sure the file exists as named in the rule. A glob expression that
+        # expands to the name of the file is not acceptable.
+        srcs = native.glob([license_text])
+        if len(srcs) != 1 or srcs[0] != license_text:
+            fail("Specified license file doesn't exist: %s" % license_text)
 
     _license(
         name = name,
