@@ -24,6 +24,8 @@ load(
     "license_rule_impl",
 )
 
+# Enable this if your organization requires the license text to be a file
+# checked into source control instead of, possibly, another rule.
 _require_license_text_is_a_file = False
 
 # This rule must be named "_license" for backwards compatability with older
