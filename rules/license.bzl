@@ -26,6 +26,10 @@ load(
 
 _require_license_text_is_a_file = False
 
+# This rule must be named "_license" for backwards compatability with older
+# or Bazel that checked that name explicitly. See
+# https://github.com/bazelbuild/bazel/commit/bbc221f60bc8c9177470529d85c3e47a5d9aaf21
+# TODO(after bazel 7.0 release): Feel free to rename the rule and move.
 _license = rule(
     implementation = license_rule_impl,
     attrs = {
