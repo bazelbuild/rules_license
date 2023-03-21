@@ -146,3 +146,17 @@ check_license(
         ":hello_java",
     ],
 )
+
+
+license(
+    name = "license_with_generated_text",
+    license_text = ":created_license",
+    license_kinds = [":generic_notice_license"],
+)
+
+genrule(
+    name = "created_license",
+    outs = ["something.text"],
+    cmd = "echo hello >$@",
+)
+
