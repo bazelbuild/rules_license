@@ -45,37 +45,3 @@ def license_rule_impl(ctx):
     )
     _debug(0, provider)
     return [provider]
-
-license_impl = rule(
-    implementation = license_rule_impl,
-    attrs = {
-        "license_kinds": attr.label_list(
-            mandatory = False,
-            doc = "License kind(s) of this license. If multiple license kinds are" +
-                  " listed in the LICENSE file, and they all apply, then all" +
-                  " should be listed here. If the user can choose a single one" +
-                  " of many, then only list one here.",
-            providers = [LicenseKindInfo],
-            cfg = "exec",
-        ),
-        "copyright_notice": attr.string(
-            doc = "Copyright notice.",
-        ),
-        "license_text": attr.label(
-            allow_single_file = True,
-            default = "LICENSE",
-            doc = "The license file.",
-        ),
-        "package_name": attr.string(
-            doc = "A human readable name identifying this package." +
-                  " This may be used to produce an index of OSS packages used by" +
-                  " an applicatation.",
-        ),
-        "namespace": attr.string(
-            doc = "A human readable name used to organize licenses into categories." +
-                  " This is used in google3 to differentiate third party licenses used" +
-                  " for compliance versus internal licenses used by SLAsan for internal" +
-                  " teams' SLAs.",
-        ),
-    },
-)
