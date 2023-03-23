@@ -113,7 +113,7 @@ def _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_pa
                     if info.package_info:
                         trans_package_info.append(info.package_info)
 
-def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metadata_providers, filter_func):
+def gather_metadata_info_common(target, ctx, provider_factory, metadata_providers, filter_func):
     """Collect license and other metadata info from myself and my deps.
 
     Any single target might directly depend on a license, or depend on
@@ -122,17 +122,16 @@ def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metad
     in new direct license deps found and forward up the transitive information
     collected so far.
 
-    This is a common abstraction for crawling the dependency graph. It is parameterized
-    to allow specifying the provider that is populated with results. It is
-    configurable to select only licenses matching a certain namespace. It is also
-    configurable to specify which dependency edges should not be traced for the
-    purpose of tracing the graph.
+    This is a common abstraction for crawling the dependency graph. It is
+    parameterized to allow specifying the provider that is populated with
+    results. It is configurable to select only a subset of providers. It
+    is also configurable to specify which dependency edges should not
+    be traced for the purpose of tracing the graph.
 
     Args:
       target: The target of the aspect.
       ctx: The aspect evaluation context.
       provider_factory: abstracts the provider returned by this aspect
-      namespaces: a list of namespaces licenses must match to be included
       metadata_providers: a list of other providers of interest
       filter_func: a function that returns true iff the dep edge should be ignored
 
@@ -154,16 +153,8 @@ def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metad
             for dep in ctx.rule.attr.applicable_licenses:
                 if LicenseInfo in dep:
                     lic = dep[LicenseInfo]
+                    licenses.append(lic)
 
-                    # This check shouldn't be necessary since any license created
-                    # by the official code will have this set. However, one of the
-                    # tests has its own implementation of license that had to be fixed
-                    # so this is just a conservative safety check.
-                    if hasattr(lic, "namespace"):
-                        if lic.namespace in namespaces:
-                            licenses.append(lic)
-                    else:
-                        fail("should have a namespace")
                 for m_p in metadata_providers:
                     if m_p in dep:
                         other_metadata.append(dep[m_p])

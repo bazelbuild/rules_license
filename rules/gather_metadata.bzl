@@ -29,10 +29,6 @@ load(
     "TransitiveMetadataInfo",
 )
 
-# Definition for compliance namespace, used for filtering licenses
-# based on the namespace to which they belong.
-NAMESPACES = ["compliance"]
-
 def _strip_null_repo(label):
     """Removes the null repo name (e.g. @//) from a string.
 
@@ -54,7 +50,6 @@ def _gather_metadata_info_impl(target, ctx):
         target,
         ctx,
         TransitiveMetadataInfo,
-        NAMESPACES,
         [ExperimentalMetadataInfo, PackageInfo],
         should_traverse)
 
