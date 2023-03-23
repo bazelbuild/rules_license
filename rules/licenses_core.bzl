@@ -113,7 +113,7 @@ def _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_pa
                     if info.package_info:
                         trans_package_info.append(info.package_info)
 
-def gather_metadata_info_common(target, ctx, provider_factory, metadata_providers, filter_func, namespaces=None):
+def gather_metadata_info_common(target, ctx, provider_factory, metadata_providers, filter_func):
     """Collect license and other metadata info from myself and my deps.
 
     Any single target might directly depend on a license, or depend on
@@ -123,8 +123,7 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
     collected so far.
 
     This is a common abstraction for crawling the dependency graph. It is parameterized
-    to allow specifying the provider that is populated with results. It is
-    configurable to select only licenses matching a certain namespace. It is also
+    to allow specifying the provider that is populated with results. It is also
     configurable to specify which dependency edges should not be traced for the
     purpose of tracing the graph.
 
@@ -134,7 +133,6 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
       provider_factory: abstracts the provider returned by this aspect
       metadata_providers: a list of other providers of interest
       filter_func: a function that returns true iff the dep edge should be ignored
-      namespaces: a list of namespaces licenses must match to be included
 
     Returns:
       provider of parameterized type
@@ -154,14 +152,7 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
             for dep in ctx.rule.attr.applicable_licenses:
                 if LicenseInfo in dep:
                     lic = dep[LicenseInfo]
-
-                    # Filter licenses by namespace iff `namespaces` is provided
-                    if namespaces:
-                        if hasattr(lic, "namespace"):
-                            if lic.namespace in namespaces:
-                                licenses.append(lic)
-                    else:
-                        licenses.append(lic)
+                    licenses.append(lic)
 
                 for m_p in metadata_providers:
                     if m_p in dep:
