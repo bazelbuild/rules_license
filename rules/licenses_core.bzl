@@ -122,10 +122,11 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
     in new direct license deps found and forward up the transitive information
     collected so far.
 
-    This is a common abstraction for crawling the dependency graph. It is parameterized
-    to allow specifying the provider that is populated with results. It is also
-    configurable to specify which dependency edges should not be traced for the
-    purpose of tracing the graph.
+    This is a common abstraction for crawling the dependency graph. It is
+    parameterized to allow specifying the provider that is populated with
+    results. It is configurable to select only a subset of providers. It
+    is also configurable to specify which dependency edges should not
+    be traced for the purpose of tracing the graph.
 
     Args:
       target: The target of the aspect.
