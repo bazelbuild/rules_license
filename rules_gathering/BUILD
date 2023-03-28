@@ -1,6 +1,4 @@
-# BUILD file defining @rules_license/rules
-#
-# Copyright 2020 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,22 +13,9 @@
 # limitations under the License.
 """Rules for making license declarations."""
 
-load("@rules_license//rules_gathering:trace.bzl", "trace")
-
 package(
     default_applicable_licenses = ["//:license"],
     default_visibility = ["//visibility:public"],
-)
-
-licenses(["notice"])
-
-# This target controls the value of the traced target used during dependency collection.
-# This value should always be the empty string!
-# Specify this value with a flag, like --@rules_license//rules:trace_target=//target/to:trace
-trace(
-    name = "trace_target",
-    build_setting_default = "",  # TRACE-TARGET-SHOULD-BE-EMPTY
-    visibility = ["//visibility:public"],
 )
 
 filegroup(
