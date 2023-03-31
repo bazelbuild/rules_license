@@ -59,6 +59,7 @@ ORDER = [
     ("LicenseInfo",     "//rules:providers.bzl"),
     ("LicenseKindInfo", "//rules:providers.bzl"),
     ("PackageInfo",     "//rules:providers.bzl"),
+    ("trace",           "//rules_gathering:trace.bzl"),
 ]
 
 genrule(
@@ -90,7 +91,7 @@ bzl_library(
         "//:version.bzl",
         "//rules:standard_package",
         "//rules/private:standard_package",
-        # "@bazel_skylib//lib:paths",
+        "//rules_gathering:standard_package",
     ],
     visibility = ["//visibility:public"],
 )

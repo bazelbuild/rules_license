@@ -14,33 +14,14 @@
 """Rules and macros for collecting LicenseInfo providers."""
 
 load("@rules_license//rules:filtered_rule_kinds.bzl", "aspect_filters")
+load("@rules_license//rules:providers.bzl", "LicenseInfo")
 load("@rules_license//rules:user_filtered_rule_kinds.bzl", "user_aspect_filters")
-load(
-    "@rules_license//rules:providers.bzl",
-    "LicenseInfo",
-)
 load(
     "@rules_license//rules/private:gathering_providers.bzl",
     "LicensedTargetInfo",
     "TransitiveLicensesInfo",
 )
-
-
-TraceInfo = provider(
-    doc = """Provides a target (as a string) to assist in debugging dependency issues.""",
-    fields = {
-        "trace": "String: a target to trace dependency edges to.",
-    },
-)
-
-def _trace_impl(ctx):
-    return TraceInfo(trace = ctx.build_setting_value)
-
-trace = rule(
-    doc = """Used to allow the specification of a target to trace while collecting license dependencies.""",
-    implementation = _trace_impl,
-    build_setting = config.string(flag = True),
-)
+load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")
 
 def should_traverse(ctx, attr):
     """Checks if the dependent attribute should be traversed.

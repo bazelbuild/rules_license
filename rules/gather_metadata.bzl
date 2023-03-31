@@ -15,7 +15,6 @@
 
 load(
     "@rules_license//rules:licenses_core.bzl",
-    "TraceInfo",
     "gather_metadata_info_common",
     "should_traverse",
 )
@@ -28,6 +27,7 @@ load(
     "@rules_license//rules/private:gathering_providers.bzl",
     "TransitiveMetadataInfo",
 )
+load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")
 
 def _strip_null_repo(label):
     """Removes the null repo name (e.g. @//) from a string.
