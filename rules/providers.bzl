@@ -18,6 +18,11 @@ license and package_info declarations. Providers needed to gather
 them are declared in other places.
 """
 
+load(
+    "@rules_license//rules/private:gathering_providers.bzl",
+    _private_TransitiveLicensesInfo = "TransitiveLicensesInfo",
+)
+
 LicenseKindInfo = provider(
     doc = """Provides information about a license_kind instance.""",
     fields = {
@@ -63,5 +68,8 @@ ExperimentalMetadataInfo = provider(
         "type": "string: How to interpret data",
         "label": "Label: label of the metadata rule",
         "data": "String->any: Map of names to values",
-    }
+    },
 )
+
+# Deprecated: Use write_licenses_info instead.
+TransitiveLicensesInfo = _private_TransitiveLicensesInfo

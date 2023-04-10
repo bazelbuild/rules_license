@@ -126,8 +126,14 @@ def write_licenses_info(ctx, deps, json_out):
 
       def _foo_impl(ctx):
         ...
-        out = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
-        write_licenses_info(ctx, ctx.attr.deps, licenses_file)
+        json_file = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
+        license_files = write_licenses_info(ctx, ctx.attr.deps, json_file)
+
+        // process the json file and the license_files referenced by it
+        ctx.actions.run(
+          inputs = [json_file] + license_files
+          executable = ...
+        )
 
     Args:
       ctx: context of the caller
@@ -135,15 +141,25 @@ def write_licenses_info(ctx, deps, json_out):
             This requires that you have run the gather_licenses_info
             aspect over them
       json_out: output handle to write the JSON info
+
+    Returns:
+      A list of License File objects for each of the license paths referenced in the json.
     """
-    licenses = []
+    licenses_json = []
+    licenses_files = []
     for dep in deps:
         if TransitiveLicensesInfo in dep:
-            licenses.extend(licenses_info_to_json(dep[TransitiveLicensesInfo]))
+            transitive_licenses_info = dep[TransitiveLicensesInfo]
+            licenses_json.extend(licenses_info_to_json(transitive_licenses_info))
+            for info in transitive_licenses_info.licenses.to_list():
+                if info.license_text:
+                    licenses_files.append(info.license_text)
+
     ctx.actions.write(
         output = json_out,
-        content = "[\n%s\n]\n" % ",\n".join(licenses),
+        content = "[\n%s\n]\n" % ",\n".join(licenses_json),
     )
+    return licenses_files
 
 def licenses_info_to_json(licenses_info):
     """Render a single LicenseInfo provider to JSON
