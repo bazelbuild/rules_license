@@ -207,6 +207,7 @@ def licenses_info_to_json(licenses_info):
           {{
             "target": "{kind_path}",
             "name": "{kind_name}",
+            "long_name": "{kind_long_name}",
             "conditions": {kind_conditions}
           }}"""
 
@@ -226,6 +227,7 @@ def licenses_info_to_json(licenses_info):
         for kind in sorted(license.license_kinds, key = lambda x: x.name):
             kinds.append(kind_template.format(
                 kind_name = kind.name,
+                kind_long_name = kind.long_name if kind.long_name else "",
                 kind_path = kind.label,
                 kind_conditions = kind.conditions,
             ))
