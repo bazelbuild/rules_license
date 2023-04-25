@@ -1,4 +1,4 @@
-load("@rules_license//rules:compliance.bzl", "manifest")
+load("manifest.bzl", "manifest")
 
 """This is a proof of concept to show how to modify a macro definition to
 create a sub-graph allowing for build time injection of license information. We
