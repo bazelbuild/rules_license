@@ -3,6 +3,7 @@ default_tests: &default_tests
   test_targets:
     - "//tests/..."
     - "//examples/..."
+    - "-//examples/manifest/..."
 
 #
 # Bazel releases
