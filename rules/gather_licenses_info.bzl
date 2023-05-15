@@ -229,9 +229,13 @@ def licenses_info_to_json(licenses_info):
     for license in sorted(licenses_info.licenses.to_list(), key = lambda x: x.label):
         kinds = []
         for kind in sorted(license.license_kinds, key = lambda x: x.name):
+            if hasattr(kind, "long_name"):
+                long_name = kind.long_name
+            else:
+                long_name = ""
             kinds.append(kind_template.format(
                 kind_name = kind.name,
-                kind_long_name = kind.long_name if kind.long_name else "",
+                kind_long_name = long_name,
                 kind_path = kind.label,
                 kind_conditions = kind.conditions,
             ))
