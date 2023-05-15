@@ -86,7 +86,12 @@ package_info(<a href="#package_info-name">name</a>, <a href="#package_info-packa
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
-Providers for license rules.
+Basic providers for license rules.
+
+This file should only contain the basic providers needed to create
+license and package_info declarations. Providers needed to gather
+them are declared in other places.
+
 
 <a id="LicenseInfo"></a>
 
@@ -117,7 +122,12 @@ Provides information about a license instance.
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
-Providers for license rules.
+Basic providers for license rules.
+
+This file should only contain the basic providers needed to create
+license and package_info declarations. Providers needed to gather
+them are declared in other places.
+
 
 <a id="LicenseKindInfo"></a>
 
@@ -143,7 +153,12 @@ Provides information about a license_kind instance.
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
-Providers for license rules.
+Basic providers for license rules.
+
+This file should only contain the basic providers needed to create
+license and package_info declarations. Providers needed to gather
+them are declared in other places.
+
 
 <a id="PackageInfo"></a>
 
@@ -165,6 +180,29 @@ Provides information about a package.
 | <a id="PackageInfo-package_name"></a>package_name |  string: Human readable package name    |
 | <a id="PackageInfo-package_url"></a>package_url |  string: URL from which this package was downloaded.    |
 | <a id="PackageInfo-package_version"></a>package_version |  string: Human readable version string    |
+
+
+
+<!-- Generated with Stardoc: http://skydoc.bazel.build -->
+
+Rules and macros for collecting package metdata providers.
+
+<a id="trace"></a>
+
+## trace
+
+<pre>
+trace(<a href="#trace-name">name</a>)
+</pre>
+
+Used to allow the specification of a target to trace while collecting license dependencies.
+
+**ATTRIBUTES**
+
+
+| Name  | Description | Type | Mandatory | Default |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| <a id="trace-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
 
 
 
