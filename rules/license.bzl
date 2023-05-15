@@ -69,12 +69,6 @@ _license = rule(
                   " by an applicatation.  It should be a value that" +
                   " increases over time, rather than a commit hash."
         ),
-        "namespace": attr.string(
-            doc = "A human readable name used to organize licenses into categories." +
-                  " This is used in google3 to differentiate third party licenses used" +
-                  " for compliance versus internal licenses used by SLAsan for internal" +
-                  " teams' SLAs.",
-        ),
     },
 )
 
@@ -88,7 +82,7 @@ def license(
         package_name = None,
         package_url = None,
         package_version = None,
-        namespace = "compliance",
+        namespace = None,
         tags = [],
         visibility = ["//visibility:public"]):
     """Wrapper for license rule.
@@ -107,7 +101,6 @@ def license(
                     an application.
       package_url: str The canonical URL this package was downloaded from.
       package_version: str The version corresponding the the URL.
-      namespace: str Undocumened. Internal.
       tags: list(str) tags applied to the rule
       visibility: list(label) visibility spec.
     """
@@ -123,6 +116,11 @@ def license(
         if len(srcs) != 1 or srcs[0] != license_text:
             fail("Specified license file doesn't exist: %s" % license_text)
 
+    # TODO(0.0.6 release): Remove this warning and fail hard instead.
+    if namespace:
+        # buildifier: disable=print
+        print("license(namespace=<str>) is deprecated.")
+
     _license(
         name = name,
         license_kinds = license_kinds,
@@ -131,7 +129,6 @@ def license(
         package_name = package_name,
         package_url = package_url,
         package_version = package_version,
-        namespace = namespace,
         applicable_licenses = [],
         visibility = visibility,
         tags = tags,
