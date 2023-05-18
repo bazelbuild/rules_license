@@ -253,7 +253,7 @@ def licenses_info_to_json(licenses_info):
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
-            # Additionally retrun all File references so that other rules invoking
+            # Additionally return all File references so that other rules invoking
             # this method can load license text file contents from external repos
             # using runfiles
             all_license_text_files.append(license.license_text)
