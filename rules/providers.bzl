@@ -40,7 +40,6 @@ LicenseInfo = provider(
         "label": "Label: label of the license rule",
         "license_kinds": "list(LicenseKindInfo): License kinds ",
         "license_text": "string: The license file path",
-        "namespace": "string: namespace of the license rule",
         # TODO(aiuto): move to PackageInfo
         "package_name": "string: Human readable package name",
         "package_url": "URL from which this package was downloaded.",
