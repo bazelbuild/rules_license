@@ -24,6 +24,14 @@ load(
     "license_rule_impl",
 )
 
+# Enable this if your organization requires the license text to be a file
+# checked into source control instead of, possibly, another rule.
+_require_license_text_is_a_file = False
+
+# This rule must be named "_license" for backwards compatability with older
+# or Bazel that checked that name explicitly. See
+# https://github.com/bazelbuild/bazel/commit/bbc221f60bc8c9177470529d85c3e47a5d9aaf21
+# TODO(after bazel 7.0 release): Feel free to rename the rule and move.
 _license = rule(
     implementation = license_rule_impl,
     attrs = {
@@ -34,6 +42,7 @@ _license = rule(
                   " should be listed here. If the user can choose a single one" +
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
+            # This should be the null configuration, not the exec.
             cfg = "exec",
         ),
         "copyright_notice": attr.string(
@@ -60,12 +69,6 @@ _license = rule(
                   " by an applicatation.  It should be a value that" +
                   " increases over time, rather than a commit hash."
         ),
-        "namespace": attr.string(
-            doc = "A human readable name used to organize licenses into categories." +
-                  " This is used in google3 to differentiate third party licenses used" +
-                  " for compliance versus internal licenses used by SLAsan for internal" +
-                  " teams' SLAs.",
-        ),
     },
 )
 
@@ -79,7 +82,7 @@ def license(
         package_name = None,
         package_url = None,
         package_version = None,
-        namespace = "compliance",
+        namespace = None,
         tags = [],
         visibility = ["//visibility:public"]):
     """Wrapper for license rule.
@@ -98,7 +101,6 @@ def license(
                     an application.
       package_url: str The canonical URL this package was downloaded from.
       package_version: str The version corresponding the the URL.
-      namespace: str Undocumened. Internal.
       tags: list(str) tags applied to the rule
       visibility: list(label) visibility spec.
     """
@@ -107,11 +109,17 @@ def license(
             fail("Can not use both license_kind and license_kinds")
         license_kinds = [license_kind]
 
-    # Make sure the file exists as named in the rule. A glob expression that
-    # expands to the name of the file is not acceptable.
-    srcs = native.glob([license_text])
-    if len(srcs) != 1 or srcs[0] != license_text:
-        fail("Specified license file doesn't exist: %s" % license_text)
+    if _require_license_text_is_a_file:
+        # Make sure the file exists as named in the rule. A glob expression that
+        # expands to the name of the file is not acceptable.
+        srcs = native.glob([license_text])
+        if len(srcs) != 1 or srcs[0] != license_text:
+            fail("Specified license file doesn't exist: %s" % license_text)
+
+    # TODO(0.0.6 release): Remove this warning and fail hard instead.
+    if namespace:
+        # buildifier: disable=print
+        print("license(namespace=<str>) is deprecated.")
 
     _license(
         name = name,
@@ -121,7 +129,6 @@ def license(
         package_name = package_name,
         package_url = package_url,
         package_version = package_version,
-        namespace = namespace,
         applicable_licenses = [],
         visibility = visibility,
         tags = tags,

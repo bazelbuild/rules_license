@@ -14,30 +14,14 @@
 """Rules and macros for collecting LicenseInfo providers."""
 
 load("@rules_license//rules:filtered_rule_kinds.bzl", "aspect_filters")
+load("@rules_license//rules:providers.bzl", "LicenseInfo")
 load("@rules_license//rules:user_filtered_rule_kinds.bzl", "user_aspect_filters")
 load(
-    "@rules_license//rules:providers.bzl",
-    "LicenseInfo",
+    "@rules_license//rules/private:gathering_providers.bzl",
     "LicensedTargetInfo",
     "TransitiveLicensesInfo",
 )
-
-
-TraceInfo = provider(
-    doc = """Provides a target (as a string) to assist in debugging dependency issues.""",
-    fields = {
-        "trace": "String: a target to trace dependency edges to.",
-    },
-)
-
-def _trace_impl(ctx):
-    return TraceInfo(trace = ctx.build_setting_value)
-
-trace = rule(
-    doc = """Used to allow the specification of a target to trace while collecting license dependencies.""",
-    implementation = _trace_impl,
-    build_setting = config.string(flag = True),
-)
+load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")
 
 def should_traverse(ctx, attr):
     """Checks if the dependent attribute should be traversed.
@@ -110,7 +94,7 @@ def _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_pa
                     if info.package_info:
                         trans_package_info.append(info.package_info)
 
-def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metadata_providers, filter_func):
+def gather_metadata_info_common(target, ctx, provider_factory, metadata_providers, filter_func):
     """Collect license and other metadata info from myself and my deps.
 
     Any single target might directly depend on a license, or depend on
@@ -119,17 +103,16 @@ def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metad
     in new direct license deps found and forward up the transitive information
     collected so far.
 
-    This is a common abstraction for crawling the dependency graph. It is parameterized
-    to allow specifying the provider that is populated with results. It is
-    configurable to select only licenses matching a certain namespace. It is also
-    configurable to specify which dependency edges should not be traced for the
-    purpose of tracing the graph.
+    This is a common abstraction for crawling the dependency graph. It is
+    parameterized to allow specifying the provider that is populated with
+    results. It is configurable to select only a subset of providers. It
+    is also configurable to specify which dependency edges should not
+    be traced for the purpose of tracing the graph.
 
     Args:
       target: The target of the aspect.
       ctx: The aspect evaluation context.
       provider_factory: abstracts the provider returned by this aspect
-      namespaces: a list of namespaces licenses must match to be included
       metadata_providers: a list of other providers of interest
       filter_func: a function that returns true iff the dep edge should be ignored
 
@@ -151,19 +134,17 @@ def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metad
             for dep in ctx.rule.attr.applicable_licenses:
                 if LicenseInfo in dep:
                     lic = dep[LicenseInfo]
+                    licenses.append(lic)
 
-                    # This check shouldn't be necessary since any license created
-                    # by the official code will have this set. However, one of the
-                    # tests has its own implementation of license that had to be fixed
-                    # so this is just a conservative safety check.
-                    if hasattr(lic, "namespace"):
-                        if lic.namespace in namespaces:
-                            licenses.append(lic)
-                    else:
-                        fail("should have a namespace")
                 for m_p in metadata_providers:
                     if m_p in dep:
                         other_metadata.append(dep[m_p])
+
+    # A hack until https://github.com/bazelbuild/rules_license/issues/89 is
+    # fully resolved. If exec is in the bin_dir path, then the current
+    # configuration is probably cfg = exec.
+    if "-exec-" in ctx.bin_dir.path:
+        return [provider_factory(deps = depset(), licenses = depset(), traces = [])]
 
     # Now gather transitive collection of providers from the targets
     # this target depends upon.
@@ -172,6 +153,7 @@ def gather_metadata_info_common(target, ctx, provider_factory, namespaces, metad
     trans_package_info = []
     trans_deps = []
     traces = []
+
     _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_package_info, trans_deps, traces, provider_factory, filter_func)
 
     if not licenses and not trans_licenses:

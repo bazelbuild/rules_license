@@ -11,11 +11,4 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-#include <iostream>
-#include <ostream>
-
-void new_lib_func() {
-    std::cout << "This is restricted code" << std::endl;
-}
-
+int file_under_notice = 1;

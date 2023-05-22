@@ -3,7 +3,6 @@
 import codecs
 import json
 
-
 # This is extracted out to make it easier to keep test equivalence between
 # the OSS version and Google.
 LICENSE_PACKAGE_BASE = "/"
@@ -52,21 +51,34 @@ def check_licenses_of_dependencies(test_case, licenses_info, expected,
   Args:
     test_case: (TestCase) the test.
     licenses_info: (dict) licenses info.
-    expected: (dict) map of target names to the licenses they are under. Names
-        must be relative to the licenses package, not absolute.
+    expected: (dict) map of target name suffixes to the licenses they are under.
     path_prefix: (str) prefix to prepend to targets and licenses in expected.
        This turns the relative target names to absolute ones.
   """
 
   # Turn the list of deps into a dict by target for easier comparison.
-  print(licenses_info)
   deps_to_licenses = {
-      x["target_under_license"].lstrip('@'): set(l.strip('@') for l in x["licenses"])
+      x["target_under_license"].lstrip("@"): set(l.strip("@") for l in x["licenses"])
       for x in licenses_info[0]["dependencies"]}
-  print(deps_to_licenses)
 
-  for target, licenses in expected.items():
-    got_licenses = set(deps_to_licenses[path_prefix + target])
-    for lic in licenses:
-      test_case.assertIn(path_prefix + lic, got_licenses)
-  # future: Maybe check that deps is not larger than expected.
+  target_names = ",".join(deps_to_licenses.keys())
+  # This is n**2, but N is typically < 3 or we are doing this wrong.
+  for want_target, want_licenses in expected.items():
+    found_target = False
+    for got_target, got_licenses in deps_to_licenses.items():
+      if got_target.endswith(want_target):
+        found_target = True
+        test_case.assertEqual(len(want_licenses), len(got_licenses))
+        found_license = False
+        for want_l in want_licenses:
+          for got_l in got_licenses:
+            if got_l.endswith(want_l):
+              found_license = True
+              break
+        test_case.assertTrue(
+            found_license,
+            msg="license (%s) not a suffix in %s" % (want_l, got_licenses))
+        break
+    test_case.assertTrue(
+        found_target,
+        msg="target (%s) not a suffix in [%s]" % (want_target, target_names))

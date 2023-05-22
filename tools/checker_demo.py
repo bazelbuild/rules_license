@@ -90,7 +90,6 @@ def _do_copyright_notices(out, licenses):
     if l.get('package_version'):
       name =  name + "/" + l['package_version']
     # IGNORE_COPYRIGHT: Not a copyright notice. It is a variable holding one.
-    print(l)
     out.write('package(%s), copyright(%s)\n' % (name, l['copyright_notice']))
 
 
@@ -122,7 +121,6 @@ def main():
   top_level_target = target['top_level_target']
   dependencies = target['dependencies']
   licenses = target['licenses']
-  print(licenses)
 
   err = 0
   with codecs.open(args.report, mode='w', encoding='utf-8') as rpt:

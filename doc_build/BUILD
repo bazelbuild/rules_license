@@ -59,6 +59,7 @@ ORDER = [
     ("LicenseInfo",     "//rules:providers.bzl"),
     ("LicenseKindInfo", "//rules:providers.bzl"),
     ("PackageInfo",     "//rules:providers.bzl"),
+    ("trace",           "//rules_gathering:trace.bzl"),
 ]
 
 genrule(
@@ -66,7 +67,7 @@ genrule(
     srcs = ["%s.md" % rule for rule, _ in ORDER],
     outs = ["reference.md"],
     cmd = "$(location :merge) $(SRCS) >$@",
-    exec_tools = [":merge"],
+    tools = [":merge"],
 )
 
 [
@@ -89,7 +90,8 @@ bzl_library(
     srcs = [
         "//:version.bzl",
         "//rules:standard_package",
-        # "@bazel_skylib//lib:paths",
+        "//rules/private:standard_package",
+        "//rules_gathering:standard_package",
     ],
     visibility = ["//visibility:public"],
 )

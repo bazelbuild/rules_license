@@ -11,28 +11,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# A package with all code under a single license. This is the most common case
-# we expect to see.
+# A package with a commercial license.
 
 load("@rules_license//rules:license.bzl", "license")
 
-# Using a package wide default ensure that all targets are associated with the
-# license.
 package(
-    default_applicable_licenses = [":license"],
-    default_visibility = ["//visibility:public"],
+   default_applicable_licenses = [":license"],
+   default_visibility = ["//examples:__subpackages__"],
 )
 
 # The default license for an entire package is typically named "license".
 license(
     name = "license",
     license_kinds = [
-        "@rules_license//examples/my_org/licenses:generic_notice",
+        "@rules_license//examples/my_org/licenses:acme_corp_paid",
     ],
-    license_text = "LICENSE",
+    license_text = "ACME_LICENSE",
 )
 
 cc_library(
-    name = "libhhgttg",
-    srcs = ["answer.cc"],
+    name = "acme",
+    srcs = ["coyote.cc"],
 )

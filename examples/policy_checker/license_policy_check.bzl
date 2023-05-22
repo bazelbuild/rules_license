@@ -22,11 +22,8 @@ load(
     "@rules_license//rules:gather_licenses_info.bzl",
     "gather_licenses_info",
 )
-load(
-    "@rules_license//rules:providers.bzl",
-    "LicenseInfo",
-    "TransitiveLicensesInfo",
-)
+load("@rules_license//rules:providers.bzl", "LicenseInfo")
+load("@rules_license//rules/private:gathering_providers.bzl", "TransitiveLicensesInfo")
 
 # This is a crude example of the kind of thing which can be done.
 def _license_policy_check_impl(ctx):
@@ -44,7 +41,6 @@ def _license_policy_check_impl(ctx):
                                 policy.label,
                                 target.label,
                             ))
-
     for target in ctx.attr.targets:
         if LicenseInfo in target:
             for license in target[LicenseInfo].licenses.to_list():

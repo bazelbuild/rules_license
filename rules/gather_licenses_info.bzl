@@ -15,18 +15,14 @@
 
 load(
     "@rules_license//rules:licenses_core.bzl",
-    "TraceInfo",
     "gather_metadata_info_common",
     "should_traverse",
 )
 load(
-    "@rules_license//rules:providers.bzl",
+    "@rules_license//rules/private:gathering_providers.bzl",
     "TransitiveLicensesInfo",
 )
-
-# Definition for compliance namespace, used for filtering licenses
-# based on the namespace to which they belong.
-NAMESPACES = ["compliance"]
+load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")
 
 def _strip_null_repo(label):
     """Removes the null repo name (e.g. @//) from a string.
@@ -41,7 +37,7 @@ def _strip_null_repo(label):
     return s
 
 def _gather_licenses_info_impl(target, ctx):
-    return gather_metadata_info_common(target, ctx, TransitiveLicensesInfo, NAMESPACES, [], should_traverse)
+    return gather_metadata_info_common(target, ctx, TransitiveLicensesInfo, [], should_traverse)
 
 gather_licenses_info = aspect(
     doc = """Collects LicenseInfo providers into a single TransitiveLicensesInfo provider.""",
@@ -76,7 +72,8 @@ def _write_licenses_info_impl(target, ctx):
 
     # Write the output file for the target
     name = "%s_licenses_info.json" % ctx.label.name
-    content = "[\n%s\n]\n" % ",\n".join(licenses_info_to_json(info))
+    lic_info, _ = licenses_info_to_json(info)
+    content = "[\n%s\n]\n" % ",\n".join(lic_info)
     out = ctx.actions.declare_file(name)
     ctx.actions.write(
         output = out,
@@ -130,8 +127,14 @@ def write_licenses_info(ctx, deps, json_out):
 
       def _foo_impl(ctx):
         ...
-        out = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
-        write_licenses_info(ctx, ctx.attr.deps, licenses_file)
+        json_file = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
+        license_files = write_licenses_info(ctx, ctx.attr.deps, json_file)
+
+        // process the json file and the license_files referenced by it
+        ctx.actions.run(
+          inputs = [json_file] + license_files
+          executable = ...
+        )
 
     Args:
       ctx: context of the caller
@@ -139,15 +142,26 @@ def write_licenses_info(ctx, deps, json_out):
             This requires that you have run the gather_licenses_info
             aspect over them
       json_out: output handle to write the JSON info
+
+    Returns:
+      A list of License File objects for each of the license paths referenced in the json.
     """
-    licenses = []
+    licenses_json = []
+    licenses_files = []
     for dep in deps:
         if TransitiveLicensesInfo in dep:
-            licenses.extend(licenses_info_to_json(dep[TransitiveLicensesInfo]))
+            transitive_licenses_info = dep[TransitiveLicensesInfo]            
+            lic_info, _ = licenses_info_to_json(transitive_licenses_info)
+            licenses_json.extend(lic_info)
+            for info in transitive_licenses_info.licenses.to_list():
+                if info.license_text:
+                    licenses_files.append(info.license_text)
+
     ctx.actions.write(
         output = json_out,
-        content = "[\n%s\n]\n" % ",\n".join(licenses),
+        content = "[\n%s\n]\n" % ",\n".join(licenses_json),
     )
+    return licenses_files
 
 def licenses_info_to_json(licenses_info):
     """Render a single LicenseInfo provider to JSON
@@ -157,6 +171,7 @@ def licenses_info_to_json(licenses_info):
 
     Returns:
       [(str)] list of LicenseInfo values rendered as JSON.
+      [(File)] list of Files containing license texts.
     """
 
     main_template = """  {{
@@ -195,6 +210,7 @@ def licenses_info_to_json(licenses_info):
           {{
             "target": "{kind_path}",
             "name": "{kind_name}",
+            "long_name": "{kind_long_name}",
             "conditions": {kind_conditions}
           }}"""
 
@@ -209,11 +225,17 @@ def licenses_info_to_json(licenses_info):
             used_by[license].append(_strip_null_repo(dep.target_under_license))
 
     all_licenses = []
+    all_license_text_files = []
     for license in sorted(licenses_info.licenses.to_list(), key = lambda x: x.label):
         kinds = []
         for kind in sorted(license.license_kinds, key = lambda x: x.name):
+            if hasattr(kind, "long_name"):
+                long_name = kind.long_name
+            else:
+                long_name = ""
             kinds.append(kind_template.format(
                 kind_name = kind.name,
+                kind_long_name = long_name,
                 kind_path = kind.label,
                 kind_conditions = kind.conditions,
             ))
@@ -231,11 +253,12 @@ def licenses_info_to_json(licenses_info):
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
-
+            # Additionally return all File references so that other rules invoking
+            # this method can load license text file contents from external repos
+            # using runfiles
+            all_license_text_files.append(license.license_text)
     all_deps = []
     for dep in sorted(licenses_info.deps.to_list(), key = lambda x: x.target_under_license):
-        licenses_used = []
-
         # Undo the concatenation applied when stored in the provider.
         dep_licenses = dep.licenses.split(",")
         all_deps.append(dep_template.format(
@@ -247,4 +270,4 @@ def licenses_info_to_json(licenses_info):
         top_level_target = _strip_null_repo(licenses_info.target_under_license),
         dependencies = ",".join(all_deps),
         licenses = ",".join(all_licenses),
-    )]
+    )], all_license_text_files
