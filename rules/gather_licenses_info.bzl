@@ -229,9 +229,13 @@ def licenses_info_to_json(licenses_info):
     for license in sorted(licenses_info.licenses.to_list(), key = lambda x: x.label):
         kinds = []
         for kind in sorted(license.license_kinds, key = lambda x: x.name):
+            if hasattr(kind, "long_name"):
+                long_name = kind.long_name
+            else:
+                long_name = ""
             kinds.append(kind_template.format(
                 kind_name = kind.name,
-                kind_long_name = kind.long_name if kind.long_name else "",
+                kind_long_name = long_name,
                 kind_path = kind.label,
                 kind_conditions = kind.conditions,
             ))
@@ -249,7 +253,7 @@ def licenses_info_to_json(licenses_info):
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
-            # Additionally retrun all File references so that other rules invoking
+            # Additionally return all File references so that other rules invoking
             # this method can load license text file contents from external repos
             # using runfiles
             all_license_text_files.append(license.license_text)

@@ -41,7 +41,6 @@ def license_rule_impl(ctx):
         package_version = ctx.attr.package_version,
         license_text = ctx.file.license_text,
         label = ctx.label,
-        namespace = ctx.attr.namespace,
     )
     _debug(0, provider)
     return [provider]
