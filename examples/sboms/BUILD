@@ -1,6 +1,6 @@
 # Demonstrate the generate_sbom rule
 
-load("@rules_license//rules:sbom.bzl", "generate_sbom")
+load("@rules_license//rules_gathering:generate_sbom.bzl", "generate_sbom")
 
 # There are not a lot of targets in this rule set to build a SBOM from
 # so we will (in a very self-referential way) generate one for the tool
