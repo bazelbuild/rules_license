@@ -24,7 +24,7 @@ load(
     "TransitiveLicensesInfo",
 )
 
-# Forward licenses used until users migrate
+# Forward licenses used until users migrate. Delete at 0.0.7 or 0.1.0.
 load(
     "@rules_license//sample_reports:licenses_used.bzl",
     _licenses_used = "licenses_used",
