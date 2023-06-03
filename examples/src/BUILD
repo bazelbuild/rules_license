@@ -13,8 +13,9 @@
 # limitations under the License.
 # Examples of applications and interactions with licenses
 
-load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
 load("@rules_license//examples/vndor/constant_gen:defs.bzl", "constant_gen")
+load("@rules_license//rules:compliance.bzl", "check_license")
+load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
 
 package(
     default_package_metadata = ["//:license", "//:package_info"],

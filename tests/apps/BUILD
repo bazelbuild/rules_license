@@ -1,6 +1,6 @@
 # Test cases for license rules: Sample app
 
-load("@rules_license//rules:compliance.bzl", "licenses_used")
+load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
 
 package(default_visibility = ["//examples:__subpackages__"])
 
