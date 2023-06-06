@@ -13,8 +13,8 @@
 # limitations under the License.
 # An example of a code generator with a distinct license for the generated code.
 
-load("@rules_license//rules:compliance.bzl", "licenses_used")
 load("@rules_license//rules:license.bzl", "license")
+load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
 load(":defs.bzl", "constant_gen")
 
 package(
