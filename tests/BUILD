@@ -1,8 +1,9 @@
 # Test cases for license rules.
 
-load("@rules_license//rules:compliance.bzl", "check_license", "licenses_used")
+load("@rules_license//rules:compliance.bzl", "check_license")
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//rules:license_kind.bzl", "license_kind")
+load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
 
 package(
     default_applicable_licenses = [":license"],

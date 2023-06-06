@@ -24,6 +24,14 @@ load(
     "TransitiveLicensesInfo",
 )
 
+# Forward licenses used until users migrate. Delete at 0.0.7 or 0.1.0.
+load(
+    "@rules_license//sample_reports:licenses_used.bzl",
+    _licenses_used = "licenses_used",
+)
+
+licenses_used = _licenses_used
+
 # This rule is proof of concept, and may not represent the final
 # form of a rule for compliance validation.
 def _check_license_impl(ctx):
@@ -119,26 +127,6 @@ def manifest(name, deps, out = None, **kwargs):
 
     _manifest(name = name, deps = deps, out = out, **kwargs)
 
-def _licenses_used_impl(ctx):
-    # Gather all licenses and make it available as JSON
-    write_licenses_info(ctx, ctx.attr.deps, ctx.outputs.out)
-    return [DefaultInfo(files = depset([ctx.outputs.out]))]
-
-_licenses_used = rule(
-    implementation = _licenses_used_impl,
-    doc = """Internal tmplementation method for licenses_used().""",
-    attrs = {
-        "deps": attr.label_list(
-            doc = """List of targets to collect LicenseInfo for.""",
-            aspects = [gather_licenses_info_and_write],
-        ),
-        "out": attr.output(
-            doc = """Output file.""",
-            mandatory = True,
-        ),
-    },
-)
-
 def get_licenses_mapping(deps, warn = False):
     """Creates list of entries representing all licenses for the deps.
 
@@ -170,28 +158,3 @@ def get_licenses_mapping(deps, warn = False):
             print("Legacy license %s not included, rule needs updating" % lic.license_text)
 
     return mappings
-
-def licenses_used(name, deps, out = None, **kwargs):
-    """Collects LicensedInfo providers for a set of targets and writes as JSON.
-
-    The output is a single JSON array, with an entry for each license used.
-    See gather_licenses_info.bzl:write_licenses_info() for a description of the schema.
-
-    Args:
-      name: The target.
-      deps: A list of targets to get LicenseInfo for. The output is the union of
-            the result, not a list of information for each dependency.
-      out: The output file name. Default: <name>.json.
-      **kwargs: Other args
-
-    Usage:
-
-      licenses_used(
-          name = "license_info",
-          deps = [":my_app"],
-          out = "license_info.json",
-      )
-    """
-    if not out:
-        out = name + ".json"
-    _licenses_used(name = name, deps = deps, out = out, **kwargs)
