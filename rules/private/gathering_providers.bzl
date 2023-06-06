@@ -25,7 +25,7 @@ LicensedTargetInfo = provider(
     },
 )
 
-def licenses_info():
+def XXX_licenses_info():
     return provider(
         doc = """The transitive set of licenses used by a target.""",
         fields = {
@@ -37,7 +37,28 @@ def licenses_info():
     )
 
 # This provider is used by the aspect that is used by manifest() rules.
-TransitiveLicensesInfo = licenses_info()
+# XXXX TransitiveLicensesInfo = licenses_info()
+
+# Constructor to reduce larger set of gathered data to what we want.
+def TransitiveLicensesInfoInit(target_under_license=None, licenses=None, deps=None, traces=None, **kwargs):
+    return {
+        "target_under_license": target_under_license,
+        "deps": deps,
+        "licenses": licenses,
+        "traces": traces,
+    }
+
+
+TransitiveLicensesInfo, _raw_TransitiveLicensesInfo = provider(
+    doc = """The transitive set of licenses used by a target.""",
+    fields = {
+        "target_under_license": "Label: The top level target label.",
+        "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
+        "licenses": "depset(LicenseInfo)",
+        "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",
+    },
+    init = TransitiveLicensesInfoInit,
+)
 
 TransitiveMetadataInfo = provider(
     doc = """The transitive set of licenses used by a target.""",

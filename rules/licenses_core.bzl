@@ -139,6 +139,9 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
                 for m_p in metadata_providers:
                     if m_p in dep:
                         other_metadata.append(dep[m_p])
+                # Remove: Only here to show fanout from explict providers.
+                # if PackageInfo in dep:
+                #    package_info.append(dep[PackageInfo])
 
     # A hack until https://github.com/bazelbuild/rules_license/issues/89 is
     # fully resolved. If exec is in the bin_dir path, then the current
