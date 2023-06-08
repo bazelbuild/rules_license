@@ -19,7 +19,7 @@ load(
     "should_traverse",
 )
 load(
-    "@rules_license//rules/private:gathering_providers.bzl",
+    "@rules_license//rules_gathering:gathering_providers.bzl",
     "TransitiveLicensesInfo",
 )
 load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")
