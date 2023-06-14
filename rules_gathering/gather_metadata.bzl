@@ -24,7 +24,7 @@ load(
     "PackageInfo",
 )
 load(
-    "@rules_license//rules/private:gathering_providers.bzl",
+    "@rules_license//rules_gathering:gathering_providers.bzl",
     "TransitiveMetadataInfo",
 )
 load("@rules_license//rules_gathering:trace.bzl", "TraceInfo")

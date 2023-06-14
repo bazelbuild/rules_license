@@ -90,7 +90,6 @@ bzl_library(
     srcs = [
         "//:version.bzl",
         "//rules:standard_package",
-        "//rules/private:standard_package",
         "//rules_gathering:standard_package",
     ],
     visibility = ["//visibility:public"],

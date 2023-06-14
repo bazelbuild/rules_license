@@ -18,7 +18,7 @@ load(
     "gather_licenses_info",
 )
 load(
-    "@rules_license//rules/private:gathering_providers.bzl",
+    "@rules_license//rules_gathering:gathering_providers.bzl",
     "TransitiveLicensesInfo",
 )
 

@@ -19,7 +19,7 @@ them are declared in other places.
 """
 
 load(
-    "@rules_license//rules/private:gathering_providers.bzl",
+    "@rules_license//rules_gathering:gathering_providers.bzl",
     _private_TransitiveLicensesInfo = "TransitiveLicensesInfo",
 )
 
