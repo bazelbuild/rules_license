@@ -59,6 +59,8 @@ ORDER = [
     ("LicenseInfo",     "//rules:providers.bzl"),
     ("LicenseKindInfo", "//rules:providers.bzl"),
     ("PackageInfo",     "//rules:providers.bzl"),
+    ("gather_metadata_info",           "//rules_gathering:gather_metadata.bzl"),
+    ("gather_metadata_info_and_write", "//rules_gathering:gather_metadata.bzl"),
     ("trace",           "//rules_gathering:trace.bzl"),
 ]
 
