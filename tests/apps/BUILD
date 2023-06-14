@@ -64,7 +64,7 @@ py_test(
     name = "an_app_licenses_test",
     srcs = ["an_app_licenses_test.py"],
     data = [":an_app_licenses.json"],
-    # python_version = "PY3",
+    python_version = "PY3",
     deps = [
         "@rules_license//tests:license_test_utils",
     ],
