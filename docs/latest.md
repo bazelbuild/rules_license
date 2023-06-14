@@ -183,6 +183,73 @@ Provides information about a package.
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
+Rules and macros for collecting LicenseInfo providers.
+
+<a id="gather_metadata_info"></a>
+
+## gather_metadata_info
+
+<pre>
+gather_metadata_info(<a href="#gather_metadata_info-name">name</a>)
+</pre>
+
+Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.
+
+**ASPECT ATTRIBUTES**
+
+
+| Name | Type |
+| :------------- | :------------- |
+| *| String |
+
+
+**ATTRIBUTES**
+
+
+| Name  | Description | Type | Mandatory | Default |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| <a id="gather_metadata_info-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
+
+
+
+<!-- Generated with Stardoc: http://skydoc.bazel.build -->
+
+Rules and macros for collecting LicenseInfo providers.
+
+<a id="gather_metadata_info_and_write"></a>
+
+## gather_metadata_info_and_write
+
+<pre>
+gather_metadata_info_and_write(<a href="#gather_metadata_info_and_write-name">name</a>)
+</pre>
+
+Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
+
+    Usage:
+      bazel build //some:target           --aspects=@rules_license//rules:gather_metadata_info.bzl%gather_metadata_info_and_write
+          --output_groups=licenses
+    
+
+**ASPECT ATTRIBUTES**
+
+
+| Name | Type |
+| :------------- | :------------- |
+| *| String |
+
+
+**ATTRIBUTES**
+
+
+| Name  | Description | Type | Mandatory | Default |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| <a id="gather_metadata_info_and_write-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
+
+
+
+<!-- Generated with Stardoc: http://skydoc.bazel.build -->
+
 Rules and macros for collecting package metdata providers.
 
 <a id="trace"></a>
