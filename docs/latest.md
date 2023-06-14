@@ -97,8 +97,8 @@ them are declared in other places.
 ## LicenseInfo
 
 <pre>
-LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a href="#LicenseInfo-label">label</a>, <a href="#LicenseInfo-license_kinds">license_kinds</a>, <a href="#LicenseInfo-license_text">license_text</a>, <a href="#LicenseInfo-package_name">package_name</a>,
-            <a href="#LicenseInfo-package_url">package_url</a>, <a href="#LicenseInfo-package_version">package_version</a>)
+LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a href="#LicenseInfo-label">label</a>, <a href="#LicenseInfo-license_kinds">license_kinds</a>, <a href="#LicenseInfo-license_text">license_text</a>, <a href="#LicenseInfo-package_name">package_name</a>, <a href="#LicenseInfo-package_url">package_url</a>,
+            <a href="#LicenseInfo-package_version">package_version</a>)
 </pre>
 
 Provides information about a license instance.
@@ -178,6 +178,73 @@ Provides information about a package.
 | <a id="PackageInfo-package_name"></a>package_name |  string: Human readable package name    |
 | <a id="PackageInfo-package_url"></a>package_url |  string: URL from which this package was downloaded.    |
 | <a id="PackageInfo-package_version"></a>package_version |  string: Human readable version string    |
+
+
+
+<!-- Generated with Stardoc: http://skydoc.bazel.build -->
+
+Rules and macros for collecting LicenseInfo providers.
+
+<a id="gather_metadata_info"></a>
+
+## gather_metadata_info
+
+<pre>
+gather_metadata_info(<a href="#gather_metadata_info-name">name</a>)
+</pre>
+
+Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.
+
+**ASPECT ATTRIBUTES**
+
+
+| Name | Type |
+| :------------- | :------------- |
+| *| String |
+
+
+**ATTRIBUTES**
+
+
+| Name  | Description | Type | Mandatory | Default |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| <a id="gather_metadata_info-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
+
+
+
+<!-- Generated with Stardoc: http://skydoc.bazel.build -->
+
+Rules and macros for collecting LicenseInfo providers.
+
+<a id="gather_metadata_info_and_write"></a>
+
+## gather_metadata_info_and_write
+
+<pre>
+gather_metadata_info_and_write(<a href="#gather_metadata_info_and_write-name">name</a>)
+</pre>
+
+Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
+
+    Usage:
+      bazel build //some:target           --aspects=@rules_license//rules:gather_metadata_info.bzl%gather_metadata_info_and_write
+          --output_groups=licenses
+    
+
+**ASPECT ATTRIBUTES**
+
+
+| Name | Type |
+| :------------- | :------------- |
+| *| String |
+
+
+**ATTRIBUTES**
+
+
+| Name  | Description | Type | Mandatory | Default |
+| :------------- | :------------- | :------------- | :------------- | :------------- |
+| <a id="gather_metadata_info_and_write-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
 
 
 
