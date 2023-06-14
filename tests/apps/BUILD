@@ -1,6 +1,7 @@
 # Test cases for license rules: Sample app
 
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
+load("@rules_python//python:defs.bzl", "py_test")
 
 package(default_visibility = ["//examples:__subpackages__"])
 
@@ -63,7 +64,7 @@ py_test(
     name = "an_app_licenses_test",
     srcs = ["an_app_licenses_test.py"],
     data = [":an_app_licenses.json"],
-    python_version = "PY3",
+    # python_version = "PY3",
     deps = [
         "@rules_license//tests:license_test_utils",
     ],
