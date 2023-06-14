@@ -35,7 +35,10 @@ trace(
 
 filegroup(
     name = "standard_package",
-    srcs = glob(["**"]),
+    srcs = glob([
+        "**/BUILD",
+        "**/*.bzl",
+    ]),
 )
 
 # Do not create a bzl_library(). That would create a dependency loop back
