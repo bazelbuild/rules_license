@@ -97,8 +97,8 @@ them are declared in other places.
 ## LicenseInfo
 
 <pre>
-LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a href="#LicenseInfo-label">label</a>, <a href="#LicenseInfo-license_kinds">license_kinds</a>, <a href="#LicenseInfo-license_text">license_text</a>, <a href="#LicenseInfo-package_name">package_name</a>,
-            <a href="#LicenseInfo-package_url">package_url</a>, <a href="#LicenseInfo-package_version">package_version</a>)
+LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a href="#LicenseInfo-label">label</a>, <a href="#LicenseInfo-license_kinds">license_kinds</a>, <a href="#LicenseInfo-license_text">license_text</a>, <a href="#LicenseInfo-package_name">package_name</a>, <a href="#LicenseInfo-package_url">package_url</a>,
+            <a href="#LicenseInfo-package_version">package_version</a>)
 </pre>
 
 Provides information about a license instance.
