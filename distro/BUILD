@@ -39,6 +39,7 @@ pkg_tar(
         "//rules:standard_package",
         "//rules_gathering:standard_package",
         "//rules/private:standard_package",
+        "//sample_reports:standard_package",
         "//tools:standard_package",
     ],
     extension = "tar.gz",
