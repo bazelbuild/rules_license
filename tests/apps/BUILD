@@ -1,6 +1,7 @@
 # Test cases for license rules: Sample app
 
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
+load("@rules_python//python:defs.bzl", "py_test")
 
 package(default_visibility = ["//examples:__subpackages__"])
 
