@@ -1,6 +1,7 @@
 #!/bin/bash -ef
 #
-# This is a temporary hack.
+# This is a temporary hack to verify the distribution archive is sound.
+#
 # The intent is to create a rule which does this and add to
 # rules_pkg. Comments within it are mostly for future me
 # while writing that.
