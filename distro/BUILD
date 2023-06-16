@@ -37,6 +37,7 @@ pkg_tar(
         "//licenses/generic:standard_package",
         "//licenses/spdx:standard_package",
         "//rules:standard_package",
+        "//rules_gathering:standard_package",
         "//rules/private:standard_package",
         "//tools:standard_package",
     ],
