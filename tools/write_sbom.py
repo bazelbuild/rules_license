@@ -21,8 +21,8 @@ This is only a demonstration. It will be replaced with other tools.
 import argparse
 import codecs
 import datetime
+import getpass
 import json
-import os
 
 
 TOOL = 'https//github.com/bazelbuild/rules_license/tools:write_sbom'
@@ -39,7 +39,7 @@ def _write_sbom_header(out, package):
     'DocumentName: %s' % package,
     # TBD
     # 'DocumentNamespace: https://swinslow.net/spdx-examples/example1/hello-v3
-    'Creator: Person: %s' % os.getlogin(),
+    'Creator: Person: %s' % getpass.getuser(),
     'Creator: Tool: %s' % TOOL,
     datetime.datetime.utcnow().strftime('Created: %Y-%m-%d-%H:%M:%SZ'),
     '',
