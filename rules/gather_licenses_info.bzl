@@ -71,15 +71,9 @@ def _write_licenses_info_impl(target, ctx):
         return [OutputGroupInfo(licenses = depset())]
 
     # Write the output file for the target
-    name = "%s_licenses_info.json" % ctx.label.name
-    lic_info, _ = licenses_info_to_json(info)
-    content = "[\n%s\n]\n" % ",\n".join(lic_info)
-    out = ctx.actions.declare_file(name)
-    ctx.actions.write(
-        output = out,
-        content = content,
-    )
-    outs.append(out)
+    json_out = ctx.actions.declare_file("%s_licenses_info.json" % ctx.label.name)
+    write_licenses_info(ctx, target, json_out)
+    outs.append(json_out)
 
     if ctx.attr._trace[TraceInfo].trace:
         trace = ctx.actions.declare_file("%s_trace_info.json" % ctx.label.name)
@@ -146,6 +140,7 @@ def write_licenses_info(ctx, deps, json_out):
     Returns:
       A list of License File objects for each of the license paths referenced in the json.
     """
+
     licenses_json = []
     licenses_files = []
     for dep in deps:
