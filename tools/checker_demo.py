@@ -31,11 +31,6 @@ def _load_license_data(licenses_info):
     return json.loads(licenses_file.read())
 
 
-def unique_licenses(licenses):
-  for target in licenses:
-    for lic in target.get('licenses') or []:
-      yield lic
-
 def _do_report(out, licenses):
   """Produce a report showing the set of licenses being used.
 
@@ -47,13 +42,12 @@ def _do_report(out, licenses):
     0 for no restricted licenses.
   """
 
-  for target in unique_licenses(licenses):
-    for lic in target.get('licenses') or []:
-      print("lic:", lic)
-      rule = lic['rule']
-      for kind in lic['license_kinds']:
-        out.write('= %s\n  kind: %s\n' % (rule, kind['target']))
-        out.write('  conditions: %s\n' % kind['conditions'])
+  for lic in licenses:
+    print("lic:", lic)
+    rule = lic['rule']
+    for kind in lic['license_kinds']:
+      out.write('= %s\n  kind: %s\n' % (rule, kind['target']))
+      out.write('  conditions: %s\n' % kind['conditions'])
 
 
 def _check_conditions(out, licenses, allowed_conditions):
@@ -94,7 +88,7 @@ def _do_copyright_notices(out, licenses):
 
 
 def _do_licenses(out, licenses):
-  for lic in unique_licenses(licenses):
+  for lic in licenses:
     path = lic['license_text']
     with codecs.open(path, encoding='utf-8') as license_file:
       out.write('= %s\n' % path)
