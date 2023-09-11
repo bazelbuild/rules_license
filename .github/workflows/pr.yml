@@ -1,0 +1,19 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+# Cancel previous runs if a new one is started.
+concurrency:
+  group: ${{ github.ref }}-pr
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
