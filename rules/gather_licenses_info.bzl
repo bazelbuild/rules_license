@@ -72,8 +72,11 @@ def _write_licenses_info_impl(target, ctx):
 
     # Write the output file for the target
     json_out = ctx.actions.declare_file("%s_licenses_info.json" % ctx.label.name)
-    write_licenses_info(ctx, target, json_out)
+    licenses_files = write_licenses_info(ctx, target, json_out)
     outs.append(json_out)
+    json_out_full = ctx.actions.declare_file("%s_licenses_info_full.json" % ctx.label.name)
+    embed_licenses_text(ctx, json_out, licenses_files, json_out_full)
+    outs.append(json_out_full)
 
     if ctx.attr._trace[TraceInfo].trace:
         trace = ctx.actions.declare_file("%s_trace_info.json" % ctx.label.name)
@@ -94,6 +97,12 @@ gather_licenses_info_and_write = aspect(
     attr_aspects = ["*"],
     attrs = {
         "_trace": attr.label(default = "@rules_license//rules:trace_target"),
+        "_embed_licenses_text_tool": attr.label(
+            default = Label("@rules_license//tools:embed_licenses_text"),
+            executable = True,
+            allow_files = True,
+            cfg = "exec",
+        ),
     },
     provides = [OutputGroupInfo],
     requires = [gather_licenses_info],
@@ -160,6 +169,30 @@ def write_licenses_info(ctx, deps, json_out):
         content = "[\n%s\n]\n" % ",\n".join(licenses_json),
     )
     return licenses_files
+
+def embed_licenses_text(ctx, json_in, licenses_files, json_out):
+    """Reads the license text from the referenced file and attaches it to the json
+
+    Args:
+      ctx: context of the caller
+      json_in: input handle to read the JSON info
+      licenses_files: input handles for all LICENSE files
+      json_out: output handle to write the JSON info
+    """
+
+    inputs = [json_in]+licenses_files
+    outputs = [json_out]
+    args = ctx.actions.args()
+    args.add("--licenses_in", json_in.path)
+    args.add("--licenses_out", json_out.path)
+    ctx.actions.run(
+        mnemonic = "EmbedLICENSETexts",
+        progress_message = "Embedding license texts...",
+        inputs = inputs,
+        outputs = outputs,
+        executable = ctx.executable._embed_licenses_text_tool,
+        arguments = [args],
+    )
 
 def licenses_info_to_json(licenses_info):
     """Render a single LicenseInfo provider to JSON
