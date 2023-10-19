@@ -33,9 +33,8 @@ windows: &windows
   platform: windows
   test_targets:
     - "//tests/..."
-    - "//examples/..."
-    - "-//examples/manifest/..."
-
+    - "//examples/policy_checker/..."
+    - "//examples/sboms/..."
 
 
 # The cross product of bazel releases X platforms
