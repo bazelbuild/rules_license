@@ -2,8 +2,8 @@
 default_tests: &default_tests
   test_targets:
     - "//tests/..."
-    - "//examples/..."
-    - "-//examples/manifest/..."
+    - "//examples/policy_checker/..."
+    - "//examples/sboms/..."
 
 #
 # Bazel releases
