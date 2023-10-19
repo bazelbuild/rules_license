@@ -45,7 +45,6 @@ def golden_cmd_test(
         golden,  # Required
         toolchains = [],
         tools = None,
-        exec_tools = None,
         srcs = [],  # Optional
         **kwargs):  # Rest
     """Compares cmd output to golden output, passes if they are identical.
@@ -56,7 +55,6 @@ def golden_cmd_test(
       golden: The golden file to be compared.
       toolchains: List of toolchains needed to run the command, passed to genrule.
       tools: List of tools needed to run the command, passed to genrule.
-      exec_tools: List of tools needed to run the command, passed to genrule.
       srcs: List of sources needed as input to the command, passed to genrule.
       **kwargs: Any additional parameters for the generated golden_test.
     """
@@ -75,7 +73,6 @@ def golden_cmd_test(
         cmd = cmd + " > '$@'",  # Redirect to collect output
         toolchains = toolchains,
         tools = tools,
-        exec_tools = exec_tools,
         testonly = True,
     )
 
