@@ -71,7 +71,7 @@ _license_policy_check = rule(
     },
 )
 
-def license_policy_check(name, targets, policy, **kwargs):
+def license_policy_check(name, policy, targets = None, **kwargs):
     """Checks a list of targets against a policy.
 
     Args:
