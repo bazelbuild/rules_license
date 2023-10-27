@@ -88,4 +88,6 @@ def license_policy_check(name, targets, policy, **kwargs):
           policy = "//my_org/compliance/policies:mobile_application",
       )
     """
+    if "target" in kwargs:
+        targets = kwargs.pop("target")
     _license_policy_check(name = name, targets = targets, policy = policy, **kwargs)
