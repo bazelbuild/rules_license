@@ -13,29 +13,48 @@
 # limitations under the License.
 """Generate an SBOM for a target."""
 
-load("//rules_gathering:gather_packages.bzl", "packages_used")
+load("//rules_gathering:gather_packages.bzl", "gather_package_info", "packages_used")
 
-def _sbom_impl(ctx):
+def _spdx_common(ctx, target, spdx_output, _gen_spdx_tool):
     # Gather all licenses and write information to one place
+    name = "%s_info.json" % ctx.label.name
+    aspect_output = ctx.actions.declare_file(name)
 
-    # Now turn the big blob of data into something consumable.
-    outputs = [ctx.outputs.out]
+def _create_sbom(ctx, packages_used_file, spdx_output, _gen_spdx_tool):
+    """Now turn the big blob of package data into something consumable.
+
+    Might merge in rules_jvm and bzlmod lock files.
+    """
     args = ctx.actions.args()
-    inputs = [ctx.file.packages_used]
-    args.add("--packages_used", ctx.file.packages_used.path)
-    args.add("--out", ctx.outputs.out.path)
-    if ctx.attr.maven_install:
-        args.add("--maven_install", ctx.file.maven_install.path)
-        inputs.append(ctx.file.maven_install)
+    inputs = [packages_used_file]
+    outputs = [spdx_output]
+    args.add("--packages_used", packages_used_file.path)
+    args.add("--out", spdx_output.path)
+    if hasattr(ctx.attr, "bzlmod_lock"):
+        if ctx.attr.bzlmod_lock:
+            args.add("--bzlmod_lock", ctx.file.bzlmod_lock.path)
+            inputs.append(ctx.file.bzlmod_lock)
+    if hasattr(ctx.attr, "maven_install"):
+        if ctx.attr.maven_install:
+            args.add("--maven_install", ctx.file.maven_install.path)
+            inputs.append(ctx.file.maven_install)
     ctx.actions.run(
         mnemonic = "CreateSBOM",
         progress_message = "Creating SBOM for %s" % ctx.label,
+        arguments = [args],
         inputs = inputs,
         outputs = outputs,
-        executable = ctx.executable._sbom_generator,
-        arguments = [args],
+        executable = _gen_spdx_tool,
     )
-    return [DefaultInfo(files = depset(outputs))]
+    return [
+        DefaultInfo(files = depset(outputs)),
+        OutputGroupInfo(
+            spdx = depset(outputs),
+        ),
+    ]
+
+def _sbom_impl(ctx):
+    _create_sbom(ctx, ctx.file.packages_used, ctx.outputs.out, ctx.executable._sbom_generator)
 
 _sbom = rule(
     implementation = _sbom_impl,
@@ -51,6 +70,10 @@ _sbom = rule(
             allow_files = True,
             cfg = "exec",
         ),
+        "bzlmod_lock": attr.label(
+            mandatory = False,
+            allow_single_file = True,
+        ),
         "maven_install": attr.label(
             mandatory = False,
             allow_single_file = True,
@@ -58,10 +81,11 @@ _sbom = rule(
     },
 )
 
-def sbom(
+def sbom_spdx(
         name,
         target,
         out = None,
+        bzlmod_lock = None,
         maven_install = "//:maven_install.json"):
     """Wrapper for sbom rule.
 
@@ -83,5 +107,39 @@ def sbom(
         name = name,
         out = out,
         packages_used = ":" + packages + ".json",
+        bzlmod_lock = bzlmod_lock,
         maven_install = maven_install,
     )
+
+def _gen_spdx_impl(target, ctx):
+    """
+    spdx_output = ctx.actions.declare_file("%s.spdx.json" % ctx.label.name)
+
+    name = "%s_info.json" % ctx.label.name
+    aspect_output = ctx.actions.declare_file(name)
+
+    # ... possibly traverse output from aspect and assemble it for writing...
+    info = target[TransitiveLicensesInfo]
+
+    # If the result doesn't contain licenses, we simply return the provider
+    #if not hasattr(info, "target_under_license"):
+    #    return [OutputGroupInfo()]
+
+    content = "[\n%s\n]\n" % ",\n".join(info_to_json(info))
+    """
+
+    #return _spdx_common(ctx, target, spdx_output, ctx.executable._gen_spdx)
+    return _create_sbom(ctx, ctx.file.packages_used, ctx.output.out, ctx.executable._sbom_generator)
+
+
+gen_sbom_spdx = aspect(
+    implementation = _gen_spdx_impl,
+    requires = [gather_package_info],
+    attrs = {
+        "_gen_spdx": attr.label(
+            default = Label("//tools/sbom:write_sbom_internal"),
+            executable = True,
+            cfg = "exec",
+        ),
+    },
+)

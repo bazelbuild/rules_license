@@ -222,11 +222,18 @@ gather_package_info = aspect(
 )
 
 def _packages_used_impl(ctx):
+    write_packages_info(
+        ctx,
+        top_level_target = ctx.attr.target,
+        transitive_package_info = ctx.attr.target[TransitivePackageInfo],
+        output = ctx.outputs.out,
+    )
+
+def write_packages_info(ctx, top_level_target, transitive_package_info, output):
     """Write the TransitivePackageInfo as JSON."""
-    tpi = ctx.attr.target[TransitivePackageInfo]
-    licenses_json = licenses_to_json(tpi.license_info)
-    package_info_json = package_infos_to_json(tpi.package_info)
-    packages = labels_to_json(tpi.packages.to_list())
+    licenses_json = licenses_to_json(transitive_package_info.license_info)
+    package_info_json = package_infos_to_json(transitive_package_info.package_info)
+    packages = labels_to_json(transitive_package_info.packages.to_list())
 
     # Create a single dict of all the info.
     main_template = """{{
@@ -237,13 +244,13 @@ def _packages_used_impl(ctx):
     \n}}"""
 
     content = main_template.format(
-        top_level_target = ctx.attr.target.label,
+        top_level_target = top_level_target.label,
         licenses = licenses_json,
         package_info = package_info_json,
         packages = packages,
     )
     ctx.actions.write(
-        output = ctx.outputs.out,
+        output = output,
         content = content,
     )
 

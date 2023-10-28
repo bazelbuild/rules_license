@@ -19,6 +19,7 @@ Inputs:
   - the output of packages_used. This is a JSON block of license, package_info
     and other declarations, plus a list of all remote packages referenced.
   - the maven lock file (maven_install.json)
+  - the bzlmod lock file (MODULE.bazel.lock)
   - FUTURE: other packgage lock files
   - FUTURE: a user provided override of package URL to corrected information
 
@@ -202,6 +203,9 @@ def maven_install_to_packages(maven_install: dict) -> dict:
         ret[bazel_name] = tmp
   return ret
 
+def bzlmod_lock_to_packages(bzlmod_lock: dict) -> dict:
+  pass
+
 
 def main() -> None:
   parser = argparse.ArgumentParser(
@@ -216,6 +220,12 @@ def main() -> None:
       help="JSON list of transitive package data for a target",
   )
   parser.add_argument(
+      "--bzlmod_lock",
+      required=False,
+      default="",
+      help="bzlmod lock file",
+  )
+  parser.add_argument(
       "--maven_install",
       required=False,
       default="",
@@ -225,6 +235,13 @@ def main() -> None:
 
   with open(opts.packages_used, "rt", encoding="utf-8") as inp:
     package_info = json.loads(inp.read())
+
+  if opts.bzlmod_lock:
+    with open(opts.bzlmod_lock, "rt", encoding="utf-8") as inp:
+      bzlmod_lock = json.loads(inp.read())
+      bzlmod_packages = bzlmod_lock_to_packages(bzlmod_lock)
+      # Useful for debugging
+
 
   maven_packages = None
   if opts.maven_install:
