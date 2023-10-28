@@ -227,7 +227,7 @@ gather_metadata_info_and_write(<a href="#gather_metadata_info_and_write-name">na
 Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
 
     Usage:
-      bazel build //some:target           --aspects=@rules_license//rules:gather_metadata_info.bzl%gather_metadata_info_and_write
+      bazel build //some:target           --aspects=@rules_license//rules_gathering:gather_metadata.bzl%gather_metadata_info_and_write
           --output_groups=licenses
     
 
