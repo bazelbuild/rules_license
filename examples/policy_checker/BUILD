@@ -47,7 +47,7 @@ license_policy(
 license_policy_check(
     name = "check_server",
     policy = ":production_service",
-    target = "//examples/src:my_server",
+    targets = ["//examples/src:my_server"],
 )
 
 
@@ -59,5 +59,5 @@ license_policy_check(
     tags = [
         "manual",
     ],
-    target = "//examples/src:my_violating_server",
+    targets = ["//examples/src:my_violating_server"],
 )
