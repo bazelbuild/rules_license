@@ -20,61 +20,14 @@ This is only a demonstration. It will be replaced with other tools.
 
 import argparse
 import codecs
-import datetime
-import getpass
 import json
-
+import sbom
 
 TOOL = 'https//github.com/bazelbuild/rules_license/tools:write_sbom'
 
 def _load_package_data(package_info):
   with codecs.open(package_info, encoding='utf-8') as inp:
     return json.loads(inp.read())
-
-def _write_sbom_header(out, package):
-  header = [
-    'SPDXVersion: SPDX-2.2',
-    'DataLicense: CC0-1.0',
-    'SPDXID: SPDXRef-DOCUMENT',
-    'DocumentName: %s' % package,
-    # TBD
-    # 'DocumentNamespace: https://swinslow.net/spdx-examples/example1/hello-v3
-    'Creator: Person: %s' % getpass.getuser(),
-    'Creator: Tool: %s' % TOOL,
-    datetime.datetime.utcnow().strftime('Created: %Y-%m-%d-%H:%M:%SZ'),
-    '',
-    '##### Package: %s' % package,
-  ]
-  out.write('\n'.join(header))
-
-
-
-def _write_sbom(out, packages):
-  """Produce a basic SBOM
-
-  Args:
-    out: file object to write to
-    packages: package metadata. A big blob of JSON.
-  """
-  for p in packages:
-    name = p.get('package_name') or '<unknown>'
-    out.write('\n')
-    out.write('SPDXID: "%s"\n' % name)
-    out.write('  name: "%s"\n' % name)
-    if p.get('package_version'):
-      out.write('  versionInfo: "%s"\n' % p['package_version'])
-    # IGNORE_COPYRIGHT: Not a copyright notice. It is a variable holding one.
-    cn = p.get('copyright_notice')
-    if cn:
-      out.write('  copyrightText: "%s"\n' % cn)
-    kinds = p.get('license_kinds')
-    if kinds:
-      out.write('  licenseDeclared: "%s"\n' %
-                ','.join([k['name'] for k in kinds]))
-    url = p.get('package_url')
-    if url:
-      out.write('  downloadLocation: %s\n' % url)
-
 
 def main():
   parser = argparse.ArgumentParser(
@@ -106,11 +59,10 @@ def main():
     else:
       all[pi['bazel_package']] = pi
 
-  err = 0
   with codecs.open(args.out, mode='w', encoding='utf-8') as out:
-    _write_sbom_header(out, package=top_level_target)
-    _write_sbom(out, all.values())
-  return err
+    sbom_writer = sbom.SBOMWriter(TOOL, out)
+    sbom_writer.write_header(package=top_level_target)
+    sbom_writer.write_packages(packages=all.values())
 
 
 if __name__ == '__main__':
