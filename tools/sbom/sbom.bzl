@@ -13,7 +13,13 @@
 # limitations under the License.
 """Generate an SBOM for a target."""
 
-load("//rules_gathering:gather_packages.bzl", "gather_package_info", "packages_used")
+load(
+    "//rules_gathering:gather_packages.bzl",
+    "gather_package_info",
+    "packages_used",
+    "write_packages_info",
+    "TransitivePackageInfo"
+)
 
 def _spdx_common(ctx, target, spdx_output, _gen_spdx_tool):
     # Gather all licenses and write information to one place
@@ -49,11 +55,12 @@ def _create_sbom(ctx, packages_used_file, spdx_output, _gen_spdx_tool):
     return [
         DefaultInfo(files = depset(outputs)),
         OutputGroupInfo(
-            spdx = depset(outputs),
+            sbom_spdx = depset(outputs),
         ),
     ]
 
 def _sbom_impl(ctx):
+    print("TOAST1")
     _create_sbom(ctx, ctx.file.packages_used, ctx.outputs.out, ctx.executable._sbom_generator)
 
 _sbom = rule(
@@ -111,33 +118,29 @@ def sbom_spdx(
         maven_install = maven_install,
     )
 
-def _gen_spdx_impl(target, ctx):
-    """
+def _gen_sbom_spdx_impl(target, ctx):
+    print("TOAST")
+    info_aspect_output = ctx.actions.declare_file("%s_info.json" % ctx.label.name)
+    # traverse output from aspect and assemble it for writing...
+    write_packages_info(
+        ctx,
+        top_level_target = target,
+        transitive_package_info = target[TransitivePackageInfo],
+        output = info_aspect_output,
+    )
     spdx_output = ctx.actions.declare_file("%s.spdx.json" % ctx.label.name)
-
-    name = "%s_info.json" % ctx.label.name
-    aspect_output = ctx.actions.declare_file(name)
-
-    # ... possibly traverse output from aspect and assemble it for writing...
-    info = target[TransitiveLicensesInfo]
-
-    # If the result doesn't contain licenses, we simply return the provider
-    #if not hasattr(info, "target_under_license"):
-    #    return [OutputGroupInfo()]
-
-    content = "[\n%s\n]\n" % ",\n".join(info_to_json(info))
-    """
-
-    #return _spdx_common(ctx, target, spdx_output, ctx.executable._gen_spdx)
-    return _create_sbom(ctx, ctx.file.packages_used, ctx.output.out, ctx.executable._sbom_generator)
+    print("WRITE TO", spdx_output.path)
+    return _create_sbom(ctx, info_aspect_output, spdx_output, ctx.executable._gen_spdx)
 
 
 gen_sbom_spdx = aspect(
-    implementation = _gen_spdx_impl,
+    doc = """Generates an SPDX sbom for a target.""",
+    implementation = _gen_sbom_spdx_impl,
     requires = [gather_package_info],
     attrs = {
         "_gen_spdx": attr.label(
             default = Label("//tools/sbom:write_sbom_internal"),
+            allow_files = True,
             executable = True,
             cfg = "exec",
         ),

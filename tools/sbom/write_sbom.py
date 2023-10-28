@@ -243,7 +243,7 @@ def main() -> None:
       # Useful for debugging
 
 
-  maven_packages = None
+  maven_packages = {}
   if opts.maven_install:
     with open(opts.maven_install, "rt", encoding="utf-8") as inp:
       maven_install = json.loads(inp.read())
