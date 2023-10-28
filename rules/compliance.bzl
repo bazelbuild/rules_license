@@ -67,8 +67,10 @@ def _check_license_impl(ctx):
         executable = ctx.executable._checker,
         arguments = [args],
     )
-    outputs.append(licenses_file)  # also make the json file available.
-    return [DefaultInfo(files = depset(outputs))]
+    return [
+        DefaultInfo(files = depset(outputs)),
+        OutputGroupInfo(licenses_file = depset([licenses_file])),
+    ]
 
 _check_license = rule(
     implementation = _check_license_impl,
