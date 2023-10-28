@@ -21,7 +21,7 @@ This is only a demonstration. It will be replaced with other tools.
 import argparse
 import codecs
 import json
-import sbom
+from tools import sbom
 import subprocess
 import os
 
