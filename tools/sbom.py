@@ -25,16 +25,12 @@ class SBOMWriter:
         self.out.write('\n'.join(header))
     
     def write_packages(self, packages):
-        """Produce a basic SBOM
-        Args:
-            out: file object to write to
-            packages: package metadata. A big blob of JSON.
-        """
         for p in packages:
             name = p.get('package_name') or '<unknown>'
             self.out.write('\n')
             self.out.write('SPDXID: "%s"\n' % name)
             self.out.write('  name: "%s"\n' % name)
+
             if p.get('package_version'):
                 self.out.write('  versionInfo: "%s"\n' % p['package_version'])
             
