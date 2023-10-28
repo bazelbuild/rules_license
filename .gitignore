@@ -3,3 +3,4 @@ bazel-bin
 bazel-out
 bazel-rules_license
 bazel-testlogs
+MODULE.bazel.lock
