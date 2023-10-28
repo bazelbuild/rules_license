@@ -88,6 +88,16 @@ def create_sbom(package_info: dict, maven_packages: dict) -> dict:
     }
 
     have_maven = None
+    # This is too brittle by any measure
+    if pkg.startswith("@@rules_jvm_external~"):
+      # with bzlmod the format is
+      # "@@rules_jvm_external~5.2~maven~maven//:com_google_errorprone_error_prone_type_annotations_2_23_0_extension",
+      # but we need com_google_errorprone_error_prone_type_annotations_2_23_0[_extension]
+      parts = pkg.split("~")
+      if len(parts) >= 3:
+        print("==>", pkg, parts[3])
+        pkg = parts[3]
+
     if pkg.startswith("@maven//:"):
       have_maven = maven_packages.get(pkg[9:])
     elif pkg.endswith(magic_file_suffix):
@@ -101,7 +111,8 @@ def create_sbom(package_info: dict, maven_packages: dict) -> dict:
       pi["downloadLocation"] = have_maven["url"]
     else:
       # TODO(aiuto): Do something better for this case.
-      print("MISSING ", pkg)
+      # print("MISSING ", pkg)
+      pass
 
     packages.append(pi)
     relationships.append({
@@ -185,6 +196,8 @@ def maven_install_to_packages(maven_install: dict) -> dict:
       tmp["url"] = url
       bazel_name = maven_to_bazel(name) + "_" + maven_to_bazel(sub_version)
       ret[bazel_name] = tmp
+      # bzlmod adds this
+      ret[bazel_name + "_extension"] = tmp
       if arch == "jar":
         ret[bazel_name] = tmp
   return ret
@@ -220,6 +233,7 @@ def main() -> None:
       maven_packages = maven_install_to_packages(maven_install)
       # Useful for debugging
       # print(json.dumps(maven_packages, indent=2))
+      # print("======================")
 
   sbom = create_sbom(package_info, maven_packages)
   with open(opts.out, "w", encoding="utf-8") as out:
