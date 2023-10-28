@@ -40,7 +40,7 @@ py_binary(
 
 py_binary(
     name = "write_sbom",
-    srcs = ["write_sbom.py"],
+    srcs = ["write_sbom.py", "sbom.py"],
     python_version = "PY3",
     visibility = ["//visibility:public"],
 )
