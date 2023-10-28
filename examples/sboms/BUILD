@@ -7,7 +7,7 @@ load("@rules_license//rules_gathering:generate_sbom.bzl", "generate_sbom")
 # which generates the SBOMs
 # See the output in bazel-bin/examples/sboms/write_sbom.txt
 generate_sbom(
-    name = "write_sbom_sbom",
+    name = "write_sbom",
     out = "write_sbom.txt",
     deps = ["//tools:write_sbom"],
 )
