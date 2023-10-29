@@ -31,3 +31,13 @@ implementation.
 
 This project follows
 [Google's Open Source Community Guidelines](https://opensource.google/conduct/).
+
+## Releasing
+
+To perform a release, simply tag the commit you wish to release, for example:
+
+```
+rules_license$ git fetch
+rules_license$ git tag 1.2.3 origin/main
+rules_license$ git push origin 1.2.3
+```

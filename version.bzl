@@ -13,4 +13,9 @@
 # limitations under the License.
 """The version of rules_license."""
 
-version = "0.0.7"
+# This is automagically replace by git during git archive using `git export-subst`
+# See https://git-scm.com/docs/git-archive/2.29.0#Documentation/git-archive.txt-export-subst
+_VERSION_PRIVATE = "$Format:%(describe:tags=true)$"
+
+# When using rules_license from source rather than from a release artifact, export a placeholder value
+version = "0.0.0-unreleased" if _VERSION_PRIVATE.startswith("$Format") else _VERSION_PRIVATE
