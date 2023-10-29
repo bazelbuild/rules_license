@@ -48,17 +48,3 @@ exports_files(
     ]),
     visibility = ["//visibility:public"],
 )
-
-filegroup(
-    name = "standard_package",
-    srcs = glob([
-        "*.bzl",
-        "*.md",
-    ]) + [
-        "MODULE.bazel",
-        "BUILD",
-        "LICENSE",
-        "WORKSPACE.bzlmod",
-    ],
-    visibility = ["//distro:__pkg__"],
-)

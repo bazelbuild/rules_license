@@ -61,11 +61,6 @@ package(
 
 licenses(["notice"])
 
-filegroup(
-    name = "standard_package",
-    srcs = ["BUILD"],
-)
-
 license_kind(
     name = "0BSD",
     conditions = [],

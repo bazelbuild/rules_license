@@ -26,17 +26,6 @@ load("//:version.bzl", "version")
 
 package(default_package_metadata = ["//:license", "//:package_info"])
 
-filegroup(
-    name = "standard_package",
-    srcs = [
-        "BUILD",
-    ] + glob([
-        "*.bzl",
-        "*.py",
-    ]),
-    visibility = ["//distro:__pkg__"],
-)
-
 exports_files(
     glob([
         "*.bzl",
@@ -91,8 +80,8 @@ bzl_library(
     name = "lib_of_everything",
     srcs = [
         "//:version.bzl",
-        "//rules:standard_package",
-        "//rules_gathering:standard_package",
+        "//rules:bzl",
+        "//rules_gathering:bzl",
     ],
     visibility = ["//visibility:public"],
 )
