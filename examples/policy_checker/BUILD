@@ -3,7 +3,10 @@
 load("@rules_license//examples/policy_checker:license_policy.bzl", "license_policy")
 load("@rules_license//examples/policy_checker:license_policy_check.bzl", "license_policy_check")
 
-package(default_package_metadata = ["//:license", "//:package_info"])
+package(default_package_metadata = [
+    "//:license",
+    "//:package_info",
+])
 
 # license_policy rules generally appear in a central location per workspace. That
 # should be access controlled by the policy team.
@@ -49,7 +52,6 @@ license_policy_check(
     policy = ":production_service",
     targets = ["//examples/src:my_server"],
 )
-
 
 # This is marked manual, so bazel test ... does not fail. Try it yourself with
 #   bazel build :check_violating_server

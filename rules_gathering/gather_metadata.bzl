@@ -35,9 +35,9 @@ def _strip_null_repo(label):
     The is to make str(label) compatible between bazel 5.x and 6.x
     """
     s = str(label)
-    if s.startswith('@//'):
+    if s.startswith("@//"):
         return s[1:]
-    elif s.startswith('@@//'):
+    elif s.startswith("@@//"):
         return s[2:]
     return s
 
@@ -51,7 +51,8 @@ def _gather_metadata_info_impl(target, ctx):
         ctx,
         TransitiveMetadataInfo,
         [ExperimentalMetadataInfo, PackageInfo],
-        should_traverse)
+        should_traverse,
+    )
 
 gather_metadata_info = aspect(
     doc = """Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.""",
@@ -249,7 +250,7 @@ def metadata_info_to_json(metadata_info):
                 package_url = license.package_url,
                 package_version = license.package_version,
                 label = _strip_null_repo(license.label),
-                bazel_package =  _bazel_package(license.label),
+                bazel_package = _bazel_package(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
 
@@ -280,17 +281,18 @@ def metadata_info_to_json(metadata_info):
         if mi.type == "package_info":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
-                bazel_package =  _bazel_package(mi.label),
+                bazel_package = _bazel_package(mi.label),
                 package_name = mi.package_name,
                 package_url = mi.package_url,
                 package_version = mi.package_version,
             ))
+
         # experimental: Support the ExperimentalMetadataInfo bag of data
         # WARNING: Do not depend on this. It will change without notice.
         if mi.type == "package_info_alt":
             all_packages.append(package_info_template.format(
                 label = _strip_null_repo(mi.label),
-                bazel_package =  _bazel_package(mi.label),
+                bazel_package = _bazel_package(mi.label),
                 # data is just a bag, so we need to use get() or ""
                 package_name = mi.data.get("package_name") or "",
                 package_url = mi.data.get("package_url") or "",

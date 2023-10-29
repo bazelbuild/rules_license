@@ -19,6 +19,7 @@ to change at any release.
 
 LicensedTargetInfo = provider(
     doc = """Lists the licenses directly used by a single target.""",
+    # buildifier: disable=attr-licenses
     fields = {
         "target_under_license": "Label: The target label",
         "licenses": "list(label of a license rule)",
@@ -28,6 +29,7 @@ LicensedTargetInfo = provider(
 def licenses_info():
     return provider(
         doc = """The transitive set of licenses used by a target.""",
+        # buildifier: disable=attr-licenses
         fields = {
             "target_under_license": "Label: The top level target label.",
             "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
@@ -41,12 +43,12 @@ TransitiveLicensesInfo = licenses_info()
 
 TransitiveMetadataInfo = provider(
     doc = """The transitive set of licenses used by a target.""",
+    # buildifier: disable=attr-licenses
     fields = {
         "top_level_target": "Label: The top level target label we are examining.",
         "other_metadata": "depset(ExperimentalMetatdataInfo)",
         "licenses": "depset(LicenseInfo)",
         "package_info": "depset(PackageInfo)",
-
         "target_under_license": "Label: A target which will be associated with some licenses.",
         "deps": "depset(LicensedTargetInfo): The transitive list of dependencies that have licenses.",
         "traces": "list(string) - diagnostic for tracing a dependency relationship to a target.",

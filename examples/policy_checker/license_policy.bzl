@@ -22,7 +22,7 @@ application type (e.g. production_server, mobile_application, ...)
 
 load(
     "@rules_license//examples/policy_checker:license_policy_provider.bzl",
-    "LicensePolicyInfo"
+    "LicensePolicyInfo",
 )
 
 def _license_policy_impl(ctx):

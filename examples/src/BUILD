@@ -18,7 +18,10 @@ load("@rules_license//rules:compliance.bzl", "check_license")
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
 
 package(
-    default_package_metadata = ["//:license", "//:package_info"],
+    default_package_metadata = [
+        "//:license",
+        "//:package_info",
+    ],
     default_visibility = ["//examples:__subpackages__"],
 )
 

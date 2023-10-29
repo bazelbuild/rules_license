@@ -16,8 +16,8 @@
 load("@rules_license//rules:license.bzl", "license")
 
 package(
-   default_applicable_licenses = [":license"],
-   default_visibility = ["//examples:__subpackages__"],
+    default_applicable_licenses = [":license"],
+    default_visibility = ["//examples:__subpackages__"],
 )
 
 # The default license for an entire package is typically named "license".

@@ -16,7 +16,6 @@
 load(
     "@rules_license//rules:gather_licenses_info.bzl",
     "gather_licenses_info",
-    "gather_licenses_info_and_write",
     "write_licenses_info",
 )
 load(
@@ -157,6 +156,7 @@ def get_licenses_mapping(deps, warn = False):
         if type(lic.license_text) == "File":
             mappings[lic.license_text] = lic.package_name
         elif warn:
+            # buildifier: disable=print
             print("Legacy license %s not included, rule needs updating" % lic.license_text)
 
     return mappings

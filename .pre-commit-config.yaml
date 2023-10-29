@@ -1,0 +1,12 @@
+# See CONTRIBUTING.md for instructions.
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  # Check formatting and lint for starlark code
+  - repo: https://github.com/keith/pre-commit-buildifier
+    rev: 6.3.3
+    hooks:
+      - id: buildifier
+        args: ["-mode=fix", "-lint=fix"]
+      - id: buildifier-lint

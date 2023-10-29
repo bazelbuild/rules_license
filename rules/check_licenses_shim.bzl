@@ -14,7 +14,7 @@
 """This module provides a custom Starlark rule used to create wrappers for targets that
 can have blaze build --check_licenses executed against them."""
 
-def _shim_rule_impl(ctx):
+def _shim_rule_impl(_):
     # This rule doesn't need to return anything. It only exists to propagate the dependency supplied
     # by the label_flag
     return []

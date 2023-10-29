@@ -1,6 +1,5 @@
-load(":android_mock.bzl", "android_binary", "android_library")
 load("@rules_license//tools:test_helpers.bzl", "golden_cmd_test")
-
+load(":android_mock.bzl", "android_binary", "android_library")
 
 # These two rules today capture what an android_binary would look like.
 # This rule represents the Android specific code that displays licenses
@@ -13,7 +12,7 @@ android_library(
         "license_display.sh",
     ],
     data = [
-      "@rules_license//distro:distro",
+        "@rules_license//distro",
     ],
 )
 
@@ -25,10 +24,10 @@ android_library(
 android_binary(
     name = "main",
     srcs = ["main.sh"],
-    deps = [
-    ],
     data = [
         ":licenses",
+    ],
+    deps = [
     ],
 )
 
@@ -36,6 +35,6 @@ golden_cmd_test(
     name = "main_test",
     srcs = [],
     cmd = "$(location :main)",
-    tools = [":main"],
     golden = "main_golden.txt",
+    tools = [":main"],
 )
