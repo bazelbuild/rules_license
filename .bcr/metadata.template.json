@@ -1,0 +1,17 @@
+{
+  "homepage": "https://github.com/bazelbuild/rules_license",
+  "maintainers": [
+    {
+      "github": "aiuto",
+      "name": "Tony Aiuto"
+    },
+    {
+      "email": "alex@aspect.dev",
+      "github": "alexeagle",
+      "name": "Alex Eagle"
+    }
+  ],
+  "repository": ["github:bazelbuild/rules_license"],
+  "versions": [],
+  "yanked_versions": {}
+}
