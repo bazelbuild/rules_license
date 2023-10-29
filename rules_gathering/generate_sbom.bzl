@@ -16,7 +16,6 @@
 load(
     "@rules_license//rules_gathering:gather_metadata.bzl",
     "gather_metadata_info",
-    "gather_metadata_info_and_write",
     "write_metadata_info",
 )
 load(

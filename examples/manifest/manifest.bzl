@@ -50,9 +50,9 @@ def get_licenses_mapping(deps, warn = False):
         if type(lic.license_text) == "File":
             mappings[lic.license_text] = lic.package_name
         elif warn:
+            # buildifier: disable=print
             print("Legacy license %s not included, rule needs updating" % lic.license_text)
     return mappings
-
 
 def _manifest_impl(ctx):
     # Gather all licenses and make it available as deps for downstream rules
@@ -86,4 +86,3 @@ def manifest(name, deps, out = None, **kwargs):
     if not out:
         out = name + ".manifest"
     _manifest(name = name, deps = deps, out = out, **kwargs)
-

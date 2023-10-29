@@ -21,10 +21,11 @@ How to:
 
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load("@io_bazel_stardoc//stardoc:stardoc.bzl", "stardoc")
-load("@rules_python//python:defs.bzl", "py_library")
-load("//:version.bzl", "version")
 
-package(default_package_metadata = ["//:license", "//:package_info"])
+package(default_package_metadata = [
+    "//:license",
+    "//:package_info",
+])
 
 filegroup(
     name = "standard_package",
@@ -50,18 +51,18 @@ exports_files(
 # Must put macro wrapped rules after their wrapper
 # buildifier: leave-alone, do not sort
 ORDER = [
-    ("license",         "//rules:license.bzl"),
-    ("_license",        "//rules:license.bzl"),
-    ("license_kind",    "//rules:license_kind.bzl"),
-    ("_license_kind",   "//rules:license_kind.bzl"),
-    ("package_info",    "//rules:package_info.bzl"),
-    ("_package_info",   "//rules:package_info.bzl"),
-    ("LicenseInfo",     "//rules:providers.bzl"),
+    ("license", "//rules:license.bzl"),
+    ("_license", "//rules:license.bzl"),
+    ("license_kind", "//rules:license_kind.bzl"),
+    ("_license_kind", "//rules:license_kind.bzl"),
+    ("package_info", "//rules:package_info.bzl"),
+    ("_package_info", "//rules:package_info.bzl"),
+    ("LicenseInfo", "//rules:providers.bzl"),
     ("LicenseKindInfo", "//rules:providers.bzl"),
-    ("PackageInfo",     "//rules:providers.bzl"),
-    ("gather_metadata_info",           "//rules_gathering:gather_metadata.bzl"),
+    ("PackageInfo", "//rules:providers.bzl"),
+    ("gather_metadata_info", "//rules_gathering:gather_metadata.bzl"),
     ("gather_metadata_info_and_write", "//rules_gathering:gather_metadata.bzl"),
-    ("trace",           "//rules_gathering:trace.bzl"),
+    ("trace", "//rules_gathering:trace.bzl"),
 ]
 
 genrule(

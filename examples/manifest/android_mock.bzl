@@ -1,9 +1,9 @@
-load("manifest.bzl", "manifest")
-
 """This is a proof of concept to show how to modify a macro definition to
 create a sub-graph allowing for build time injection of license information. We
 use Android-inspired rule names since these are a likely candidate for this
 sort of injection."""
+
+load("manifest.bzl", "manifest")
 
 def android_library(name, **kwargs):
     # This is an approximation for demo purposes.
@@ -21,6 +21,7 @@ def android_library(name, **kwargs):
         **kwargs
     )
 
+# buildifier: disable=function-docstring
 def android_binary(name, **kwargs):
     # Same observation about not being sloppy with mapping deps, but I think the only important attribute
     # in android_binary is deps, but need to double-check.

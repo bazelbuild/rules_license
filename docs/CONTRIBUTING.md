@@ -31,3 +31,9 @@ implementation.
 
 This project follows
 [Google's Open Source Community Guidelines](https://opensource.google/conduct/).
+
+## Formatting and linting
+
+We recommend that you install [pre-commit](https://pre-commit.com) so that your code is automatically
+formatted when you `git commit`.
+We may enforce that code is formatted and/or lint-free in our CI at some point.

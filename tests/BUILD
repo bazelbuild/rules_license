@@ -113,8 +113,8 @@ py_test(
     name = "hello_licenses_test",
     srcs = ["hello_licenses_test.py"],
     data = [
-        ":hello_licenses.json",
         ":hello_cc_copyrights.txt",
+        ":hello_licenses.json",
     ],
     python_version = "PY3",
     deps = [
@@ -139,11 +139,10 @@ check_license(
     ],
 )
 
-
 license(
     name = "license_with_generated_text",
-    license_text = ":created_license",
     license_kinds = [":generic_notice_license"],
+    license_text = ":created_license",
 )
 
 genrule(
@@ -151,4 +150,3 @@ genrule(
     outs = ["something.text"],
     cmd = "echo hello >$@",
 )
-

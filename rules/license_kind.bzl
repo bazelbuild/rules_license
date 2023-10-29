@@ -55,6 +55,10 @@ def license_kind(name, **kwargs):
     """Wrapper for license_kind.
 
     @wraps(_license_kind)
+
+    Args:
+        name: name of resulting _license_kind rule
+        **kwargs: additional named parameters passed to resulting _license_kind rule
     """
     if "conditions" not in kwargs:
         kwargs["conditions"] = []

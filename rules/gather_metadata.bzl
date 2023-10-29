@@ -15,6 +15,7 @@
 
 To be deleted before version 0.1.0
 """
+
 load(
     "@rules_license//rules_gathering:gather_metadata.bzl",
     _gather_metadata_info = "gather_metadata_info",

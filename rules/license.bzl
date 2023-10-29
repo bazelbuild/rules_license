@@ -16,12 +16,12 @@
 """
 
 load(
-    "@rules_license//rules:providers.bzl",
-    "LicenseKindInfo",
-)
-load(
     "@rules_license//rules:license_impl.bzl",
     "license_rule_impl",
+)
+load(
+    "@rules_license//rules:providers.bzl",
+    "LicenseKindInfo",
 )
 
 # Enable this if your organization requires the license text to be a file
@@ -67,7 +67,7 @@ _license = rule(
             doc = "A human readable version string identifying this package." +
                   " This may be used to produce an index of OSS packages used" +
                   " by an applicatation.  It should be a value that" +
-                  " increases over time, rather than a commit hash."
+                  " increases over time, rather than a commit hash.",
         ),
     },
 )

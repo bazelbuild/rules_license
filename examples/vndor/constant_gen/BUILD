@@ -72,8 +72,8 @@ py_test(
     name = "verify_licenses_test",
     srcs = ["verify_licenses_test.py"],
     data = [
-        ":generator_licenses.json",
         ":generated_code_licenses.json",
+        ":generator_licenses.json",
     ],
     python_version = "PY3",
     deps = [

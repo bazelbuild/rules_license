@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//:version.bzl", "version")
 load("@rules_pkg//pkg:pkg.bzl", "pkg_tar")
 load("@rules_pkg//pkg/releasing:defs.bzl", "print_rel_notes")
+load("//:version.bzl", "version")
 
 package(
-    default_visibility = ["//visibility:public"],
     default_applicable_licenses = ["//:license"],
+    default_visibility = ["//visibility:public"],
 )
 
 licenses(["notice"])
@@ -37,8 +37,8 @@ pkg_tar(
         "//licenses/generic:standard_package",
         "//licenses/spdx:standard_package",
         "//rules:standard_package",
-        "//rules_gathering:standard_package",
         "//rules/private:standard_package",
+        "//rules_gathering:standard_package",
         "//sample_reports:standard_package",
         "//tools:standard_package",
     ],

@@ -35,6 +35,7 @@ def _package_info_impl(ctx):
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
     )
+
     # Experimental alternate design, using a generic 'data' back to hold things
     generic_provider = ExperimentalMetadataInfo(
         type = "package_info_alt",
@@ -42,8 +43,8 @@ def _package_info_impl(ctx):
         data = {
             "package_name": ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
             "package_url": ctx.attr.package_url,
-            "package_version": ctx.attr.package_version
-        }
+            "package_version": ctx.attr.package_version,
+        },
     )
     return [provider, generic_provider]
 
@@ -64,7 +65,7 @@ _package_info = rule(
             doc = "A human readable version string identifying this package." +
                   " This may be used to produce an index of OSS packages used" +
                   " by an applicatation.  It should be a value that" +
-                  " increases over time, rather than a commit hash."
+                  " increases over time, rather than a commit hash.",
         ),
     },
 )
@@ -86,7 +87,7 @@ def package_info(
                     may be used to produce an index of OSS packages used by
                     an application.
       package_url: str The canoncial URL this package distribution was retrieved from.
-                       Note that, because of local mirroring, that might not be the 
+                       Note that, because of local mirroring, that might not be the
                        physical URL it was retrieved from.
       package_version: str A human readable name identifying version of this package.
       kwargs: other args. Most are ignored.
