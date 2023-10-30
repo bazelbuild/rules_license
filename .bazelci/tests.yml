@@ -21,9 +21,6 @@ rolling: &rolling
 ubuntu2004: &ubuntu
   platform: ubuntu2004
   <<: *default_tests
-  build_targets:
-    - "//distro:distro"
-    - "//distro:relnotes"
 
 macos: &macos
   platform: macos
@@ -74,6 +71,3 @@ tasks:
     <<: *rolling
     build_flags:
       - "--enable_bzlmod"
-    build_targets:
-      - "//distro:distro"
-      - "//distro:relnotes"
