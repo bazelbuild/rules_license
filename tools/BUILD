@@ -47,7 +47,7 @@ py_library(
 py_binary(
     name = "write_sbom",
     srcs = ["write_sbom.py"],
-    deps = [":sbom_lib"],
+    # deps = [":sbom_lib"],
     python_version = "PY3",
     visibility = ["//visibility:public"],
 )

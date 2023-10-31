@@ -85,6 +85,12 @@ license_kind(
 )
 
 license_kind(
+    name = "AdaCore-doc",
+    conditions = [],
+    url = "https://spdx.org/licenses/AdaCore-doc.html",
+)
+
+license_kind(
     name = "Adobe-2006",
     conditions = [],
     url = "https://spdx.org/licenses/Adobe-2006.html",
@@ -94,6 +100,12 @@ license_kind(
     name = "Adobe-Glyph",
     conditions = [],
     url = "https://spdx.org/licenses/Adobe-Glyph.html",
+)
+
+license_kind(
+    name = "Adobe-Utopia",
+    conditions = [],
+    url = "https://spdx.org/licenses/Adobe-Utopia.html",
 )
 
 license_kind(
@@ -301,6 +313,18 @@ license_kind(
 )
 
 license_kind(
+    name = "ASWF-Digital-Assets-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/ASWF-Digital-Assets-1.0.html",
+)
+
+license_kind(
+    name = "ASWF-Digital-Assets-1.1",
+    conditions = [],
+    url = "https://spdx.org/licenses/ASWF-Digital-Assets-1.1.html",
+)
+
+license_kind(
     name = "Baekmuk",
     conditions = [],
     url = "https://spdx.org/licenses/Baekmuk.html",
@@ -322,6 +346,12 @@ license_kind(
     name = "Beerware",
     conditions = [],
     url = "https://spdx.org/licenses/Beerware.html",
+)
+
+license_kind(
+    name = "Bitstream-Charter",
+    conditions = [],
+    url = "https://spdx.org/licenses/Bitstream-Charter.html",
 )
 
 license_kind(
@@ -355,9 +385,21 @@ license_kind(
 )
 
 license_kind(
+    name = "Boehm-GC",
+    conditions = [],
+    url = "https://spdx.org/licenses/Boehm-GC.html",
+)
+
+license_kind(
     name = "Borceux",
     conditions = [],
     url = "https://spdx.org/licenses/Borceux.html",
+)
+
+license_kind(
+    name = "Brian-Gladman-3-Clause",
+    conditions = [],
+    url = "https://spdx.org/licenses/Brian-Gladman-3-Clause.html",
 )
 
 license_kind(
@@ -415,6 +457,18 @@ license_kind(
 )
 
 license_kind(
+    name = "BSD-3-Clause-flex",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-3-Clause-flex.html",
+)
+
+license_kind(
+    name = "BSD-3-Clause-HP",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-3-Clause-HP.html",
+)
+
+license_kind(
     name = "BSD-3-Clause-LBNL",
     conditions = [],
     url = "https://spdx.org/licenses/BSD-3-Clause-LBNL.html",
@@ -457,6 +511,12 @@ license_kind(
 )
 
 license_kind(
+    name = "BSD-3-Clause-Sun",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-3-Clause-Sun.html",
+)
+
+license_kind(
     name = "BSD-4-Clause",
     conditions = [],
     url = "https://spdx.org/licenses/BSD-4-Clause.html",
@@ -475,6 +535,36 @@ license_kind(
 )
 
 license_kind(
+    name = "BSD-4.3RENO",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-4.3RENO.html",
+)
+
+license_kind(
+    name = "BSD-4.3TAHOE",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-4.3TAHOE.html",
+)
+
+license_kind(
+    name = "BSD-Advertising-Acknowledgement",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-Advertising-Acknowledgement.html",
+)
+
+license_kind(
+    name = "BSD-Attribution-HPND-disclaimer",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-Attribution-HPND-disclaimer.html",
+)
+
+license_kind(
+    name = "BSD-Inferno-Nettverk",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-Inferno-Nettverk.html",
+)
+
+license_kind(
     name = "BSD-Protection",
     conditions = [],
     url = "https://spdx.org/licenses/BSD-Protection.html",
@@ -484,6 +574,12 @@ license_kind(
     name = "BSD-Source-Code",
     conditions = [],
     url = "https://spdx.org/licenses/BSD-Source-Code.html",
+)
+
+license_kind(
+    name = "BSD-Systemics",
+    conditions = [],
+    url = "https://spdx.org/licenses/BSD-Systemics.html",
 )
 
 license_kind(
@@ -580,6 +676,12 @@ license_kind(
     name = "CC-BY-3.0-DE",
     conditions = [],
     url = "https://spdx.org/licenses/CC-BY-3.0-DE.html",
+)
+
+license_kind(
+    name = "CC-BY-3.0-IGO",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-3.0-IGO.html",
 )
 
 license_kind(
@@ -688,6 +790,12 @@ license_kind(
     name = "CC-BY-NC-SA-2.0",
     conditions = [],
     url = "https://spdx.org/licenses/CC-BY-NC-SA-2.0.html",
+)
+
+license_kind(
+    name = "CC-BY-NC-SA-2.0-DE",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-NC-SA-2.0-DE.html",
 )
 
 license_kind(
@@ -817,6 +925,12 @@ license_kind(
 )
 
 license_kind(
+    name = "CC-BY-SA-3.0-IGO",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-BY-SA-3.0-IGO.html",
+)
+
+license_kind(
     name = "CC-BY-SA-4.0",
     conditions = [],
     url = "https://spdx.org/licenses/CC-BY-SA-4.0.html",
@@ -937,9 +1051,39 @@ license_kind(
 )
 
 license_kind(
+    name = "CFITSIO",
+    conditions = [],
+    url = "https://spdx.org/licenses/CFITSIO.html",
+)
+
+license_kind(
+    name = "check-cvs",
+    conditions = [],
+    url = "https://spdx.org/licenses/check-cvs.html",
+)
+
+license_kind(
+    name = "checkmk",
+    conditions = [],
+    url = "https://spdx.org/licenses/checkmk.html",
+)
+
+license_kind(
     name = "ClArtistic",
     conditions = [],
     url = "https://spdx.org/licenses/ClArtistic.html",
+)
+
+license_kind(
+    name = "Clips",
+    conditions = [],
+    url = "https://spdx.org/licenses/Clips.html",
+)
+
+license_kind(
+    name = "CMU-Mach",
+    conditions = [],
+    url = "https://spdx.org/licenses/CMU-Mach.html",
 )
 
 license_kind(
@@ -991,6 +1135,12 @@ license_kind(
 )
 
 license_kind(
+    name = "Cornell-Lossless-JPEG",
+    conditions = [],
+    url = "https://spdx.org/licenses/Cornell-Lossless-JPEG.html",
+)
+
+license_kind(
     name = "CPAL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/CPAL-1.0.html",
@@ -1006,6 +1156,12 @@ license_kind(
     name = "CPOL-1.02",
     conditions = [],
     url = "https://spdx.org/licenses/CPOL-1.02.html",
+)
+
+license_kind(
+    name = "Cronyx",
+    conditions = [],
+    url = "https://spdx.org/licenses/Cronyx.html",
 )
 
 license_kind(
@@ -1057,6 +1213,12 @@ license_kind(
 )
 
 license_kind(
+    name = "DL-DE-ZERO-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/DL-DE-ZERO-2.0.html",
+)
+
+license_kind(
     name = "DOC",
     conditions = [],
     url = "https://spdx.org/licenses/DOC.html",
@@ -1078,6 +1240,12 @@ license_kind(
     name = "DSDP",
     conditions = [],
     url = "https://spdx.org/licenses/DSDP.html",
+)
+
+license_kind(
+    name = "dtoa",
+    conditions = [],
+    url = "https://spdx.org/licenses/dtoa.html",
 )
 
 license_kind(
@@ -1201,9 +1369,21 @@ license_kind(
 )
 
 license_kind(
+    name = "FBM",
+    conditions = [],
+    url = "https://spdx.org/licenses/FBM.html",
+)
+
+license_kind(
     name = "FDK-AAC",
     conditions = [],
     url = "https://spdx.org/licenses/FDK-AAC.html",
+)
+
+license_kind(
+    name = "Ferguson-Twofish",
+    conditions = [],
+    url = "https://spdx.org/licenses/Ferguson-Twofish.html",
 )
 
 license_kind(
@@ -1243,9 +1423,27 @@ license_kind(
 )
 
 license_kind(
+    name = "FSFULLRWD",
+    conditions = [],
+    url = "https://spdx.org/licenses/FSFULLRWD.html",
+)
+
+license_kind(
     name = "FTL",
     conditions = [],
     url = "https://spdx.org/licenses/FTL.html",
+)
+
+license_kind(
+    name = "Furuseth",
+    conditions = [],
+    url = "https://spdx.org/licenses/Furuseth.html",
+)
+
+license_kind(
+    name = "fwlw",
+    conditions = [],
+    url = "https://spdx.org/licenses/fwlw.html",
 )
 
 license_kind(
@@ -1531,6 +1729,12 @@ license_kind(
 )
 
 license_kind(
+    name = "Graphics-Gems",
+    conditions = [],
+    url = "https://spdx.org/licenses/Graphics-Gems.html",
+)
+
+license_kind(
     name = "gSOAP-1.3b",
     conditions = [],
     url = "https://spdx.org/licenses/gSOAP-1.3b.html",
@@ -1549,15 +1753,87 @@ license_kind(
 )
 
 license_kind(
+    name = "HP-1986",
+    conditions = [],
+    url = "https://spdx.org/licenses/HP-1986.html",
+)
+
+license_kind(
+    name = "HP-1989",
+    conditions = [],
+    url = "https://spdx.org/licenses/HP-1989.html",
+)
+
+license_kind(
     name = "HPND",
     conditions = [],
     url = "https://spdx.org/licenses/HPND.html",
 )
 
 license_kind(
+    name = "HPND-DEC",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-DEC.html",
+)
+
+license_kind(
+    name = "HPND-doc",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-doc.html",
+)
+
+license_kind(
+    name = "HPND-doc-sell",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-doc-sell.html",
+)
+
+license_kind(
+    name = "HPND-export-US",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-export-US.html",
+)
+
+license_kind(
+    name = "HPND-export-US-modify",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-export-US-modify.html",
+)
+
+license_kind(
+    name = "HPND-Markus-Kuhn",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-Markus-Kuhn.html",
+)
+
+license_kind(
+    name = "HPND-Pbmplus",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-Pbmplus.html",
+)
+
+license_kind(
+    name = "HPND-sell-regexpr",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-sell-regexpr.html",
+)
+
+license_kind(
     name = "HPND-sell-variant",
     conditions = [],
     url = "https://spdx.org/licenses/HPND-sell-variant.html",
+)
+
+license_kind(
+    name = "HPND-sell-variant-MIT-disclaimer",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-sell-variant-MIT-disclaimer.html",
+)
+
+license_kind(
+    name = "HPND-UC",
+    conditions = [],
+    url = "https://spdx.org/licenses/HPND-UC.html",
 )
 
 license_kind(
@@ -1579,9 +1855,21 @@ license_kind(
 )
 
 license_kind(
+    name = "IEC-Code-Components-EULA",
+    conditions = [],
+    url = "https://spdx.org/licenses/IEC-Code-Components-EULA.html",
+)
+
+license_kind(
     name = "IJG",
     conditions = [],
     url = "https://spdx.org/licenses/IJG.html",
+)
+
+license_kind(
+    name = "IJG-short",
+    conditions = [],
+    url = "https://spdx.org/licenses/IJG-short.html",
 )
 
 license_kind(
@@ -1606,6 +1894,12 @@ license_kind(
     name = "Info-ZIP",
     conditions = [],
     url = "https://spdx.org/licenses/Info-ZIP.html",
+)
+
+license_kind(
+    name = "Inner-Net-2.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/Inner-Net-2.0.html",
 )
 
 license_kind(
@@ -1657,6 +1951,12 @@ license_kind(
 )
 
 license_kind(
+    name = "JPL-image",
+    conditions = [],
+    url = "https://spdx.org/licenses/JPL-image.html",
+)
+
+license_kind(
     name = "JPNIC",
     conditions = [],
     url = "https://spdx.org/licenses/JPNIC.html",
@@ -1669,9 +1969,27 @@ license_kind(
 )
 
 license_kind(
+    name = "Kastrup",
+    conditions = [],
+    url = "https://spdx.org/licenses/Kastrup.html",
+)
+
+license_kind(
+    name = "Kazlib",
+    conditions = [],
+    url = "https://spdx.org/licenses/Kazlib.html",
+)
+
+license_kind(
     name = "KiCad-libraries-exception",
     conditions = [],
     url = "https://spdx.org/licenses/KiCad-libraries-exception.html",
+)
+
+license_kind(
+    name = "Knuth-CTAN",
+    conditions = [],
+    url = "https://spdx.org/licenses/Knuth-CTAN.html",
 )
 
 license_kind(
@@ -1690,6 +2008,12 @@ license_kind(
     name = "Latex2e",
     conditions = [],
     url = "https://spdx.org/licenses/Latex2e.html",
+)
+
+license_kind(
+    name = "Latex2e-translated-notice",
+    conditions = [],
+    url = "https://spdx.org/licenses/Latex2e-translated-notice.html",
 )
 
 license_kind(
@@ -1801,6 +2125,12 @@ license_kind(
 )
 
 license_kind(
+    name = "libutil-David-Nugent",
+    conditions = [],
+    url = "https://spdx.org/licenses/libutil-David-Nugent.html",
+)
+
+license_kind(
     name = "LiLiQ-P-1.1",
     conditions = [],
     url = "https://spdx.org/licenses/LiLiQ-P-1.1.html",
@@ -1819,15 +2149,39 @@ license_kind(
 )
 
 license_kind(
+    name = "Linux-man-pages-1-para",
+    conditions = [],
+    url = "https://spdx.org/licenses/Linux-man-pages-1-para.html",
+)
+
+license_kind(
     name = "Linux-man-pages-copyleft",
     conditions = [],
     url = "https://spdx.org/licenses/Linux-man-pages-copyleft.html",
 )
 
 license_kind(
+    name = "Linux-man-pages-copyleft-2-para",
+    conditions = [],
+    url = "https://spdx.org/licenses/Linux-man-pages-copyleft-2-para.html",
+)
+
+license_kind(
+    name = "Linux-man-pages-copyleft-var",
+    conditions = [],
+    url = "https://spdx.org/licenses/Linux-man-pages-copyleft-var.html",
+)
+
+license_kind(
     name = "Linux-OpenIB",
     conditions = [],
     url = "https://spdx.org/licenses/Linux-OpenIB.html",
+)
+
+license_kind(
+    name = "LOOP",
+    conditions = [],
+    url = "https://spdx.org/licenses/LOOP.html",
 )
 
 license_kind(
@@ -1873,9 +2227,63 @@ license_kind(
 )
 
 license_kind(
+    name = "lsof",
+    conditions = [],
+    url = "https://spdx.org/licenses/lsof.html",
+)
+
+license_kind(
+    name = "Lucida-Bitmap-Fonts",
+    conditions = [],
+    url = "https://spdx.org/licenses/Lucida-Bitmap-Fonts.html",
+)
+
+license_kind(
+    name = "LZMA-SDK-9.11-to-9.20",
+    conditions = [],
+    url = "https://spdx.org/licenses/LZMA-SDK-9.11-to-9.20.html",
+)
+
+license_kind(
+    name = "LZMA-SDK-9.22",
+    conditions = [],
+    url = "https://spdx.org/licenses/LZMA-SDK-9.22.html",
+)
+
+license_kind(
+    name = "magaz",
+    conditions = [],
+    url = "https://spdx.org/licenses/magaz.html",
+)
+
+license_kind(
     name = "MakeIndex",
     conditions = [],
     url = "https://spdx.org/licenses/MakeIndex.html",
+)
+
+license_kind(
+    name = "Martin-Birgmeier",
+    conditions = [],
+    url = "https://spdx.org/licenses/Martin-Birgmeier.html",
+)
+
+license_kind(
+    name = "McPhee-slideshow",
+    conditions = [],
+    url = "https://spdx.org/licenses/McPhee-slideshow.html",
+)
+
+license_kind(
+    name = "metamail",
+    conditions = [],
+    url = "https://spdx.org/licenses/metamail.html",
+)
+
+license_kind(
+    name = "Minpack",
+    conditions = [],
+    url = "https://spdx.org/licenses/Minpack.html",
 )
 
 license_kind(
@@ -1921,6 +2329,12 @@ license_kind(
 )
 
 license_kind(
+    name = "MIT-Festival",
+    conditions = [],
+    url = "https://spdx.org/licenses/MIT-Festival.html",
+)
+
+license_kind(
     name = "MIT-Modern-Variant",
     conditions = [],
     url = "https://spdx.org/licenses/MIT-Modern-Variant.html",
@@ -1933,15 +2347,45 @@ license_kind(
 )
 
 license_kind(
+    name = "MIT-testregex",
+    conditions = [],
+    url = "https://spdx.org/licenses/MIT-testregex.html",
+)
+
+license_kind(
+    name = "MIT-Wu",
+    conditions = [],
+    url = "https://spdx.org/licenses/MIT-Wu.html",
+)
+
+license_kind(
     name = "MITNFA",
     conditions = [],
     url = "https://spdx.org/licenses/MITNFA.html",
 )
 
 license_kind(
+    name = "MMIXware",
+    conditions = [],
+    url = "https://spdx.org/licenses/MMIXware.html",
+)
+
+license_kind(
     name = "Motosoto",
     conditions = [],
     url = "https://spdx.org/licenses/Motosoto.html",
+)
+
+license_kind(
+    name = "MPEG-SSG",
+    conditions = [],
+    url = "https://spdx.org/licenses/MPEG-SSG.html",
+)
+
+license_kind(
+    name = "mpi-permissive",
+    conditions = [],
+    url = "https://spdx.org/licenses/mpi-permissive.html",
 )
 
 license_kind(
@@ -1978,6 +2422,12 @@ license_kind(
     name = "mplus",
     conditions = [],
     url = "https://spdx.org/licenses/mplus.html",
+)
+
+license_kind(
+    name = "MS-LPL",
+    conditions = [],
+    url = "https://spdx.org/licenses/MS-LPL.html",
 )
 
 license_kind(
@@ -2083,6 +2533,12 @@ license_kind(
 )
 
 license_kind(
+    name = "NICTA-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/NICTA-1.0.html",
+)
+
+license_kind(
     name = "NIST-PD",
     conditions = [],
     url = "https://spdx.org/licenses/NIST-PD.html",
@@ -2092,6 +2548,12 @@ license_kind(
     name = "NIST-PD-fallback",
     conditions = [],
     url = "https://spdx.org/licenses/NIST-PD-fallback.html",
+)
+
+license_kind(
+    name = "NIST-Software",
+    conditions = [],
+    url = "https://spdx.org/licenses/NIST-Software.html",
 )
 
 license_kind(
@@ -2200,6 +2662,12 @@ license_kind(
     name = "ODC-By-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/ODC-By-1.0.html",
+)
+
+license_kind(
+    name = "OFFIS",
+    conditions = [],
+    url = "https://spdx.org/licenses/OFFIS.html",
 )
 
 license_kind(
@@ -2377,9 +2845,21 @@ license_kind(
 )
 
 license_kind(
+    name = "OLFL-1.3",
+    conditions = [],
+    url = "https://spdx.org/licenses/OLFL-1.3.html",
+)
+
+license_kind(
     name = "OML",
     conditions = [],
     url = "https://spdx.org/licenses/OML.html",
+)
+
+license_kind(
+    name = "OpenPBS-2.3",
+    conditions = [],
+    url = "https://spdx.org/licenses/OpenPBS-2.3.html",
 )
 
 license_kind(
@@ -2392,6 +2872,12 @@ license_kind(
     name = "OPL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/OPL-1.0.html",
+)
+
+license_kind(
+    name = "OPL-UK-3.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/OPL-UK-3.0.html",
 )
 
 license_kind(
@@ -2437,6 +2923,12 @@ license_kind(
 )
 
 license_kind(
+    name = "PADL",
+    conditions = [],
+    url = "https://spdx.org/licenses/PADL.html",
+)
+
+license_kind(
     name = "Parity-6.0.0",
     conditions = [],
     url = "https://spdx.org/licenses/Parity-6.0.0.html",
@@ -2470,6 +2962,12 @@ license_kind(
     name = "Plexus",
     conditions = [],
     url = "https://spdx.org/licenses/Plexus.html",
+)
+
+license_kind(
+    name = "pnmstitch",
+    conditions = [],
+    url = "https://spdx.org/licenses/pnmstitch.html",
 )
 
 license_kind(
@@ -2515,6 +3013,18 @@ license_kind(
 )
 
 license_kind(
+    name = "Python-2.0.1",
+    conditions = [],
+    url = "https://spdx.org/licenses/Python-2.0.1.html",
+)
+
+license_kind(
+    name = "python-ldap",
+    conditions = [],
+    url = "https://spdx.org/licenses/python-ldap.html",
+)
+
+license_kind(
     name = "Qhull",
     conditions = [],
     url = "https://spdx.org/licenses/Qhull.html",
@@ -2524,6 +3034,12 @@ license_kind(
     name = "QPL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/QPL-1.0.html",
+)
+
+license_kind(
+    name = "QPL-1.0-INRIA-2004",
+    conditions = [],
+    url = "https://spdx.org/licenses/QPL-1.0-INRIA-2004.html",
 )
 
 license_kind(
@@ -2629,6 +3145,18 @@ license_kind(
 )
 
 license_kind(
+    name = "SGI-OpenGL",
+    conditions = [],
+    url = "https://spdx.org/licenses/SGI-OpenGL.html",
+)
+
+license_kind(
+    name = "SGP4",
+    conditions = [],
+    url = "https://spdx.org/licenses/SGP4.html",
+)
+
+license_kind(
     name = "SHL-0.5",
     conditions = [],
     url = "https://spdx.org/licenses/SHL-0.5.html",
@@ -2659,6 +3187,12 @@ license_kind(
 )
 
 license_kind(
+    name = "SL",
+    conditions = [],
+    url = "https://spdx.org/licenses/SL.html",
+)
+
+license_kind(
     name = "Sleepycat",
     conditions = [],
     url = "https://spdx.org/licenses/Sleepycat.html",
@@ -2683,6 +3217,18 @@ license_kind(
 )
 
 license_kind(
+    name = "snprintf",
+    conditions = [],
+    url = "https://spdx.org/licenses/snprintf.html",
+)
+
+license_kind(
+    name = "Soundex",
+    conditions = [],
+    url = "https://spdx.org/licenses/Soundex.html",
+)
+
+license_kind(
     name = "Spencer-86",
     conditions = [],
     url = "https://spdx.org/licenses/Spencer-86.html",
@@ -2704,6 +3250,12 @@ license_kind(
     name = "SPL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/SPL-1.0.html",
+)
+
+license_kind(
+    name = "ssh-keyscan",
+    conditions = [],
+    url = "https://spdx.org/licenses/ssh-keyscan.html",
 )
 
 license_kind(
@@ -2737,9 +3289,27 @@ license_kind(
 )
 
 license_kind(
+    name = "SunPro",
+    conditions = [],
+    url = "https://spdx.org/licenses/SunPro.html",
+)
+
+license_kind(
     name = "SWL",
     conditions = [],
     url = "https://spdx.org/licenses/SWL.html",
+)
+
+license_kind(
+    name = "swrule",
+    conditions = [],
+    url = "https://spdx.org/licenses/swrule.html",
+)
+
+license_kind(
+    name = "Symlinks",
+    conditions = [],
+    url = "https://spdx.org/licenses/Symlinks.html",
 )
 
 license_kind(
@@ -2761,6 +3331,12 @@ license_kind(
 )
 
 license_kind(
+    name = "TermReadKey",
+    conditions = [],
+    url = "https://spdx.org/licenses/TermReadKey.html",
+)
+
+license_kind(
     name = "TMate",
     conditions = [],
     url = "https://spdx.org/licenses/TMate.html",
@@ -2779,6 +3355,30 @@ license_kind(
 )
 
 license_kind(
+    name = "TPDL",
+    conditions = [],
+    url = "https://spdx.org/licenses/TPDL.html",
+)
+
+license_kind(
+    name = "TPL-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/TPL-1.0.html",
+)
+
+license_kind(
+    name = "TTWL",
+    conditions = [],
+    url = "https://spdx.org/licenses/TTWL.html",
+)
+
+license_kind(
+    name = "TTYP0",
+    conditions = [],
+    url = "https://spdx.org/licenses/TTYP0.html",
+)
+
+license_kind(
     name = "TU-Berlin-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/TU-Berlin-1.0.html",
@@ -2791,9 +3391,21 @@ license_kind(
 )
 
 license_kind(
+    name = "UCAR",
+    conditions = [],
+    url = "https://spdx.org/licenses/UCAR.html",
+)
+
+license_kind(
     name = "UCL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/UCL-1.0.html",
+)
+
+license_kind(
+    name = "ulem",
+    conditions = [],
+    url = "https://spdx.org/licenses/ulem.html",
 )
 
 license_kind(
@@ -2815,6 +3427,12 @@ license_kind(
 )
 
 license_kind(
+    name = "UnixCrypt",
+    conditions = [],
+    url = "https://spdx.org/licenses/UnixCrypt.html",
+)
+
+license_kind(
     name = "Unlicense",
     conditions = [],
     url = "https://spdx.org/licenses/Unlicense.html",
@@ -2824,6 +3442,12 @@ license_kind(
     name = "UPL-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/UPL-1.0.html",
+)
+
+license_kind(
+    name = "URT-RLE",
+    conditions = [],
+    url = "https://spdx.org/licenses/URT-RLE.html",
 )
 
 license_kind(
@@ -2863,9 +3487,21 @@ license_kind(
 )
 
 license_kind(
+    name = "w3m",
+    conditions = [],
+    url = "https://spdx.org/licenses/w3m.html",
+)
+
+license_kind(
     name = "Watcom-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/Watcom-1.0.html",
+)
+
+license_kind(
+    name = "Widget-Workshop",
+    conditions = [],
+    url = "https://spdx.org/licenses/Widget-Workshop.html",
 )
 
 license_kind(
@@ -2899,9 +3535,21 @@ license_kind(
 )
 
 license_kind(
+    name = "Xdebug-1.03",
+    conditions = [],
+    url = "https://spdx.org/licenses/Xdebug-1.03.html",
+)
+
+license_kind(
     name = "Xerox",
     conditions = [],
     url = "https://spdx.org/licenses/Xerox.html",
+)
+
+license_kind(
+    name = "Xfig",
+    conditions = [],
+    url = "https://spdx.org/licenses/Xfig.html",
 )
 
 license_kind(
@@ -2914,6 +3562,12 @@ license_kind(
     name = "xinetd",
     conditions = [],
     url = "https://spdx.org/licenses/xinetd.html",
+)
+
+license_kind(
+    name = "xlock",
+    conditions = [],
+    url = "https://spdx.org/licenses/xlock.html",
 )
 
 license_kind(
@@ -2950,6 +3604,12 @@ license_kind(
     name = "Zed",
     conditions = [],
     url = "https://spdx.org/licenses/Zed.html",
+)
+
+license_kind(
+    name = "Zeeff",
+    conditions = [],
+    url = "https://spdx.org/licenses/Zeeff.html",
 )
 
 license_kind(
