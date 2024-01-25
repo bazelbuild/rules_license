@@ -12,9 +12,6 @@ android_library(
     srcs = [
         "license_display.sh",
     ],
-    data = [
-      "@rules_license//distro:distro",
-    ],
 )
 
 # This captures how the application would be built. The dependencies of this
