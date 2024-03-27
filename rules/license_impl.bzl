@@ -36,7 +36,7 @@ def license_rule_impl(ctx):
     provider = LicenseInfo(
         license_kinds = tuple([k[LicenseKindInfo] for k in ctx.attr.license_kinds]),
         copyright_notice = ctx.attr.copyright_notice,
-        package_name = ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
+        package_name = ctx.attr.package_name or ctx.label.package,
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
         license_text = ctx.file.license_text,
