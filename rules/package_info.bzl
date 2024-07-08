@@ -34,6 +34,7 @@ def _package_info_impl(ctx):
         package_name = ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
+        purl = ctx.attr.purl,
     )
 
     # Experimental alternate design, using a generic 'data' back to hold things
@@ -44,6 +45,7 @@ def _package_info_impl(ctx):
             "package_name": ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
             "package_url": ctx.attr.package_url,
             "package_version": ctx.attr.package_version,
+            "purl": ctx.attr.purl,
         },
     )
     return [provider, generic_provider]
