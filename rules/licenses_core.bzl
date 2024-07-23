@@ -87,6 +87,7 @@ def _get_transitive_metadata(ctx, trans_licenses, trans_other_metadata, trans_pa
                 if hasattr(info, "other_metadata"):
                     if info.other_metadata:
                         trans_other_metadata.append(info.other_metadata)
+
                 # But if we want more precise type safety, we would have a
                 # trans_* for each type of metadata. That is not user
                 # extensibile.
@@ -131,14 +132,20 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
         pass
     else:
         if hasattr(ctx.rule.attr, "applicable_licenses"):
-            for dep in ctx.rule.attr.applicable_licenses:
-                if LicenseInfo in dep:
-                    lic = dep[LicenseInfo]
-                    licenses.append(lic)
+            package_metadata = ctx.rule.attr.applicable_licenses
+        elif hasattr(ctx.rule.attr, "package_metadata"):
+            package_metadata = ctx.rule.attr.package_metadata
+        else:
+            package_metadata = []
 
-                for m_p in metadata_providers:
-                    if m_p in dep:
-                        other_metadata.append(dep[m_p])
+        for dep in package_metadata:
+            if LicenseInfo in dep:
+                lic = dep[LicenseInfo]
+                licenses.append(lic)
+
+            for m_p in metadata_providers:
+                if m_p in dep:
+                    other_metadata.append(dep[m_p])
 
     # A hack until https://github.com/bazelbuild/rules_license/issues/89 is
     # fully resolved. If exec is in the bin_dir path, then the current
