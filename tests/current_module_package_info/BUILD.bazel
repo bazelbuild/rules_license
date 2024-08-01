@@ -1,0 +1,5 @@
+load(":starlark_tests.bzl", "starlark_tests")
+
+starlark_tests(
+    name = "starlark_tests"
+)

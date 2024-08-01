@@ -62,6 +62,7 @@ ORDER = [
     ("gather_metadata_info",           "//rules_gathering:gather_metadata.bzl"),
     ("gather_metadata_info_and_write", "//rules_gathering:gather_metadata.bzl"),
     ("trace",           "//rules_gathering:trace.bzl"),
+    ("current_module_package_info", "//rules:current_module_package_info.bzl"),
 ]
 
 genrule(

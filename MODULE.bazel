@@ -14,4 +14,5 @@ module(
 # Only for development
 bazel_dep(name = "rules_pkg", version = "0.7.0", dev_dependency = True)
 bazel_dep(name = "rules_python", version = "0.23.0", dev_dependency = True)
+bazel_dep(name = "rules_testing", version = "0.6.0", dev_dependency = True)
 bazel_dep(name = "stardoc", version = "0.5.3", dev_dependency = True)
