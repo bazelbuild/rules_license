@@ -56,22 +56,22 @@ _package_info = rule(
         "package_name": attr.string(
             doc = "A human readable name identifying this package." +
                   " This may be used to produce an index of OSS packages used by" +
-                  " an applicatation.",
+                  " an application.",
         ),
         "package_url": attr.string(
             doc = "The URL this instance of the package was download from." +
                   " This may be used to produce an index of OSS packages used by" +
-                  " an applicatation.",
+                  " an application.",
         ),
         "package_version": attr.string(
             doc = "A human readable version string identifying this package." +
                   " This may be used to produce an index of OSS packages used" +
-                  " by an applicatation.  It should be a value that" +
+                  " by an application.  It should be a value that" +
                   " increases over time, rather than a commit hash.",
         ),
         "purl": attr.string(
             doc = "A pURL conforming to the spec outlined in" +
-                  " https://github.com/package-url/purl-spec This may be used when" +
+                  " https://github.com/package-url/purl-spec. This may be used when" +
                   " generating an SBOM.",
         ),
     },
