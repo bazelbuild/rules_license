@@ -13,7 +13,7 @@
 # limitations under the License.
 
 load("@rules_license//rules:license.bzl", "license")
-load("@rules_license//rules:package_info.bzl", "package_info")
+load("@rules_license//rules:current_module_package_info.bzl", "current_module_package_info")
 load("@rules_license//:version.bzl", "version")
 
 package(
@@ -31,10 +31,8 @@ license(
     license_text = "LICENSE",
 )
 
-package_info(
+current_module_package_info(
     name = "package_info",
-    package_name = "rules_license",
-    package_version = version,
 )
 
 exports_files(
