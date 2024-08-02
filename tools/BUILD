@@ -23,12 +23,6 @@ package(
 
 licenses(["notice"])
 
-filegroup(
-    name = "standard_package",
-    srcs = glob(["**"]),
-    visibility = ["//distro:__pkg__"],
-)
-
 exports_files(["diff_test.sh"])
 
 py_binary(

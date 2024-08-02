@@ -44,11 +44,6 @@ package(
 
 licenses(["notice"])
 
-filegroup(
-    name = "standard_package",
-    srcs = ["BUILD"],
-)
-
 # "none" should be used for packages which are distributed with no license of
 # any kind. You can use this no-op license as a positive indication that the
 # code's license terms were reviewed, so that linters will not flag it later as

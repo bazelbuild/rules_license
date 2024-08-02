@@ -26,26 +26,6 @@ load("//:version.bzl", "version")
 
 package(default_package_metadata = ["//:license", "//:package_info"])
 
-filegroup(
-    name = "standard_package",
-    srcs = [
-        "BUILD",
-    ] + glob([
-        "*.bzl",
-        "*.py",
-    ]),
-    visibility = ["//distro:__pkg__"],
-)
-
-exports_files(
-    glob([
-        "*.bzl",
-    ]),
-    visibility = [
-        "//distro:__pkg__",
-    ],
-)
-
 # pairs of rule name and the source file to get it from
 # Must put macro wrapped rules after their wrapper
 # buildifier: leave-alone, do not sort
@@ -91,8 +71,8 @@ bzl_library(
     name = "lib_of_everything",
     srcs = [
         "//:version.bzl",
-        "//rules:standard_package",
-        "//rules_gathering:standard_package",
+        "//rules:bzl",
+        "//rules_gathering:bzl",
     ],
     visibility = ["//visibility:public"],
 )
