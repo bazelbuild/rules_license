@@ -60,12 +60,6 @@ def golden_cmd_test(
     """
     actual = name + ".output"
 
-    # There are some cases where tools are provided and exec_tools are provided.
-    # Specifying both in the same genrule, confuses the host vs exec rules,
-    # which prevents python3 from execution.
-    if tools and exec_tools:
-        fail("Only set one: tools or exec_tools.  " +
-             "Setting both confuses python execution mode (host vs exec).")
     native.genrule(
         name = name + "_output",
         srcs = srcs,

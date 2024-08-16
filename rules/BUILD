@@ -33,12 +33,10 @@ trace(
     visibility = ["//visibility:public"],
 )
 
+# TODO(alexeagle): use gazelle to replace all these with bzl_library
 filegroup(
-    name = "standard_package",
-    srcs = glob([
-        "**/BUILD",
-        "**/*.bzl",
-    ]),
+    name = "bzl",
+    srcs = glob(["**/*.bzl"]),
 )
 
 # Do not create a bzl_library(). That would create a dependency loop back
