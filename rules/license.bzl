@@ -11,9 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Rules for declaring the compliance licenses used by a package.
-
-"""
+"""Rule for declaring the OSS licenses used by a package."""
 
 load(
     "@rules_license//rules:providers.bzl",
@@ -87,14 +85,15 @@ def license(
         visibility = ["//visibility:public"]):
     """Wrapper for license rule.
 
-    @wraps(_license)
-
     Args:
       name: str target name.
       license_text: str Filename of the license file
-      license_kind: label a single license_kind. Only one of license_kind or license_kinds may
-                    be specified
-      license_kinds: list(label) list of license_kind targets.
+      license_kind: label Legacy attribute to specify a single license_kind.
+          See license_kinds.
+      license_kinds: list(label) License kind(s) of this license.
+          If multiple license kinds are listed in the LICENSE file, and they
+          all apply, then all of them should be listed here. If the user can
+          choose a single one of many, then only list one here.
       copyright_notice: str Copyright notice associated with this package.
       package_name: str A human readable name identifying this package. This
                     may be used to produce an index of OSS packages used by

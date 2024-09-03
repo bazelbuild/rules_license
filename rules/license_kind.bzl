@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Proof of concept. License restriction."""
 
 load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
 
@@ -21,7 +20,7 @@ load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
 # that it may user privately.
 #
 
-def _license_kind_impl(ctx):
+def _license_kind_internal_impl(ctx):
     provider = LicenseKindInfo(
         name = ctx.attr.name,
         label = "@%s//%s:%s" % (
@@ -34,8 +33,8 @@ def _license_kind_impl(ctx):
     )
     return [provider]
 
-_license_kind = rule(
-    implementation = _license_kind_impl,
+license_kind_internal = rule(
+    implementation = _license_kind_internal_impl,
     attrs = {
         "conditions": attr.string_list(
             doc = "Conditions to be met when using software under this license." +
@@ -54,13 +53,13 @@ _license_kind = rule(
 def license_kind(name, **kwargs):
     """Wrapper for license_kind.
 
-    @wraps(_license_kind)
+    @wraps(license_kind_internal)
     """
     if "conditions" not in kwargs:
         kwargs["conditions"] = []
     if "long_name" not in kwargs:
         kwargs["long_name"] = name
-    _license_kind(
+    license_kind_internal(
         name = name,
         applicable_licenses = [],
         **kwargs

@@ -23,7 +23,7 @@ load(
 # package_info()
 #
 
-def _package_info_impl(ctx):
+def _package_info_internal_impl(ctx):
     provider = PackageInfo(
         # Metadata providers must include a type discriminator. We don't need it
         # to collect the providers, but we do need it to write the JSON. We
@@ -50,8 +50,8 @@ def _package_info_impl(ctx):
     )
     return [provider, generic_provider]
 
-_package_info = rule(
-    implementation = _package_info_impl,
+package_info_internal = rule(
+    implementation = _package_info_internal_impl,
     attrs = {
         "package_name": attr.string(
             doc = "A human readable name identifying this package." +
@@ -87,7 +87,7 @@ def package_info(
         **kwargs):
     """Wrapper for package_info rule.
 
-    @wraps(_package_info)
+    @wraps(package_info_internal)
 
     The purl attribute should be a valid pURL, as defined in the
     [pURL spec](https://github.com/package-url/purl-spec).
@@ -105,7 +105,7 @@ def package_info(
       kwargs: other args. Most are ignored.
     """
     visibility = kwargs.get("visibility") or ["//visibility:public"]
-    _package_info(
+    package_info_internal(
         name = name,
         package_name = package_name,
         package_url = package_url,
