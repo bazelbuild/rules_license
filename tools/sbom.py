@@ -48,4 +48,6 @@ class SBOMWriter:
             if url:
                 self.out.write('  downloadLocation: %s\n' % url)
 
-
+            purl = p.get('purl')
+            if purl:
+                self.out.write('  externalRef: PACKAGE-MANAGER purl %s\n' % purl)

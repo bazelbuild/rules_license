@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@rules_license//rules:license.bzl", "license")
-load("@rules_license//rules:current_module_package_info.bzl", "current_module_package_info")
 load("@rules_license//:version.bzl", "version")
+load("@rules_license//rules:current_module_package_info.bzl", "current_module_package_info")
+load("@rules_license//rules:license.bzl", "license")
+load("@rules_license//rules:package_info.bzl", "package_info")
 
 package(
     default_applicable_licenses = [":license", ":package_info"],
@@ -53,10 +54,20 @@ filegroup(
         "*.bzl",
         "*.md",
     ]) + [
-        "MODULE.bazel",
         "BUILD",
         "LICENSE",
+        "MODULE.bazel",
         "WORKSPACE.bzlmod",
     ],
     visibility = ["//distro:__pkg__"],
+)
+
+filegroup(
+    name = "docs_deps",
+    srcs = [
+        ":standard_package",
+        "//rules:standard_package",
+        "//rules_gathering:standard_package",
+    ],
+    visibility = ["//visibility:public"],
 )
