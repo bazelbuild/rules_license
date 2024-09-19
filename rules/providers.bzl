@@ -11,12 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Basic providers for license rules.
 
-This file should only contain the basic providers needed to create
-license and package_info declarations. Providers needed to gather
-them are declared in other places.
-"""
+"""Core providers for license rules."""
+
+# This file should only contain the basic providers needed to create
+# license and package_info declarations. Providers needed to gather
+# them are declared in other places.
 
 load(
     "@rules_license//rules_gathering:gathering_providers.bzl",
