@@ -59,6 +59,13 @@ http_archive(
     ],
 )
 
+http_archive(
+    name = "rules_testing",
+    sha256 = "c06835f9e2858edbbcda79dd728e3caedcbd43a1234014ff2884cf57a93f280c",
+    strip_prefix = "rules_testing-0.6.0rc1",
+    url = "https://github.com/bazelbuild/rules_testing/releases/download/v0.6.0rc1/rules_testing-v0.6.0rc1.tar.gz",
+)
+
 load("@rules_python//python:repositories.bzl", "py_repositories")
 
 py_repositories()
