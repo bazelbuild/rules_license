@@ -42,7 +42,12 @@ _license = rule(
                   " should be listed here. If the user can choose a single one" +
                   " of many, then only list one here.",
             providers = [LicenseKindInfo],
-            # This should be the null configuration, not the exec.
+            # Bazel 8+ users: In Bazel 8, the targets for package_metadata are
+            # always in a null configuration. This reflects the fact that they
+            # are non-configurable and keeps the node for a license in a single
+            # configuration, no matter what physical platforms you are building
+            # for.
+            # TODO: (after bazel 8.0 is mainstream): Remove this line.
             cfg = "exec",
         ),
         "copyright_notice": attr.string(
