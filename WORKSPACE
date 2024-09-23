@@ -66,3 +66,5 @@ py_repositories()
 load("@bazel_stardoc//:setup.bzl", "stardoc_repositories")
 
 stardoc_repositories()
+
+register_toolchains("@rules_license//rules_gathering:example_sbom_tools_toolchain")

@@ -18,6 +18,8 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
+load(":toolchains.bzl", "sbom_tools_toolchain")
+
 filegroup(
     name = "standard_package",
     srcs = glob(["**"]),
@@ -30,4 +32,18 @@ exports_files(
         "*.bzl",
     ]),
     visibility = ["//doc_build:__pkg__"],
+)
+
+
+toolchain_type(name = "sbom_tools")
+
+sbom_tools_toolchain(
+    name = "example_sbom_tools",
+    create_intermediate_sbom_binary = "@rules_license//tools:write_sbom",
+)
+
+toolchain(
+    name = "example_sbom_tools_toolchain",
+    toolchain_type = ":sbom_tools",
+    toolchain = "example_sbom_tools",
 )

@@ -32,24 +32,11 @@ def _generate_sbom_impl(ctx):
     licenses_file = ctx.actions.declare_file("_%s_licenses_info.json" % ctx.label.name)
     write_metadata_info(ctx, ctx.attr.deps, licenses_file)
 
-    # Now turn the big blob of data into something consumable.
-    inputs = [licenses_file]
-    outputs = [ctx.outputs.out]
-    args = ctx.actions.args()
-    args.add("--licenses_info", licenses_file.path)
-    args.add("--out", ctx.outputs.out.path)
-    ctx.actions.run(
-        mnemonic = "CreateSBOM",
-        progress_message = "Creating SBOM for %s" % ctx.label,
-        inputs = inputs,
-        outputs = outputs,
-        executable = ctx.executable._sbom_generator,
-        arguments = [args],
-    )
+    sbom_providers = ctx.toolchains[":sbom_tools"].sbom_tools_info.create_intermediate_sbom(ctx, ctx.outputs.out, licenses_file = licenses_file)
+
     return [
-        DefaultInfo(files = depset(outputs)),
         OutputGroupInfo(licenses_file = depset([licenses_file])),
-    ]
+    ] + sbom_providers
 
 _generate_sbom = rule(
     implementation = _generate_sbom_impl,
@@ -58,13 +45,8 @@ _generate_sbom = rule(
             aspects = [gather_metadata_info],
         ),
         "out": attr.output(mandatory = True),
-        "_sbom_generator": attr.label(
-            default = Label("@rules_license//tools:write_sbom"),
-            executable = True,
-            allow_files = True,
-            cfg = "exec",
-        ),
     },
+    toolchains = [":sbom_tools"],
 )
 
 def generate_sbom(**kwargs):
