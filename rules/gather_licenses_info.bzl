@@ -30,9 +30,9 @@ def _strip_null_repo(label):
     The is to make str(label) compatible between bazel 5.x and 6.x
     """
     s = str(label)
-    if s.startswith('@//'):
+    if s.startswith("@//"):
         return s[1:]
-    elif s.startswith('@@//'):
+    elif s.startswith("@@//"):
         return s[2:]
     return s
 
@@ -150,7 +150,7 @@ def write_licenses_info(ctx, deps, json_out):
     licenses_files = []
     for dep in deps:
         if TransitiveLicensesInfo in dep:
-            transitive_licenses_info = dep[TransitiveLicensesInfo]            
+            transitive_licenses_info = dep[TransitiveLicensesInfo]
             lic_info, _ = licenses_info_to_json(transitive_licenses_info)
             licenses_json.extend(lic_info)
             for info in transitive_licenses_info.licenses.to_list():
@@ -253,6 +253,7 @@ def licenses_info_to_json(licenses_info):
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
+
             # Additionally return all File references so that other rules invoking
             # this method can load license text file contents from external repos
             # using runfiles
@@ -266,8 +267,12 @@ def licenses_info_to_json(licenses_info):
             licenses = ",\n          ".join(sorted(['"%s"' % _strip_null_repo(x) for x in dep_licenses])),
         ))
 
+    top_level_target = ""
+    if hasattr(licenses_info, "target_under_license"):
+        top_level_target = licenses_info.target_under_license
+
     return [main_template.format(
-        top_level_target = _strip_null_repo(licenses_info.target_under_license),
+        top_level_target = _strip_null_repo(top_level_target),
         dependencies = ",".join(all_deps),
         licenses = ",".join(all_licenses),
     )], all_license_text_files
