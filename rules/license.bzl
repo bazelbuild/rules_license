@@ -50,7 +50,6 @@ _license = rule(
         ),
         "license_text": attr.label(
             allow_single_file = True,
-            default = "LICENSE",
             doc = "The license file.",
         ),
         "package_name": attr.string(
