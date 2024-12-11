@@ -253,6 +253,12 @@ license_kind(
 )
 
 license_kind(
+    name = "any-OSI-perl-modules",
+    conditions = [],
+    url = "https://spdx.org/licenses/any-OSI-perl-modules.json",
+)
+
+license_kind(
     name = "Apache-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/Apache-1.0.html",
@@ -424,6 +430,12 @@ license_kind(
     name = "Boehm-GC",
     conditions = [],
     url = "https://spdx.org/licenses/Boehm-GC.html",
+)
+
+license_kind(
+    name = "Boehm-GC-without-fee",
+    conditions = [],
+    url = "https://spdx.org/licenses/Boehm-GC-without-fee.json",
 )
 
 license_kind(
@@ -1033,6 +1045,18 @@ license_kind(
 )
 
 license_kind(
+    name = "CC-PDM-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-PDM-1.0.json",
+)
+
+license_kind(
+    name = "CC-SA-1.0",
+    conditions = [],
+    url = "https://spdx.org/licenses/CC-SA-1.0.json",
+)
+
+license_kind(
     name = "CC0-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/CC0-1.0.html",
@@ -1597,6 +1621,12 @@ license_kind(
 )
 
 license_kind(
+    name = "generic-xts",
+    conditions = [],
+    url = "https://spdx.org/licenses/generic-xts.json",
+)
+
+license_kind(
     name = "GFDL-1.1",
     conditions = [],
     url = "https://spdx.org/licenses/GFDL-1.1.html",
@@ -2140,6 +2170,12 @@ license_kind(
     name = "Inner-Net-2.0",
     conditions = [],
     url = "https://spdx.org/licenses/Inner-Net-2.0.html",
+)
+
+license_kind(
+    name = "InnoSetup",
+    conditions = [],
+    url = "https://spdx.org/licenses/InnoSetup.json",
 )
 
 license_kind(
@@ -3475,6 +3511,12 @@ license_kind(
 )
 
 license_kind(
+    name = "Sendmail-Open-Source-1.1",
+    conditions = [],
+    url = "https://spdx.org/licenses/Sendmail-Open-Source-1.1.json",
+)
+
+license_kind(
     name = "SGI-B-1.0",
     conditions = [],
     url = "https://spdx.org/licenses/SGI-B-1.0.html",
@@ -3544,6 +3586,12 @@ license_kind(
     name = "Sleepycat",
     conditions = [],
     url = "https://spdx.org/licenses/Sleepycat.html",
+)
+
+license_kind(
+    name = "SMAIL-GPL",
+    conditions = [],
+    url = "https://spdx.org/licenses/SMAIL-GPL.json",
 )
 
 license_kind(
@@ -3922,6 +3970,12 @@ license_kind(
     name = "WTFPL",
     conditions = [],
     url = "https://spdx.org/licenses/WTFPL.html",
+)
+
+license_kind(
+    name = "wwl",
+    conditions = [],
+    url = "https://spdx.org/licenses/wwl.json",
 )
 
 license_kind(

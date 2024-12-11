@@ -3,84 +3,14 @@
 Rules for declaring the compliance licenses used by a package.
 
 
-
-<a id="license"></a>
-
-## license
-
-<pre>
-license(<a href="#license-name">name</a>, <a href="#license-copyright_notice">copyright_notice</a>, <a href="#license-license_kinds">license_kinds</a>, <a href="#license-license_text">license_text</a>, <a href="#license-package_name">package_name</a>, <a href="#license-package_url">package_url</a>,
-         <a href="#license-package_version">package_version</a>)
-</pre>
-
-
-
-**ATTRIBUTES**
-
-
-| Name  | Description | Type | Mandatory | Default |
-| :------------- | :------------- | :------------- | :------------- | :------------- |
-| <a id="license-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
-| <a id="license-copyright_notice"></a>copyright_notice |  Copyright notice.   | String | optional | <code>""</code> |
-| <a id="license-license_kinds"></a>license_kinds |  License kind(s) of this license. If multiple license kinds are listed in the LICENSE file, and they all apply, then all should be listed here. If the user can choose a single one of many, then only list one here.   | <a href="https://bazel.build/concepts/labels">List of labels</a> | optional | <code>[]</code> |
-| <a id="license-license_text"></a>license_text |  The license file.   | <a href="https://bazel.build/concepts/labels">Label</a> | optional | <code>LICENSE</code> |
-| <a id="license-package_name"></a>package_name |  A human readable name identifying this package. This may be used to produce an index of OSS packages used by an applicatation.   | String | optional | <code>""</code> |
-| <a id="license-package_url"></a>package_url |  The URL this instance of the package was download from. This may be used to produce an index of OSS packages used by an applicatation.   | String | optional | <code>""</code> |
-| <a id="license-package_version"></a>package_version |  A human readable version string identifying this package. This may be used to produce an index of OSS packages used by an applicatation.  It should be a value that increases over time, rather than a commit hash.   | String | optional | <code>""</code> |
-
-
-
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
 Proof of concept. License restriction.
-
-<a id="license_kind"></a>
-
-## license_kind
-
-<pre>
-license_kind(<a href="#license_kind-name">name</a>, <a href="#license_kind-canonical_text">canonical_text</a>, <a href="#license_kind-conditions">conditions</a>, <a href="#license_kind-long_name">long_name</a>, <a href="#license_kind-url">url</a>)
-</pre>
-
-
-
-**ATTRIBUTES**
-
-
-| Name  | Description | Type | Mandatory | Default |
-| :------------- | :------------- | :------------- | :------------- | :------------- |
-| <a id="license_kind-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
-| <a id="license_kind-canonical_text"></a>canonical_text |  File containing the canonical text for this license. Must be UTF-8 encoded.   | <a href="https://bazel.build/concepts/labels">Label</a> | optional | <code>None</code> |
-| <a id="license_kind-conditions"></a>conditions |  Conditions to be met when using software under this license.  Conditions are defined by the organization using this license.   | List of strings | required |  |
-| <a id="license_kind-long_name"></a>long_name |  Human readable long name of license.   | String | optional | <code>""</code> |
-| <a id="license_kind-url"></a>url |  URL pointing to canonical license definition   | String | optional | <code>""</code> |
-
 
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
 
 Rules for declaring metadata about a package.
-
-<a id="package_info"></a>
-
-## package_info
-
-<pre>
-package_info(<a href="#package_info-name">name</a>, <a href="#package_info-package_name">package_name</a>, <a href="#package_info-package_url">package_url</a>, <a href="#package_info-package_version">package_version</a>)
-</pre>
-
-
-
-**ATTRIBUTES**
-
-
-| Name  | Description | Type | Mandatory | Default |
-| :------------- | :------------- | :------------- | :------------- | :------------- |
-| <a id="package_info-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
-| <a id="package_info-package_name"></a>package_name |  A human readable name identifying this package. This may be used to produce an index of OSS packages used by an applicatation.   | String | optional | <code>""</code> |
-| <a id="package_info-package_url"></a>package_url |  The URL this instance of the package was download from. This may be used to produce an index of OSS packages used by an applicatation.   | String | optional | <code>""</code> |
-| <a id="package_info-package_version"></a>package_version |  A human readable version string identifying this package. This may be used to produce an index of OSS packages used by an applicatation.  It should be a value that increases over time, rather than a commit hash.   | String | optional | <code>""</code> |
-
 
 
 <!-- Generated with Stardoc: http://skydoc.bazel.build -->
@@ -91,12 +21,13 @@ This file should only contain the basic providers needed to create
 license and package_info declarations. Providers needed to gather
 them are declared in other places.
 
-
 <a id="LicenseInfo"></a>
 
 ## LicenseInfo
 
 <pre>
+load("@rules_license//rules:providers.bzl", "LicenseInfo")
+
 LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a href="#LicenseInfo-label">label</a>, <a href="#LicenseInfo-license_kinds">license_kinds</a>, <a href="#LicenseInfo-license_text">license_text</a>, <a href="#LicenseInfo-package_name">package_name</a>, <a href="#LicenseInfo-package_url">package_url</a>,
             <a href="#LicenseInfo-package_version">package_version</a>)
 </pre>
@@ -104,7 +35,6 @@ LicenseInfo(<a href="#LicenseInfo-copyright_notice">copyright_notice</a>, <a hre
 Provides information about a license instance.
 
 **FIELDS**
-
 
 | Name  | Description |
 | :------------- | :------------- |
@@ -126,19 +56,19 @@ This file should only contain the basic providers needed to create
 license and package_info declarations. Providers needed to gather
 them are declared in other places.
 
-
 <a id="LicenseKindInfo"></a>
 
 ## LicenseKindInfo
 
 <pre>
+load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
+
 LicenseKindInfo(<a href="#LicenseKindInfo-conditions">conditions</a>, <a href="#LicenseKindInfo-label">label</a>, <a href="#LicenseKindInfo-long_name">long_name</a>, <a href="#LicenseKindInfo-name">name</a>)
 </pre>
 
 Provides information about a license_kind instance.
 
 **FIELDS**
-
 
 | Name  | Description |
 | :------------- | :------------- |
@@ -157,19 +87,19 @@ This file should only contain the basic providers needed to create
 license and package_info declarations. Providers needed to gather
 them are declared in other places.
 
-
 <a id="PackageInfo"></a>
 
 ## PackageInfo
 
 <pre>
-PackageInfo(<a href="#PackageInfo-type">type</a>, <a href="#PackageInfo-label">label</a>, <a href="#PackageInfo-package_name">package_name</a>, <a href="#PackageInfo-package_url">package_url</a>, <a href="#PackageInfo-package_version">package_version</a>)
+load("@rules_license//rules:providers.bzl", "PackageInfo")
+
+PackageInfo(<a href="#PackageInfo-type">type</a>, <a href="#PackageInfo-label">label</a>, <a href="#PackageInfo-package_name">package_name</a>, <a href="#PackageInfo-package_url">package_url</a>, <a href="#PackageInfo-package_version">package_version</a>, <a href="#PackageInfo-purl">purl</a>)
 </pre>
 
 Provides information about a package.
 
 **FIELDS**
-
 
 | Name  | Description |
 | :------------- | :------------- |
@@ -178,6 +108,7 @@ Provides information about a package.
 | <a id="PackageInfo-package_name"></a>package_name |  string: Human readable package name    |
 | <a id="PackageInfo-package_url"></a>package_url |  string: URL from which this package was downloaded.    |
 | <a id="PackageInfo-package_version"></a>package_version |  string: Human readable version string    |
+| <a id="PackageInfo-purl"></a>purl |  string: package url matching the purl spec (https://github.com/package-url/purl-spec)    |
 
 
 
@@ -190,6 +121,8 @@ Rules and macros for collecting LicenseInfo providers.
 ## gather_metadata_info
 
 <pre>
+load("@rules_license//rules_gathering:gather_metadata.bzl", "gather_metadata_info")
+
 gather_metadata_info(<a href="#gather_metadata_info-name">name</a>)
 </pre>
 
@@ -198,17 +131,13 @@ Collects LicenseInfo providers into a single TransitiveMetadataInfo provider.
 **ASPECT ATTRIBUTES**
 
 
-| Name | Type |
-| :------------- | :------------- |
-| *| String |
-
 
 **ATTRIBUTES**
 
 
 | Name  | Description | Type | Mandatory | Default |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
-| <a id="gather_metadata_info-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
+| <a id="gather_metadata_info-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
 
 
 
@@ -221,22 +150,19 @@ Rules and macros for collecting LicenseInfo providers.
 ## gather_metadata_info_and_write
 
 <pre>
+load("@rules_license//rules_gathering:gather_metadata.bzl", "gather_metadata_info_and_write")
+
 gather_metadata_info_and_write(<a href="#gather_metadata_info_and_write-name">name</a>)
 </pre>
 
 Collects TransitiveMetadataInfo providers and writes JSON representation to a file.
 
-    Usage:
-      bazel build //some:target           --aspects=@rules_license//rules_gathering:gather_metadata.bzl%gather_metadata_info_and_write
-          --output_groups=licenses
-    
+Usage:
+  bazel build //some:target           --aspects=@rules_license//rules_gathering:gather_metadata.bzl%gather_metadata_info_and_write
+      --output_groups=licenses
 
 **ASPECT ATTRIBUTES**
 
-
-| Name | Type |
-| :------------- | :------------- |
-| *| String |
 
 
 **ATTRIBUTES**
@@ -244,7 +170,7 @@ Collects TransitiveMetadataInfo providers and writes JSON representation to a fi
 
 | Name  | Description | Type | Mandatory | Default |
 | :------------- | :------------- | :------------- | :------------- | :------------- |
-| <a id="gather_metadata_info_and_write-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |   |
+| <a id="gather_metadata_info_and_write-name"></a>name |  A unique name for this target.   | <a href="https://bazel.build/concepts/labels#target-names">Name</a> | required |  |
 
 
 
@@ -257,6 +183,8 @@ Rules and macros for collecting package metdata providers.
 ## trace
 
 <pre>
+load("@rules_license//rules_gathering:trace.bzl", "trace")
+
 trace(<a href="#trace-name">name</a>)
 </pre>
 
