@@ -174,46 +174,6 @@ def licenses_info_to_json(licenses_info):
       [(File)] list of Files containing license texts.
     """
 
-    main_template = """  {{
-    "top_level_target": "{top_level_target}",
-    "dependencies": [{dependencies}
-    ],
-    "licenses": [{licenses}
-    ]\n  }}"""
-
-    dep_template = """
-      {{
-        "target_under_license": "{target_under_license}",
-        "licenses": [
-          {licenses}
-        ]
-      }}"""
-
-    # TODO(aiuto): 'rule' is a duplicate of 'label' until old users are transitioned
-    license_template = """
-      {{
-        "label": "{label}",
-        "rule": "{label}",
-        "license_kinds": [{kinds}
-        ],
-        "copyright_notice": "{copyright_notice}",
-        "package_name": "{package_name}",
-        "package_url": "{package_url}",
-        "package_version": "{package_version}",
-        "license_text": "{license_text}",
-        "used_by": [
-          {used_by}
-        ]
-      }}"""
-
-    kind_template = """
-          {{
-            "target": "{kind_path}",
-            "name": "{kind_name}",
-            "long_name": "{kind_long_name}",
-            "conditions": {kind_conditions}
-          }}"""
-
     # Build reverse map of license to user
     used_by = {}
     for dep in licenses_info.deps.to_list():
@@ -233,26 +193,30 @@ def licenses_info_to_json(licenses_info):
                 long_name = kind.long_name
             else:
                 long_name = ""
-            kinds.append(kind_template.format(
-                kind_name = kind.name,
-                kind_long_name = long_name,
-                kind_path = kind.label,
-                kind_conditions = kind.conditions,
-            ))
+            kinds.append({
+                "target": kind.label,
+                "name": kind.name,
+                "long_name": long_name,
+                "conditions": kind.conditions,
+            })
 
         if license.license_text:
             # Special handling for synthetic LicenseInfo
             text_path = (license.license_text.package + "/" + license.license_text.name if type(license.license_text) == "Label" else license.license_text.path)
-            all_licenses.append(license_template.format(
-                copyright_notice = license.copyright_notice,
-                kinds = ",".join(kinds),
-                license_text = text_path,
-                package_name = license.package_name,
-                package_url = license.package_url,
-                package_version = license.package_version,
-                label = _strip_null_repo(license.label),
-                used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
-            ))
+            label = _strip_null_repo(license.label)
+            all_licenses.append({
+                "label": label,
+                # TODO(aiuto): 'rule' is a duplicate of 'label' until old users are transitioned
+                "rule": label,
+                "license_kinds": kinds,
+                "copyright_notice": license.copyright_notice,
+                "package_name": license.package_name,
+                "package_url": license.package_url,
+                "package_version": license.package_version,
+                "license_text": text_path,
+                "used_by": sorted(used_by[str(license.label)]),
+            })
+
             # Additionally return all File references so that other rules invoking
             # this method can load license text file contents from external repos
             # using runfiles
@@ -261,13 +225,16 @@ def licenses_info_to_json(licenses_info):
     for dep in sorted(licenses_info.deps.to_list(), key = lambda x: x.target_under_license):
         # Undo the concatenation applied when stored in the provider.
         dep_licenses = dep.licenses.split(",")
-        all_deps.append(dep_template.format(
-            target_under_license = _strip_null_repo(dep.target_under_license),
-            licenses = ",\n          ".join(sorted(['"%s"' % _strip_null_repo(x) for x in dep_licenses])),
-        ))
+        all_deps.append({
+            "target_under_license": _strip_null_repo(dep.target_under_license),
+            "licenses": sorted(['%s' % _strip_null_repo(x) for x in dep_licenses]),
+        })
 
-    return [main_template.format(
-        top_level_target = _strip_null_repo(licenses_info.target_under_license),
-        dependencies = ",".join(all_deps),
-        licenses = ",".join(all_licenses),
+    return [json.encode_indent(
+        {
+            "top_level_target": _strip_null_repo(licenses_info.target_under_license),
+            "dependencies": all_deps,
+            "licenses": all_licenses,
+        },
+        indent="  ",
     )], all_license_text_files
