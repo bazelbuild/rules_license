@@ -45,10 +45,10 @@
 #   2. Automatically remap "@rules_license//licenses/spdx:" to
 #      "//compliance/licenses/spdx:" when importing third party code.
 #
-# The choice of approach should be based on your individual philosoply of how
+# The choice of approach should be based on your individual philosophy of how
 # you should bring dependencies into your code. If you build from downloaded
 # packages then you might favor the first approach, because external deps
-# can simply refer to @rules_pkg, and they will pick up your local copy.
+# can simply refer to @rules_license, and they will pick up your local copy.
 # If you maintain your own  third_party directory of all your dependences,
 # so that your WORKSPACE files are empty, you might favor the second.
 
