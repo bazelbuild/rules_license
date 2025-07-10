@@ -9,51 +9,15 @@ This repository contains a set of rules and tools for
   - copyright information
   - ... and more TBD in the future
 - gathering license declarations into artifacts to ship with code
-- applying organization specific compliance constriants against the
+- applying organization specific compliance constraints against the
   set of packages used by a target.
 - producing SBOMs for built artifacts.
 
-WARNING: The code here is still in active initial development and will churn a lot.
+NOTE: Active development has moved to https://github.com/bazel-contrib/supply-chain.
 
-## Contact
+Please look there for current status. If you wish to contribute, please consider
+doing your work there.
 
-If you want to follow along:
-- Mailing list: [bazel-ssc@bazel.build](https://groups.google.com/a/bazel.build/g/bazel-ssc)  
-- Monthly eng meeting: [calendar link](MjAyMjA4MjJUMTYwMDAwWiBjXzUzcHBwZzFudWthZXRmb3E5NzhxaXViNmxzQGc&tmsrc=c_53pppg1nukaetfoq978qiub6ls%40group.calendar.google.com&scp=ALL)
-- [Latest docs](https://bazelbuild.github.io/rules_license/latest.html)
-
-## Roadmap
-
-*Last update: October 22, 2023*
-
-### Q4 2023
-
-- Reference implementation for "packages used" tool
-  - produce JSON output usable for SBOM generation or other compliance reporting.
-- Reference implementation for an SPDX SBOMM generator
-  - Support for reading bzlmod lock file
-  - Support for reading maven lock file
-- "How To" guides
-  - produce a license audit
-  - produce an SBOM
-
-### Q1 2024
-
-- Add support for other package manager lock file formats
-  - ? Python
-  - Golang
-  - NodeJS
-- More SPDX SBOM fields
-  - support for including vendor SBOMs
-  - 
-
-### Beyond
-
-- Performance improvements
-- Sub-SBOMs for tools
-
-
-- TBD
 
 ## Background reading:
 
