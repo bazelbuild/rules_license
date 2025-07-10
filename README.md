@@ -1,9 +1,10 @@
 # rules_license
 
+CI: [![Build status](https://badge.buildkite.com/e12f23186aa579f1e20fcb612a22cd799239c3134bc38e1aff.svg)](https://buildkite.com/bazel/rules-license)
+
 [!WARNING]
 Active development has moved to https://github.com/bazel-contrib/supply-chain.  Please look there for current status. If you wish to contribute, please consider doing your work there.
 
-CI: [![Build status](https://badge.buildkite.com/e12f23186aa579f1e20fcb612a22cd799239c3134bc38e1aff.svg)](https://buildkite.com/bazel/rules-license)
 
 This repository contains a set of rules and tools for
 - declaring metadata about packages, such as
@@ -15,7 +16,6 @@ This repository contains a set of rules and tools for
 - applying organization specific compliance constraints against the
   set of packages used by a target.
 - producing SBOMs for built artifacts.
-
 
 
 ## Background reading:
