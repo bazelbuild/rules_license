@@ -2,8 +2,9 @@
 
 CI: [![Build status](https://badge.buildkite.com/e12f23186aa579f1e20fcb612a22cd799239c3134bc38e1aff.svg)](https://buildkite.com/bazel/rules-license)
 
-[!WARNING]
-Active development has moved to https://github.com/bazel-contrib/supply-chain.  Please look there for current status. If you wish to contribute, please consider doing your work there.
+| :warning: WARNING           |
+|:----------------------------|
+| Active development has moved to https://github.com/bazel-contrib/supply-chain.  Please look there for current status. If you wish to contribute, please consider doing your work there. |
 
 
 This repository contains a set of rules and tools for
