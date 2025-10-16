@@ -6,6 +6,12 @@ CI: [![Build status](https://badge.buildkite.com/e12f23186aa579f1e20fcb612a22cd7
 |:----------------------------|
 | Active development has moved to https://github.com/bazel-contrib/supply-chain.  Please look there for current status. If you wish to contribute, please consider doing your work there. |
 
+:warning: WARNING
+Version 2.0.0 of this package is version 1 with the addition of providers
+that are compatible with `supply-chain`. This provides a slow migration
+path where you can use supply-chain tools to reason about your project,
+while still incorporating projects using rules_license.
+
 
 This repository contains a set of rules and tools for
 - declaring metadata about packages, such as
