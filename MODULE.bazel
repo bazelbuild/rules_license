@@ -15,10 +15,11 @@ bazel_dep(name = "package_metadata", version = "0.0.5")
 # Only for development
 bazel_dep(name = "bazel_skylib", version = "1.7.1", dev_dependency = True)
 bazel_dep(name = "rules_pkg", version = "1.0.1", dev_dependency = True)
-bazel_dep(name = "rules_python", version = "0.40.0", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "0.35.0", dev_dependency = True)
 bazel_dep(name = "rules_testing", version = "0.6.0", dev_dependency = True)
 bazel_dep(name = "stardoc", version = "0.6.2", dev_dependency = True)
 
+# DNS Remove before merge.
 local_path_override(
     module_name = "package_metadata",
     path = "../supply-chain/metadata",
