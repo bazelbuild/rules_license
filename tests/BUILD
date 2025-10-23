@@ -1,9 +1,14 @@
 # Test cases for license rules.
 
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+load("@rules_java//java:java_binary.bzl", "java_binary")
+load("@rules_java//java:java_library.bzl", "java_library")
 load("@rules_license//rules:compliance.bzl", "check_license")
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//rules:license_kind.bzl", "license_kind")
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 package(
     default_applicable_licenses = [":license"],

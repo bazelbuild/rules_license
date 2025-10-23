@@ -1,5 +1,6 @@
 # A sample library using new license rules.
 
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_license//rules:license.bzl", "license")
 
 package(
