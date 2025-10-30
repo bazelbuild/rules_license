@@ -20,26 +20,26 @@ How to:
 """
 
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@rules_python//python:py_binary.bzl", "py_binary")
 load("@stardoc//stardoc:stardoc.bzl", "stardoc")
-load("@rules_python//python:defs.bzl", "py_library")
-load("//:version.bzl", "version")
 
-package(default_package_metadata = ["//:license", "//:package_info"])
+package(default_package_metadata = [
+    "//:license",
+    "//:package_info",
+])
 
 filegroup(
     name = "standard_package",
     srcs = [
         "BUILD",
-    ] + glob([
-        "*.bzl",
-        "*.py",
-    ]),
+        "merge.py",
+    ],
     visibility = ["//distro:__pkg__"],
 )
 
 exports_files(
     glob([
-        "*.bzl",
+        "**",
     ]),
     visibility = [
         "//distro:__pkg__",
@@ -62,7 +62,7 @@ ORDER = [
     ("gather_metadata_info",           "//rules_gathering:gather_metadata.bzl"),
     ("gather_metadata_info_and_write", "//rules_gathering:gather_metadata.bzl"),
     ("trace",           "//rules_gathering:trace.bzl"),
-    ("current_module_package_info", "//rules:current_module_package_info.bzl"),
+    ("current_module_package_info",    "//rules:current_module_package_info.bzl"),
 ]
 
 genrule(
@@ -94,6 +94,7 @@ bzl_library(
         "//:version.bzl",
         "//rules:standard_package",
         "//rules_gathering:standard_package",
+        "@package_metadata//:srcs",
     ],
     visibility = ["//visibility:public"],
 )

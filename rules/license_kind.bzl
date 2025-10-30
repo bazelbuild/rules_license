@@ -13,6 +13,10 @@
 # limitations under the License.
 """Proof of concept. License restriction."""
 
+load(
+    "@package_metadata//licenses/providers:license_kind_info.bzl",
+    _newLicenseKindInfo = "LicenseKindInfo",
+)
 load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
 
 #
@@ -22,17 +26,22 @@ load("@rules_license//rules:providers.bzl", "LicenseKindInfo")
 #
 
 def _license_kind_impl(ctx):
+    identifier = "@%s//%s:%s" % (
+        ctx.label.workspace_name,
+        ctx.label.package,
+        ctx.label.name,
+    )
     provider = LicenseKindInfo(
         name = ctx.attr.name,
-        label = "@%s//%s:%s" % (
-            ctx.label.workspace_name,
-            ctx.label.package,
-            ctx.label.name,
-        ),
+        label = identifier,
         long_name = ctx.attr.long_name,
         conditions = ctx.attr.conditions,
     )
-    return [provider]
+    new_provider = _newLicenseKindInfo(
+        identifier = identifier,
+        name = ctx.attr.long_name,
+    )
+    return [provider, new_provider]
 
 _license_kind = rule(
     implementation = _license_kind_impl,
