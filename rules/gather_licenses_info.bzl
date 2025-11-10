@@ -200,6 +200,7 @@ def licenses_info_to_json(licenses_info):
         "package_name": "{package_name}",
         "package_url": "{package_url}",
         "package_version": "{package_version}",
+        "supplier": "{supplier}",
         "license_text": "{license_text}",
         "used_by": [
           {used_by}
@@ -250,6 +251,7 @@ def licenses_info_to_json(licenses_info):
                 package_name = license.package_name,
                 package_url = license.package_url,
                 package_version = license.package_version,
+                supplier = license.supplier,
                 label = _strip_null_repo(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
             ))
