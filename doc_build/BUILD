@@ -20,8 +20,9 @@ How to:
 """
 
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@rules_python//python:py_binary.bzl", "py_binary")
+load("@rules_python//python:py_library.bzl", "py_library")
 load("@stardoc//stardoc:stardoc.bzl", "stardoc")
-load("@rules_python//python:defs.bzl", "py_library")
 load("//:version.bzl", "version")
 
 package(default_package_metadata = ["//:license", "//:package_info"])
@@ -33,14 +34,14 @@ filegroup(
     ] + glob([
         "*.bzl",
         "*.py",
-    ]),
+    ], allow_empty=True),
     visibility = ["//distro:__pkg__"],
 )
 
 exports_files(
     glob([
         "*.bzl",
-    ]),
+    ], allow_empty=True),
     visibility = [
         "//distro:__pkg__",
     ],
