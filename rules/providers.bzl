@@ -44,6 +44,7 @@ LicenseInfo = provider(
         "package_name": "string: Human readable package name",
         "package_url": "URL from which this package was downloaded.",
         "package_version": "Human readable version string",
+        "supplier": "string: Supplier for this package (e.g., organization/person)",
     },
 )
 
@@ -56,6 +57,7 @@ PackageInfo = provider(
         "package_url": "string: URL from which this package was downloaded.",
         "package_version": "string: Human readable version string",
         "purl": "string: package url matching the purl spec (https://github.com/package-url/purl-spec)",
+        "supplier": "string: Supplier for this package (e.g., organization/person)",
     },
 )
 

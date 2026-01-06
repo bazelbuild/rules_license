@@ -43,6 +43,7 @@ license(
     license_kinds = [":generic_notice_license"],
     # Note. This need not be precise. If a downloader creates the license
     # clause for you, then it should use the absolute download URL.
+    supplier = "Organization: Test Org",
     package_url = "http://github.com/bazelbuild/rules_license",
     package_version = "0.0.4",
 )

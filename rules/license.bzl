@@ -73,6 +73,9 @@ _license = rule(
                   " by an applicatation.  It should be a value that" +
                   " increases over time, rather than a commit hash."
         ),
+        "supplier": attr.string(
+            doc = "Supplier for this package (e.g., 'Organization: <String>' or 'Person: <String>').",
+        ),
     },
 )
 
@@ -86,6 +89,7 @@ def license(
         package_name = None,
         package_url = None,
         package_version = None,
+        supplier = None,
         namespace = None,
         tags = [],
         visibility = ["//visibility:public"]):
@@ -125,6 +129,10 @@ def license(
         # buildifier: disable=print
         print("license(namespace=<str>) is deprecated.")
 
+    if supplier:
+        if not (supplier.startswith("Organization: ") or supplier.startswith("Person: ")):
+            fail("supplier must start with 'Organization: ' or 'Person: '")
+
     _license(
         name = name,
         license_kinds = license_kinds,
@@ -133,6 +141,7 @@ def license(
         package_name = package_name,
         package_url = package_url,
         package_version = package_version,
+        supplier = supplier,
         applicable_licenses = [],
         visibility = visibility,
         tags = tags,
