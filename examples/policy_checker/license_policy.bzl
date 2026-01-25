@@ -29,7 +29,7 @@ def _license_policy_impl(ctx):
     provider = LicensePolicyInfo(
         name = ctx.attr.name,
         label = "@%s//%s:%s" % (
-            ctx.label.workspace_name,
+            ctx.label.repo_name,
             ctx.label.package,
             ctx.label.name,
         ),
