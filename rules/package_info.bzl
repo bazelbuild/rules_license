@@ -35,6 +35,7 @@ def _package_info_impl(ctx):
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
         purl = ctx.attr.purl,
+        supplier = ctx.attr.supplier,
     )
 
     # Experimental alternate design, using a generic 'data' back to hold things
@@ -46,6 +47,7 @@ def _package_info_impl(ctx):
             "package_url": ctx.attr.package_url,
             "package_version": ctx.attr.package_version,
             "purl": ctx.attr.purl,
+            "supplier": ctx.attr.supplier,
         },
     )
     return [provider, generic_provider]
@@ -74,6 +76,9 @@ _package_info = rule(
                   " https://github.com/package-url/purl-spec. This may be used when" +
                   " generating an SBOM.",
         ),
+        "supplier": attr.string(
+            doc = "Supplier for this package (e.g., 'Organization: <String>' or 'Person: <String>').",
+        ),
     },
 )
 
@@ -84,6 +89,7 @@ def package_info(
         package_url = None,
         package_version = None,
         purl = None,
+        supplier = None,
         **kwargs):
     """Wrapper for package_info rule.
 
@@ -111,6 +117,7 @@ def package_info(
         package_url = package_url,
         package_version = package_version,
         purl = purl,
+        supplier = supplier,
         applicable_licenses = [],
         visibility = visibility,
         tags = [],

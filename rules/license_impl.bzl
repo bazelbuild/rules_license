@@ -39,6 +39,7 @@ def license_rule_impl(ctx):
         package_name = ctx.attr.package_name or ctx.label.package,
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
+        supplier = ctx.attr.supplier,
         license_text = ctx.file.license_text,
         label = ctx.label,
     )
