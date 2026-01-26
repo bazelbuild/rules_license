@@ -15,6 +15,8 @@
 
 load("@rules_license//rules:license.bzl", "license")
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
+load("@rules_python//python:py_binary.bzl", "py_binary")
+load("@rules_python//python:py_test.bzl", "py_test")
 load(":defs.bzl", "constant_gen")
 
 package(
