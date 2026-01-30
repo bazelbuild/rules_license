@@ -16,6 +16,8 @@
 load("@rules_license//examples/vndor/constant_gen:defs.bzl", "constant_gen")
 load("@rules_license//rules:compliance.bzl", "check_license")
 load("@rules_license//sample_reports:licenses_used.bzl", "licenses_used")
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_python//python:py_test.bzl", "py_test")
 
 package(
     default_package_metadata = ["//:license", "//:package_info"],
