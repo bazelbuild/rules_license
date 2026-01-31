@@ -196,6 +196,7 @@ def metadata_info_to_json(metadata_info):
         "package_name": "{package_name}",
         "package_url": "{package_url}",
         "package_version": "{package_version}",
+        "supplier": "{supplier}",
         "license_text": "{license_text}",
         "used_by": [
           {used_by}
@@ -216,7 +217,8 @@ def metadata_info_to_json(metadata_info):
             "package_name": "{package_name}",
             "package_url": "{package_url}",
             "package_version": "{package_version}",
-            "purl": "{purl}"
+            "purl": "{purl}",
+            "supplier": "{supplier}"
           }}"""
 
     # Build reverse map of license to user
@@ -249,6 +251,7 @@ def metadata_info_to_json(metadata_info):
                 package_name = license.package_name,
                 package_url = license.package_url,
                 package_version = license.package_version,
+                supplier = getattr(license, "supplier", ""),
                 label = _strip_null_repo(license.label),
                 bazel_package =  _bazel_package(license.label),
                 used_by = ",\n          ".join(sorted(['"%s"' % x for x in used_by[str(license.label)]])),
@@ -286,6 +289,7 @@ def metadata_info_to_json(metadata_info):
                 package_url = mi.package_url,
                 package_version = mi.package_version,
                 purl = mi.purl,
+                supplier = getattr(mi, "supplier", ""),
             ))
         # experimental: Support the ExperimentalMetadataInfo bag of data
         # WARNING: Do not depend on this. It will change without notice.
@@ -298,6 +302,7 @@ def metadata_info_to_json(metadata_info):
                 package_url = mi.data.get("package_url") or "",
                 package_version = mi.data.get("package_version") or "",
                 purl = mi.data.get("purl") or "",
+                supplier = mi.data.get("supplier") or "",
             ))
 
     return [main_template.format(
