@@ -14,6 +14,7 @@
 # A package with all code under a single license. This is the most common case
 # we expect to see.
 
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_license//rules:license.bzl", "license")
 
 # Using a package wide default ensure that all targets are associated with the
