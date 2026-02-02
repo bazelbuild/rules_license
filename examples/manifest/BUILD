@@ -30,6 +30,7 @@ android_binary(
     data = [
         ":licenses",
     ],
+    use_bash_launcher = True,
 )
 
 golden_cmd_test(

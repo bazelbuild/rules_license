@@ -13,6 +13,7 @@
 # limitations under the License.
 # A package with a commercial license.
 
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_license//rules:license.bzl", "license")
 
 package(

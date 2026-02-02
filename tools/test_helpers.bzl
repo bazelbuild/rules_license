@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+
 """Compare rule output to a golden version."""
 
 def golden_test(
@@ -25,7 +27,7 @@ def golden_test(
       golden: expected content of subect
       subject: build target
     """
-    native.sh_test(
+    sh_test(
         name = name,
         size = "medium",
         srcs = ["@rules_license//tools:diff_test.sh"],

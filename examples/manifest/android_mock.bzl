@@ -1,3 +1,5 @@
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+load("@rules_shell//shell:sh_library.bzl", "sh_library")
 load("manifest.bzl", "manifest")
 
 """This is a proof of concept to show how to modify a macro definition to
@@ -15,7 +17,7 @@ def android_library(name, **kwargs):
     )
 
     # Inject the data dependency into the library, preserving any other data it has.
-    native.sh_library(
+    sh_library(
         name = name + "_w_licenses",
         data = data + [name + "_manifest.txt"],
         **kwargs
@@ -55,7 +57,7 @@ def android_binary(name, **kwargs):
     kwargs["data"] = newdeps
 
     # Compile the executable with the user's originally supplied name, but with the new content.
-    native.sh_binary(
+    sh_binary(
         name = name,
         **kwargs
     )
