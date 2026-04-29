@@ -150,7 +150,9 @@ def gather_metadata_info_common(target, ctx, provider_factory, metadata_provider
     # A hack until https://github.com/bazelbuild/rules_license/issues/89 is
     # fully resolved. If exec is in the bin_dir path, then the current
     # configuration is probably cfg = exec.
-    if "-exec-" in ctx.bin_dir.path:
+    # The "-exec/bin" suffix covers Bazel 9.0.0 (and <8.7.0 with
+    # --experimental_platform_in_output_dir); "-exec-" covers older layouts.
+    if "-exec-" in ctx.bin_dir.path or ctx.bin_dir.path.endswith("-exec/bin"):
         return [provider_factory(
             target_under_license = target.label,
             deps = depset(),
