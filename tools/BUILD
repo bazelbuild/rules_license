@@ -59,3 +59,10 @@ py_binary(
     python_version = "PY3",
     visibility = ["//visibility:public"],
 )
+
+py_binary(
+    name = "embed_licenses_text",
+    srcs = ["embed_licenses_text.py"],
+    python_version = "PY3",
+    visibility = ["//visibility:public"],
+)
