@@ -85,14 +85,9 @@ def _write_metadata_info_impl(target, ctx):
         return [OutputGroupInfo(licenses = depset())]
 
     # Write the output file for the target
-    name = "%s_metadata_info.json" % ctx.label.name
-    content = "[\n%s\n]\n" % ",\n".join(metadata_info_to_json(info))
-    out = ctx.actions.declare_file(name)
-    ctx.actions.write(
-        output = out,
-        content = content,
-    )
-    outs.append(out)
+    json_out = ctx.actions.declare_file("%s_metadata_info.json" % ctx.label.name)
+    write_metadata_info(ctx, target, json_out)
+    outs.append(json_out)
 
     if ctx.attr._trace[TraceInfo].trace:
         trace = ctx.actions.declare_file("%s_trace_info.json" % ctx.label.name)
@@ -140,8 +135,8 @@ def write_metadata_info(ctx, deps, json_out):
 
       def _foo_impl(ctx):
         ...
-        out = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
-        write_metadata_info(ctx, ctx.attr.deps, metadata_file)
+        json_file = ctx.actions.declare_file("%s_licenses.json" % ctx.label.name)
+        write_metadata_info(ctx, ctx.attr.deps, json_file)
 
     Args:
       ctx: context of the caller
@@ -150,10 +145,12 @@ def write_metadata_info(ctx, deps, json_out):
             aspect over them
       json_out: output handle to write the JSON info
     """
+
     licenses = []
     for dep in deps:
         if TransitiveMetadataInfo in dep:
-            licenses.extend(metadata_info_to_json(dep[TransitiveMetadataInfo]))
+            metadata_info = dep[TransitiveMetadataInfo]
+            licenses.extend(metadata_info_to_json(metadata_info))
     ctx.actions.write(
         output = json_out,
         content = "[\n%s\n]\n" % ",\n".join(licenses),
