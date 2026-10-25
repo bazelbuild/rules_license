@@ -31,7 +31,7 @@ def _package_info_impl(ctx):
         # data out and format it. We can't to the lookup on the provider class.
         type = "package_info",
         label = ctx.label,
-        package_name = ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
+        package_name = ctx.attr.package_name or ctx.label.package,
         package_url = ctx.attr.package_url,
         package_version = ctx.attr.package_version,
         purl = ctx.attr.purl,
@@ -42,7 +42,7 @@ def _package_info_impl(ctx):
         type = "package_info_alt",
         label = ctx.label,
         data = {
-            "package_name": ctx.attr.package_name or ctx.build_file_path.rstrip("/BUILD"),
+            "package_name": ctx.attr.package_name or ctx.label.package,
             "package_url": ctx.attr.package_url,
             "package_version": ctx.attr.package_version,
             "purl": ctx.attr.purl,
